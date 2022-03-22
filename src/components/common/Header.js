@@ -1,18 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useTheme } from "../../context/ThemeContext";
 
 const Header = () => {
     const isLoggedIn = false;
-    const pathname = "/login";
-    const theme = "light";
+    const { pathname } = useLocation();
+    const { theme, toggleTheme } = useTheme();
 
     const logoutHandler = () => {
         console.log("logout");
-    };
-
-    const toggleTheme = () => {
-        console.log("theme toggled");
     };
 
     const renderNavigationBar = () => {

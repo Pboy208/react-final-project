@@ -7,14 +7,17 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "./components/common/FallbackComponent";
 import "@ahaui/css/dist/index.min.css";
+import { ThemeProvider } from "./context/ThemeContext";
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router>
-            <ErrorBoundary FallbackComponent={FallbackComponent}>
-                <App />
-            </ErrorBoundary>
-        </Router>
+        <ThemeProvider>
+            <Router>
+                <ErrorBoundary FallbackComponent={FallbackComponent}>
+                    <App />
+                </ErrorBoundary>
+            </Router>
+        </ThemeProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );
