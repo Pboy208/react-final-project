@@ -34,7 +34,7 @@ const Header = () => {
     return (
         <Wrapper>
             <Side />
-            <Logo>Logo</Logo>
+            <Logo to="/home">Logo</Logo>
             <Side>
                 <Actions>
                     {renderNavigationBar()}
@@ -68,7 +68,7 @@ const Side = styled.div`
     width: 24%;
 `;
 
-const Logo = styled.p`
+const Logo = styled(Link)`
     font-family: "Rouge Script";
     font-size: 100px;
     margin: 0;
