@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Loader } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "../../utils/schemas/product-form-schema";
-import { getValue } from "@testing-library/user-event/dist/utils";
 
 const imageFallback = "https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg";
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { SearchBox } from "@ahaui/react";
-
+import ProductList from "../components/ProductList";
 const Home = () => {
     const handleClick = () => console.log("clicked");
 
@@ -18,6 +18,7 @@ const Home = () => {
                 value={""}
                 onChange={handleSearchChange}
             />
+            <ProductList />
         </Wrapper>
     );
 };
