@@ -2,7 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { formatVnd } from "../../utils/utilFunction";
-import { useParams } from "react-router-dom";
+import ConfirmModal from "./ConfirmModal";
+
 const initialProduct = {
     id: "Testing id",
     price: 5200000,
@@ -14,32 +15,45 @@ const initialProduct = {
 
 const Product = ({ product = initialProduct }) => {
     const { title, imageUrl, price, id } = product;
+    const [isModalShow, setIsModalShow] = React.useState(false);
 
     const handleDelete = () => {
         console.log("delete ", id);
     };
 
+    const toggleIsModalShow = () => setIsModalShow((prev) => !prev);
+
     return (
-        <Wrapper>
-            <ProductInformation>
-                <Information flex={3}>{title}</Information>
-                <Information flex={1}>{formatVnd(price)}</Information>
-                <Information flex={1}>
-                    <ImagePreview>
-                        Preview
-                        <Image src={imageUrl} />
-                    </ImagePreview>
-                </Information>
-            </ProductInformation>
-            <ProductActions>
-                <NavigateButton to={`/product/${id}`}>
-                    <i className="fa-solid fa-pen-to-square"></i>
-                </NavigateButton>
-                <Button onClick={handleDelete}>
-                    <i className="fa-solid fa-trash-can"></i>
-                </Button>
-            </ProductActions>
-        </Wrapper>
+        <>
+            <Wrapper>
+                <ProductInformation>
+                    <Information flex={3}>{title}</Information>
+                    <Information flex={1}>{formatVnd(price)}</Information>
+                    <Information flex={1}>
+                        <ImagePreview>
+                            Preview
+                            <Image src={imageUrl} />
+                        </ImagePreview>
+                    </Information>
+                </ProductInformation>
+                <ProductActions>
+                    <NavigateButton to={`/product/${id}`}>
+                        <i className="fa-solid fa-pen-to-square"></i>
+                    </NavigateButton>
+                    <Button onClick={toggleIsModalShow}>
+                        <i className="fa-solid fa-trash-can"></i>
+                    </Button>
+                </ProductActions>
+            </Wrapper>
+            {isModalShow && (
+                <ConfirmModal
+                    onConfirm={handleDelete}
+                    message={"Do you really want to delete this item"}
+                    content={title}
+                    turnOff={toggleIsModalShow}
+                />
+            )}
+        </>
     );
 };
 
