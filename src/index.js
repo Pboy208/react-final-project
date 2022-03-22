@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "./components/common/FallbackComponent";
+import "@ahaui/css/dist/index.min.css";
 
 ReactDOM.render(
     <React.StrictMode>
