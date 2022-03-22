@@ -32,3 +32,14 @@ export const createRequest = ({
     };
     return [requestUrl, requestConfig];
 };
+
+export const thunkWrapper =
+    (fn) =>
+    (action, ...agrs) =>
+    async (dispatch) => {
+        try {
+            return await fn(action, ...agrs)(dispatch);
+        } catch (statusCode) {
+            dispatch(statusCode);
+        }
+    };

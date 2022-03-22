@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import decode from "jwt-decode";
+import * as authApi from "../api/authApi";
+import { thunkWrapper } from "../utils/utilFunction";
 
 const initialState = {
     isLoggedIn: false,
@@ -35,6 +36,16 @@ const authSlice = createSlice({
             state.userName = "";
         },
     },
+});
+
+export const loginThunk = thunkWrapper((loginInfo) => async (dispatch) => {
+    const response = await fetch(...authApi.login(loginInfo));
+    if (!response.ok) throw response.status;
+
+    const token = (await response.json()).data.token;
+    localStorage.setItem("token", token);
+
+    dispatch(authSlice.actions.logIn(loginInfo));
 });
 
 export default authSlice.reducer;
