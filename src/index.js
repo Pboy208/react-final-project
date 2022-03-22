@@ -4,11 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
+import FallbackComponent from "./components/common/FallbackComponent";
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
-            <App />
+            <ErrorBoundary FallbackComponent={FallbackComponent}>
+                <App />
+            </ErrorBoundary>
         </Router>
     </React.StrictMode>,
     document.getElementById("root")

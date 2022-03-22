@@ -2,13 +2,17 @@ import * as React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import styled from "styled-components";
+import { ErrorBoundary } from "react-error-boundary";
+import FallbackComponent from "./FallbackComponent";
 
 const Layout = ({ children }) => {
     return (
         <Wrapper>
-            <Header />
-            <Body>{children}</Body>
-            <Footer />
+            <ErrorBoundary FallbackComponent={FallbackComponent}>
+                <Header />
+                <Body>{children}</Body>
+                <Footer />
+            </ErrorBoundary>
         </Wrapper>
     );
 };
