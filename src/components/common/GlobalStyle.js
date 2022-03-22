@@ -21,6 +21,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  a{
+    color: ${({ theme }) => themes[theme].text} ;
+    &:hover {
+        text-decoration: none;
+    }
+  }
+
   body {
     background: ${({ theme }) => themes[theme].body};
     color: ${({ theme }) => themes[theme].text};

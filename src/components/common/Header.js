@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 
 const Actions = styled.div`
     display: flex;
-    justify-content: baseline;
+    justify-content: center;
     align-items: center;
     height: 100%;
     gap: 20px;
@@ -75,19 +75,23 @@ const Logo = styled(Link)`
     text-align: "center";
 `;
 
-const Button = styled.button``;
+const Button = styled.div`
+    cursor: pointer;
+    & i {
+        font-size: 28px;
+    }
+`;
 
 const NavigateButton = styled(Link)`
-    height: 30px;
+    height: fit-content;
     padding: 1px 6px;
     display: flex;
     justify-content: flex-start;
-    align-items: baseline;
+    align-items: center;
     gap: 4px;
-
-    &:hover {
-        text-decoration: none;
-        color: black;
+    font-size: 16px;
+    & i {
+        font-size: 20px;
     }
 `;
 
