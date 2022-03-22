@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     const isLoggedIn = false;
@@ -20,11 +21,11 @@ const Header = () => {
                 <i className="fa-solid fa-arrow-right-from-bracket" />
             </Button>
         ) : pathname === "/login" ? (
-            <NavigateButton href="/register">
+            <NavigateButton to="/register">
                 Haven't got any account? <i className="fa-solid fa-user-plus"></i>
             </NavigateButton>
         ) : (
-            <NavigateButton href="/login">
+            <NavigateButton to="/login">
                 Already have an account? <i className="fa-solid fa-arrow-right-to-bracket"></i>
             </NavigateButton>
         );
@@ -76,7 +77,7 @@ const Logo = styled.p`
 
 const Button = styled.button``;
 
-const NavigateButton = styled.a`
+const NavigateButton = styled(Link)`
     height: 30px;
     padding: 1px 6px;
     display: flex;
