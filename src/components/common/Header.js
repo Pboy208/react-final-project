@@ -5,9 +5,9 @@ import { useTheme } from "../../context/ThemeContext";
 
 const Header = () => {
     const isLoggedIn = false;
-    const pathname="/login"
+    const { pathname } = useLocation();
     const { theme, toggleTheme } = useTheme();
-    
+
     const logoutHandler = () => {
         console.log("logout");
     };
