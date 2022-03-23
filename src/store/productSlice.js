@@ -4,6 +4,15 @@ import * as normalizerSchema from "../utils/schemas/normalizr-schema";
 import { thunkWrapper } from "../utils/utilFunction";
 import * as productApi from "../api/productApi";
 
+export const getProductList = createAsyncThunk(
+    "product/getProductList",
+    async (params, { rejectWithValue }) => {
+        console.log("before thunk");
+        const promise = productApi.getProductList();
+        console.log("after thunk");
+        return promise;
+    }
+);
 const productSlice = createSlice({
     name: "product",
     initialState: {
@@ -11,10 +20,6 @@ const productSlice = createSlice({
         ids: [],
     },
     reducers: {
-        replaceProductList(state, action) {
-            state.byIds = action.payload.byIds;
-            state.ids = action.payload.ids;
-        },
         addProduct(state, action) {
             state.byIds = { ...state.byIds, ...action.payload.byIds };
             state.ids = [...state.ids, ...action.payload.ids];
@@ -34,20 +39,17 @@ const productSlice = createSlice({
             delete state.byIds[action.payload.id];
         },
     },
-});
-
-export const getProductListThunk = thunkWrapper((filter, search) => async (dispatch) => {
-    return productApi.getProductList().then(async (response) => {
-        const data = response.data;
-        const normalizedData = normalize(data, normalizerSchema.arrayOfProduct);
-
-        const normalizedProductList = {
-            byIds: normalizedData.entities.product,
-            ids: normalizedData.result,
-        };
-        dispatch(productSlice.actions.replaceProductList(normalizedProductList));
-        return data;
-    });
+    extraReducers: {
+        [getProductList.fulfilled]: (state, action) => {
+            const normalizedData = normalize(action.payload.data, normalizerSchema.arrayOfProduct);
+            state.byIds = normalizedData.entities.product;
+            state.ids = normalizedData.result;
+            console.log("here");
+        },
+        [getProductList.rejected]: (state, action) => {
+            console.log("in reducer extra", action);
+        },
+    },
 });
 
 export const addproductThunk = thunkWrapper((product) => async (dispatch) => {

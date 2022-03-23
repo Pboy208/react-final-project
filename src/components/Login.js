@@ -4,7 +4,10 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Loader } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "../utils/schemas/login-schemas";
-
+import useAsync from "../hooks/useAsync";
+import { useDispatch } from "react-redux";
+import { login, loginThunk } from "../store/authSlice";
+import { Navigate } from "react-router-dom";
 const Login = () => {
     const {
         register,
@@ -14,15 +17,18 @@ const Login = () => {
         mode: "onChange",
         resolver: yupResolver(validationSchema),
     });
-    const isLoading = true;
+    const dispatch = useDispatch();
+    const { status, handleRequest } = useAsync();
+
+    const isLoading = status === "pending" ? true : false;
     const isEmailInvalid = !!errors.email;
     const isPasswordInvalid = !!errors.password;
 
-    const printData = (data) => {
-        console.log(data);
+    const handleLogin = (loginInfo) => {
+        handleRequest(dispatch(login(loginInfo)).unwrap());
     };
     return (
-        <LoginForm onSubmit={handleSubmit(printData)}>
+        <LoginForm onSubmit={handleSubmit(handleLogin)}>
             <Form.Group controlId="loginForm.email">
                 <Form.Label>Email</Form.Label>
                 <Form.Input

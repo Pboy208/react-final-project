@@ -1,7 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import decode from "jwt-decode";
 import * as authApi from "../api/authApi";
 import { thunkWrapper } from "../utils/utilFunction";
+
+export const login = createAsyncThunk("auth/login", async (loginInfo, { rejectWithValue }) => {
+    return authApi.login(loginInfo);
+});
 
 const initialState = {
     isLoggedIn: false,
@@ -36,16 +40,14 @@ const authSlice = createSlice({
             state.userName = "";
         },
     },
-});
-
-export const loginThunk = thunkWrapper((loginInfo) => async (dispatch) => {
-    const response = await authApi.login(loginInfo);
-    if (!response.ok) throw response.status;
-
-    const token = (await response.json()).data;
-    localStorage.setItem("token", token);
-
-    dispatch(authSlice.actions.logIn(loginInfo));
+    extraReducers: {
+        [login.rejected]: (state, action) => {},
+        [login.fulfilled]: (state, action) => {
+            localStorage.setItem("token", action.payload.data);
+            state.isLoggedIn = true;
+            state.userName = decode(action.payload.data).userName;
+        },
+    },
 });
 
 export default authSlice.reducer;

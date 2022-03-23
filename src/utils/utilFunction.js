@@ -12,7 +12,7 @@ const generateUrlWithParams = (givenUrl, params) => {
     return url;
 };
 
-export const createRequest = ({
+export const createRequest = async ({
     endpoint,
     method = "GET",
     body = null,
@@ -30,15 +30,16 @@ export const createRequest = ({
         },
         body: body ? JSON.stringify(body) : null,
     };
-    return fetch(requestUrl, requestConfig).then(
-        (response) => {
-            if (!response.ok) throw response.statusCode;
-            return response.json();
-        },
-        (error) => {
-            throw error;
-        }
-    );
+    console.log("about to fetch");
+    try {
+        const response = await fetch(requestUrl, requestConfig);
+        console.log(response);
+
+        if (!response.ok) throw response.status;
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const thunkWrapper =
