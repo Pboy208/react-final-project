@@ -2,23 +2,21 @@ import { controllerWrapper } from "../utils/utilFunction";
 import * as Product from "../models/productModel";
 
 const getRequestParams = (req) => {
-    let filter = req.url.searchParams.getAll("filter")[0];
+    let sortBy = req.url.searchParams.getAll("sortBy")[0];
     let search = req.url.searchParams.getAll("search")[0] || null;
-    return { filter, search };
+    return { sortBy, search };
 };
 
-const getSortFormular = (filter) => {
-    switch (filter) {
+const getSortFormula = (sortBy) => {
+    console.log("sortBy", sortBy);
+    switch (sortBy) {
         case "PRICE_DECREASE":
-            return (a, b) => a.price > b.price;
+            return (a, b) => b.price - a.price;
         case "PRICE_INCREASE":
-            return (a, b) => a.price < b.price;
-        case "CREATED_TIME":
-            //for most recently added item first
-            return (a, b) => a.createdTimestamp > b.createdTimestamp;
+            return (a, b) => a.price - b.price;
         default:
-            console.log("invalid filter::::", filter);
-            throw new Error("Invalid filter");
+            //for most recently added item first
+            return (a, b) => b.createdTimestamp - a.createdTimestamp;
     }
 };
 
@@ -38,13 +36,11 @@ const hasSearch = (title, search) => {
 };
 
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
-    const { filter, search } = getRequestParams(req);
-    console.log(filter, search);
+    const { sortBy, search } = getRequestParams(req);
+    console.log(sortBy, search);
     let productList = await Product.getAll();
     if (search) productList = productList.filter((product) => hasSearch(product.title, search));
-    // console.log("second productlist", productList);
-    productList.sort(getSortFormular("CREATED_TIME"));
-    // console.log("last productList:::", productList);
+    productList.sort(getSortFormula(sortBy));
     return res(ctx.json({ message: "Success", data: productList }));
 });
 
