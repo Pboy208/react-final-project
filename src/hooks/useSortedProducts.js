@@ -1,23 +1,18 @@
-import * as React from "react"
+import * as React from "react";
 import useAsync from "./useAsync";
+import { useDispatch } from "react-redux";
+import { getProductListThunk } from "../store/productSlice";
 
-const useSortedProducts = (filter="CREATED_TIME")=>{
-  const {error,status,data:productList,handleRequest} = useAsync();
+const useSortedProducts = (filter = "CREATED_TIME", search) => {
+    const { error, status, data: productList, handleRequest } = useAsync();
 
-  const generateUrl = React.useMemo(()=>{
-    const url = new URL("http://localhost:3000/");
-    const params = new URLSearchParams();
-    params.set("filter",filter);
-    url.search = params;
-    return url;
-  },[filter])
+    const dispatch = useDispatch();
 
-  React.useEffect=(()=>{
-    const request =  fetch(generateUrl(),{    })
-    handleRequest(request);
-  },[filter])
+    React.useEffect(() => {
+        handleRequest(dispatch(getProductListThunk()));
+    }, [dispatch, filter, handleRequest, search]);
 
-  return {productList,status,error}
-}
+    return { productList, status, error };
+};
 
 export default useSortedProducts;

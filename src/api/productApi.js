@@ -1,4 +1,4 @@
-import { createRequest } from "../mocks/utils/utilFunction";
+import { createRequest } from "../utils/utilFunction";
 
 export const getProductList = ({ filter, search } = { filter: "CREATED_TIME" }, token) =>
     createRequest({

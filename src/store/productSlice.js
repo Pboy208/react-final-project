@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { normalize } from "normalizr";
 import * as normalizerSchema from "../utils/schemas/normalizr-schema";
 import { thunkWrapper } from "../utils/utilFunction";
@@ -37,18 +37,19 @@ const productSlice = createSlice({
 });
 
 export const getProductListThunk = thunkWrapper((filter, search) => async (dispatch) => {
-    const response = await fetch(...productApi.getProductList());
-    if (!response.ok) throw response.status;
+    return fetch(...productApi.getProductList()).then(async (response) => {
+        if (!response.ok) throw response.status;
 
-    const data = (await response.json()).data;
-    const normalizedData = normalize(data, normalizerSchema.arrayOfProduct);
+        const data = (await response.json()).data;
+        const normalizedData = normalize(data, normalizerSchema.arrayOfProduct);
 
-    const normalizedProductList = {
-        byIds: normalizedData.entities.product,
-        ids: normalizedData.result,
-    };
-
-    dispatch(productSlice.actions.replaceProductList(normalizedProductList));
+        const normalizedProductList = {
+            byIds: normalizedData.entities.product,
+            ids: normalizedData.result,
+        };
+        dispatch(productSlice.actions.replaceProductList(normalizedProductList));
+        return data;
+    });
 });
 
 export const addproductThunk = thunkWrapper((product) => async (dispatch) => {

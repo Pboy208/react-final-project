@@ -2,7 +2,10 @@ import * as React from "react";
 import styled from "styled-components";
 import { SearchBox } from "@ahaui/react";
 import ProductList from "../components/ProductList";
+import useSortedProducts from "../hooks/useSortedProducts";
 const Home = () => {
+    const { status, productList } = useSortedProducts();
+
     const handleClick = () => console.log("clicked");
 
     const handleSearchChange = (e) => {
@@ -10,6 +13,7 @@ const Home = () => {
         console.log(value);
     };
 
+    if (!productList || status === "pending") return <div>loading</div>;
     return (
         <Wrapper>
             <SearchBar
@@ -18,7 +22,7 @@ const Home = () => {
                 value={""}
                 onChange={handleSearchChange}
             />
-            <ProductList />
+            <ProductList productList={productList} />
         </Wrapper>
     );
 };

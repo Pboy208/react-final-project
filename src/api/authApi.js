@@ -1,4 +1,4 @@
-import { createRequest } from "../mocks/utils/utilFuntion";
+import { createRequest } from "../utils/utilFunction";
 
 export const login = (loginInfo) =>
     createRequest({

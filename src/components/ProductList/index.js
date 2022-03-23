@@ -2,7 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 
-const ProductList = ({ productList }) => {
+const ProductList = ({ productList = [] }) => {
+    if (productList.length === 0) return <div>loading...</div>;
     return (
         <>
             <ColumnTitles>
@@ -11,18 +12,9 @@ const ProductList = ({ productList }) => {
                 <Title flex={1}>Image</Title>
             </ColumnTitles>
             <List>
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
-                <Product />
+                {productList.map((product) => (
+                    <Product key={product.id} product={product} />
+                ))}
             </List>
         </>
     );

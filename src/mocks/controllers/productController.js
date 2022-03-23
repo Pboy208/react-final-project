@@ -17,17 +17,18 @@ const getSortFormular = (filter) => {
             //for most recently added item first
             return (a, b) => a.createdTimestamp > b.createdTimestamp;
         default:
+            console.log("invalid filter::::", filter);
             throw new Error("Invalid filter");
     }
 };
 
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
-    const { filter, search } = getRequestParams(req);
+    // const { filter, search } = getRequestParams(req);
     let productList = await Product.getAll();
     // console.log("first productlist", productList, filter, search);
     // if (search) productList = productList.filter((product) => product.title === search);
     // console.log("second productlist", productList);
-    productList.sort(getSortFormular(filter));
+    productList.sort(getSortFormular("CREATED_TIME"));
     // console.log("last productList:::", productList);
     return res(ctx.json({ message: "Success", data: productList }));
 });

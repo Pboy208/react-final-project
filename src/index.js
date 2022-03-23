@@ -10,6 +10,9 @@ import "@ahaui/css/dist/index.min.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import initiateDB from "./mocks/database/indexedDB";
 import { worker as server } from "./mocks/browser";
+import { Provider } from "react-redux";
+import { store } from "./store/index";
+
 initiateDB();
 const fullUrl = new URL("http://localhost:3000");
 server.start({
@@ -20,13 +23,15 @@ server.start({
 });
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider>
-            <Router>
-                <ErrorBoundary FallbackComponent={FallbackComponent}>
-                    <App />
-                </ErrorBoundary>
-            </Router>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider>
+                <Router>
+                    <ErrorBoundary FallbackComponent={FallbackComponent}>
+                        <App />
+                    </ErrorBoundary>
+                </Router>
+            </ThemeProvider>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );
