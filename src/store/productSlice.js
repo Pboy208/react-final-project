@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { normalize } from "normalizr";
+import * as normalizerSchema from "../utils/schemas/normalizr-schema";
+import { thunkWrapper } from "../utils/utilFunction";
+import * as productApi from "../api/productApi";
 
 const productSlice = createSlice({
     name: "product",
@@ -30,6 +34,44 @@ const productSlice = createSlice({
             delete state.byIds[action.payload.id];
         },
     },
+});
+
+export const getProductListThunk = thunkWrapper((filter, search) => async (dispatch) => {
+    const response = await fetch(...productApi.getProductList());
+    if (!response.ok) throw response.status;
+
+    const data = (await response.json()).data;
+    const normalizedData = normalize(data, normalizerSchema.arrayOfProduct);
+
+    const normalizedProductList = {
+        byIds: normalizedData.entities.product,
+        ids: normalizedData.result,
+    };
+
+    dispatch(productSlice.actions.replaceProductList(normalizedProductList));
+});
+
+export const addproductThunk = thunkWrapper((product) => async (dispatch) => {
+    const response = await fetch(...productApi.addProduct(product));
+    if (!response.ok) throw response.status;
+
+    const newProduct = (await response.json()).data;
+    dispatch(productSlice.actions.modifyProductList(newProduct));
+});
+
+export const updateProductThunk = thunkWrapper((product) => async (dispatch) => {
+    const response = await fetch(...productApi.updateProduct(product));
+    if (!response.ok) throw response.status;
+
+    const newProduct = (await response.json()).data;
+    dispatch(productSlice.actions.deleteProduct(newProduct));
+});
+
+export const deleteProductThunk = thunkWrapper((id) => async (dispatch) => {
+    const response = await fetch(...productApi.deleteProduct(id));
+    if (!response.ok) throw response.status;
+
+    dispatch(productSlice.actions.modifyProductList(id));
 });
 
 export default productSlice.reducer;

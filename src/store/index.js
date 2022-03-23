@@ -2,23 +2,23 @@ import { configureStore } from "@reduxjs/toolkit";
 import productReducer from "./productSlice";
 import authReducer from "./authSlice";
 
-const errorHandlerMiddleware = (store) => (next) => (error, action) => {
-    switch (error.status) {
+const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
+    if (!Number.isInteger(action)) return next(action);
+    switch (action) {
         case 401:
-            break;
         case 402:
-            break;
         case 403:
-            break;
+        case 409:
         case 500:
+            console.log("Catched in error handler middleware:::", action);
             break;
         default:
-            next(action);
+            console.log("Un-catched status code:::", action);
             break;
     }
 };
 
 export const store = configureStore({
     reducer: { product: productReducer, auth: authReducer },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(errorHandlerMiddleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(httpErrorHandlerMiddleware),
 });
