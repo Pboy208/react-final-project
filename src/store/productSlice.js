@@ -37,10 +37,8 @@ const productSlice = createSlice({
 });
 
 export const getProductListThunk = thunkWrapper((filter, search) => async (dispatch) => {
-    return fetch(...productApi.getProductList()).then(async (response) => {
-        if (!response.ok) throw response.status;
-
-        const data = (await response.json()).data;
+    return productApi.getProductList().then(async (response) => {
+        const data = response.data;
         const normalizedData = normalize(data, normalizerSchema.arrayOfProduct);
 
         const normalizedProductList = {
@@ -53,7 +51,7 @@ export const getProductListThunk = thunkWrapper((filter, search) => async (dispa
 });
 
 export const addproductThunk = thunkWrapper((product) => async (dispatch) => {
-    const response = await fetch(...productApi.addProduct(product));
+    const response = await productApi.addProduct(product);
     if (!response.ok) throw response.status;
 
     const newProduct = (await response.json()).data;
@@ -61,7 +59,7 @@ export const addproductThunk = thunkWrapper((product) => async (dispatch) => {
 });
 
 export const updateProductThunk = thunkWrapper((product) => async (dispatch) => {
-    const response = await fetch(...productApi.updateProduct(product));
+    const response = await productApi.updateProduct(product);
     if (!response.ok) throw response.status;
 
     const newProduct = (await response.json()).data;
@@ -69,7 +67,7 @@ export const updateProductThunk = thunkWrapper((product) => async (dispatch) => 
 });
 
 export const deleteProductThunk = thunkWrapper((id) => async (dispatch) => {
-    const response = await fetch(...productApi.deleteProduct(id));
+    const response = await productApi.deleteProduct(id);
     if (!response.ok) throw response.status;
 
     dispatch(productSlice.actions.modifyProductList(id));

@@ -30,7 +30,15 @@ export const createRequest = ({
         },
         body: body ? JSON.stringify(body) : null,
     };
-    return [requestUrl, requestConfig];
+    return fetch(requestUrl, requestConfig).then(
+        (response) => {
+            if (!response.ok) throw response.statusCode;
+            return response.json();
+        },
+        (error) => {
+            throw error;
+        }
+    );
 };
 
 export const thunkWrapper =
