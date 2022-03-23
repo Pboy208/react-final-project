@@ -3,6 +3,7 @@ import productReducer from "./productSlice";
 import authReducer from "./authSlice";
 import * as Toast from "../components/common/Toast";
 const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
+    console.log("in error middleware");
     if (!action.error) return next(action);
     Toast.error(action.error.message);
 

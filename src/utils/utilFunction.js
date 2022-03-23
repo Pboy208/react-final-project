@@ -19,7 +19,7 @@ export const createRequest = async ({
 }) => {
     const url = baseUrl + endpoint;
     console.log("params pass in ", params);
-    const requestUrl = generateUrlWithParams(url, params);
+    const requestUrl = params ? generateUrlWithParams(url, params) : url;
     const requestConfig = {
         method,
         headers: {

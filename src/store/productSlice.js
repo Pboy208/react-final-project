@@ -5,8 +5,11 @@ import { thunkWrapper } from "../utils/utilFunction";
 import * as productApi from "../api/productApi";
 
 export const getProductList = createAsyncThunk("product/getProductList", async (params) => {
-    const promise = productApi.getProductList(params);
-    return promise;
+    return productApi.getProductList(params);
+});
+
+export const getProduct = createAsyncThunk("product/getProduct", async (id) => {
+    return productApi.getProduct(id);
 });
 
 const productSlice = createSlice({
@@ -16,10 +19,6 @@ const productSlice = createSlice({
         ids: [],
     },
     reducers: {
-        addProduct(state, action) {
-            state.byIds = { ...state.byIds, ...action.payload.byIds };
-            state.ids = [...state.ids, ...action.payload.ids];
-        },
         modifyProductList(state, action) {
             if (state.ids.includes(action.payload.id)) {
                 state.byIds[action.payload.id] = {
@@ -43,6 +42,14 @@ const productSlice = createSlice({
             console.log("here");
         },
         [getProductList.rejected]: (state, action) => {
+            console.log("in reducer extra", action);
+        },
+        [getProduct.fulfilled]: (state, action) => {
+            const normalizedData = normalize(action.payload.data, normalizerSchema.product);
+            state.byIds = { ...state.byIds, ...normalizedData.entities.product };
+            state.ids = [...state.ids, normalizedData.result];
+        },
+        [getProduct.rejected]: (state, action) => {
             console.log("in reducer extra", action);
         },
     },

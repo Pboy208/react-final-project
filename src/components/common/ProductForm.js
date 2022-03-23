@@ -9,6 +9,7 @@ const imageFallback = "https://banksiafdn.com/wp-content/uploads/2019/10/placeho
 
 const ProductForm = ({ product, handleFormSubmit }) => {
     const {
+        reset,
         register,
         handleSubmit,
         formState: { errors },
@@ -18,6 +19,10 @@ const ProductForm = ({ product, handleFormSubmit }) => {
         resolver: yupResolver(validationSchema),
         defaultValues: product,
     });
+
+    React.useEffect(() => {
+        reset(product);
+    }, [product]);
 
     const isLoading = true;
     const imageUrl = getFieldValues("imageUrl");
