@@ -3,12 +3,10 @@ export const formatVnd = (n) => n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".
 const baseUrl = "http://localhost:3000";
 
 const generateUrlWithParams = (givenUrl, params) => {
+    console.log(params);
+    if (!params.search) params.search = "";
     const url = new URL(givenUrl);
-    const urlSearchParams = new URLSearchParams();
-    for (let key in params) {
-        urlSearchParams.set(key, params[key]);
-    }
-    url.search = urlSearchParams;
+    url.search = new URLSearchParams(params);
     return url;
 };
 
@@ -20,7 +18,8 @@ export const createRequest = async ({
     params = null,
 }) => {
     const url = baseUrl + endpoint;
-    const requestUrl = params ? generateUrlWithParams(url, params) : url;
+    console.log("params pass in ", params);
+    const requestUrl = generateUrlWithParams(url, params);
     const requestConfig = {
         method,
         headers: {
@@ -30,7 +29,7 @@ export const createRequest = async ({
         },
         body: body ? JSON.stringify(body) : null,
     };
-    console.log("about to fetch");
+    console.log("about to fetch", requestUrl, requestConfig);
     try {
         const response = await fetch(requestUrl, requestConfig);
         console.log(response);

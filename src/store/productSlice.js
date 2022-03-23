@@ -5,7 +5,7 @@ import { thunkWrapper } from "../utils/utilFunction";
 import * as productApi from "../api/productApi";
 
 export const getProductList = createAsyncThunk("product/getProductList", async (params) => {
-    const promise = productApi.getProductList();
+    const promise = productApi.getProductList(params);
     return promise;
 });
 

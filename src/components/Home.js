@@ -27,6 +27,7 @@ const Home = () => {
                 onClickButton={handleClick}
                 value={search}
                 onChange={handleSearchChange}
+                buttonIcon={status === "pending" ? "cloudDownload" : "search"}
             />
             <TitlesAndSortByWrapper>
                 <ColumnTitles>

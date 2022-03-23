@@ -1,10 +1,10 @@
 import { createRequest } from "../utils/utilFunction";
 
-export const getProductList = async ({ filter, search } = { filter: "CREATED_TIME" }, token) =>
+export const getProductList = async (params = { sortBy: "CREATED_TIME" }, token) =>
     await createRequest({
         endpoint: "/products",
         method: "GET",
-        params: { filter, search },
+        params,
     });
 
 export const getProduct = async (id) =>

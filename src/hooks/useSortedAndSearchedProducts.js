@@ -33,7 +33,8 @@ const useSortedAndSearchedProducts = (initialSortBy = "CREATED_TIME", initialSea
 
     React.useEffect(() => {
         const debounce = setTimeout(() => {
-            handleRequest(dispatch(getProductList()).unwrap());
+            console.log("search for fetch", search);
+            handleRequest(dispatch(getProductList({ sortBy, search })).unwrap());
         }, 500);
         return () => clearTimeout(debounce);
     }, [dispatch, sortBy, handleRequest, search]);
