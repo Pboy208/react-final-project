@@ -36,7 +36,10 @@ const authSlice = createSlice({
         },
     },
     extraReducers: {
-        [login.rejected]: (state, action) => {},
+        [login.rejected]: (state, action) => {
+            console.log("first rejected", action);
+            return action;
+        },
         [login.fulfilled]: (state, action) => {
             localStorage.setItem("token", action.payload.data);
             state.isLoggedIn = true;

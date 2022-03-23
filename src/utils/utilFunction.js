@@ -34,10 +34,11 @@ export const createRequest = async ({
     try {
         const response = await fetch(requestUrl, requestConfig);
         console.log(response);
-
-        if (!response.ok) throw response.status;
-        return response.json();
+        const payload = await response.json();
+        if (!response.ok) throw { statusCode: response.status, message: payload.message };
+        return payload;
     } catch (error) {
+        console.log(error);
         throw error;
     }
 };

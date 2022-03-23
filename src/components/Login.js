@@ -8,6 +8,7 @@ import useAsync from "../hooks/useAsync";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
+import * as Toast from "./common/Toast";
 const Login = () => {
     const {
         register,
@@ -30,6 +31,7 @@ const Login = () => {
             dispatch(login(loginInfo))
                 .unwrap()
                 .then(() => navigate("/home"))
+                .then(() => Toast.success("Login Successful"))
         );
     };
     return (
