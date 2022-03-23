@@ -1,16 +1,22 @@
 import * as React from "react";
 import styled from "styled-components";
-import { SearchBox } from "@ahaui/react";
+import { SearchBox, Dropdown, Icon, Button } from "@ahaui/react";
 import ProductList from "../components/ProductList";
-import useSortedProducts from "../hooks/useSortedProducts";
-const Home = () => {
-    const { status, productList } = useSortedProducts();
+import useSortedAndSearchedProducts from "../hooks/useSortedAndSearchedProducts";
 
+const Home = () => {
+    const { status, productList, setSortBy, setSearch, sortBy, search } =
+        useSortedAndSearchedProducts();
     const handleClick = () => console.log("clicked");
 
     const handleSearchChange = (e) => {
         const value = e.target.value;
         console.log(value);
+    };
+
+    const handleSortByChange = (e) => {
+        const value = e.target.id;
+        setSortBy(value);
     };
 
     if (!productList || status === "pending") return <div>loading</div>;
@@ -19,9 +25,65 @@ const Home = () => {
             <SearchBar
                 placeholder="Search..."
                 onClickButton={handleClick}
-                value={""}
+                value={search}
                 onChange={handleSearchChange}
-            />
+            />{" "}
+            <TitlesAndSortByWrapper>
+                <ColumnTitles>
+                    <Title flex={3}>Name</Title>
+                    <Title flex={1}>Price</Title>
+                    <Title flex={1}>Image</Title>
+                </ColumnTitles>
+                <Dropdown
+                    alignRight
+                    style={{ marginTop: "20px", width: "16%" }}
+                    className="u-flex u-justifyContentEnd"
+                >
+                    <Dropdown.Button
+                        variant="secondary"
+                        style={{
+                            fontSize: "14px",
+                            width: "80%",
+                            paddingTop: "0px",
+                            paddingBottom: "0px",
+                        }}
+                    >
+                        <Button.Label>Sort by:</Button.Label>
+                        <Button.Label>
+                            {sortBy === "CREATED_TIME"
+                                ? "Currently added"
+                                : sortBy === "PRICE_INCREASE"
+                                ? "Price increase"
+                                : "Price decrease"}
+                        </Button.Label>
+                    </Dropdown.Button>
+                    <Dropdown.Container
+                        style={{
+                            backgroundColor: "#DEE2EA",
+                            top: "100%",
+                            left: "20%",
+                            width: "80%",
+                        }}
+                        className="u-paddingVerticalExtraSmall"
+                    >
+                        <Dropdown.Item styled={{ cursor: "pointer" }}>
+                            <div id="CREATED_TIME" onClick={handleSortByChange}>
+                                Currently added
+                            </div>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <div id="PRICE_INCREASE" onClick={handleSortByChange}>
+                                Price increase
+                            </div>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <div id="PRICE_DECREASE" onClick={handleSortByChange}>
+                                Price decrease
+                            </div>
+                        </Dropdown.Item>
+                    </Dropdown.Container>
+                </Dropdown>
+            </TitlesAndSortByWrapper>
             <ProductList productList={productList} />
         </Wrapper>
     );
@@ -38,6 +100,39 @@ const Wrapper = styled.div`
 const SearchBar = styled(SearchBox)`
     width: 60%;
     margin: 12px 0;
+`;
+
+const TitlesAndSortByWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+`;
+
+const SortBySelection = styled.select`
+    width: 20%;
+    margin-top: 20px;
+    border-bottom: none;
+`;
+
+const SortBy = styled.option``;
+
+const ColumnTitles = styled.div`
+    margin-top: 20px;
+    display: flex;
+    width: 80%;
+    align-self: flex-start;
+    gap: 10px;
+`;
+
+const Title = styled.div`
+    flex: ${(prop) => prop.flex};
+    height: 30px;
+    padding-left: 20px;
+    border: 1px solid;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 4px;
+    border-bottom: none;
 `;
 
 export default Home;
