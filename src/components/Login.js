@@ -7,7 +7,7 @@ import validationSchema from "../utils/schemas/login-schemas";
 import useAsync from "../hooks/useAsync";
 import { useDispatch } from "react-redux";
 import { login, loginThunk } from "../store/authSlice";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
     const {
         register,
@@ -17,15 +17,20 @@ const Login = () => {
         mode: "onChange",
         resolver: yupResolver(validationSchema),
     });
-    const dispatch = useDispatch();
     const { status, handleRequest } = useAsync();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const isLoading = status === "pending" ? true : false;
     const isEmailInvalid = !!errors.email;
     const isPasswordInvalid = !!errors.password;
 
     const handleLogin = (loginInfo) => {
-        handleRequest(dispatch(login(loginInfo)).unwrap());
+        handleRequest(
+            dispatch(login(loginInfo))
+                .unwrap()
+                .then(() => navigate("/home"))
+        );
     };
     return (
         <LoginForm onSubmit={handleSubmit(handleLogin)}>
