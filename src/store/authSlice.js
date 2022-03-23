@@ -32,6 +32,7 @@ const authSlice = createSlice({
         logOut(state) {
             state.isLoggedIn = false;
             state.userName = "";
+            localStorage.removeItem("token");
         },
     },
     extraReducers: {
