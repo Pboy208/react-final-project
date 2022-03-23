@@ -1,15 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../../store/authSlice";
 const Header = () => {
-    const isLoggedIn = false;
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const { pathname } = useLocation();
     const { theme, toggleTheme } = useTheme();
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const logoutHandler = () => {
-        console.log("logout");
+        dispatch(logOut());
+        navigate("/login");
     };
 
     const renderNavigationBar = () => {
