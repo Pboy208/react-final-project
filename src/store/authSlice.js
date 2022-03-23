@@ -42,7 +42,7 @@ export const loginThunk = thunkWrapper((loginInfo) => async (dispatch) => {
     const response = await fetch(...authApi.login(loginInfo));
     if (!response.ok) throw response.status;
 
-    const token = (await response.json()).data.token;
+    const token = (await response.json()).data;
     localStorage.setItem("token", token);
 
     dispatch(authSlice.actions.logIn(loginInfo));
