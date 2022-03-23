@@ -6,8 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "../utils/schemas/login-schemas";
 import useAsync from "../hooks/useAsync";
 import { useDispatch } from "react-redux";
-import { login, loginThunk } from "../store/authSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { login } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
     const {
         register,

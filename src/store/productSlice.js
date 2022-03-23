@@ -4,15 +4,11 @@ import * as normalizerSchema from "../utils/schemas/normalizr-schema";
 import { thunkWrapper } from "../utils/utilFunction";
 import * as productApi from "../api/productApi";
 
-export const getProductList = createAsyncThunk(
-    "product/getProductList",
-    async (params, { rejectWithValue }) => {
-        console.log("before thunk");
-        const promise = productApi.getProductList();
-        console.log("after thunk");
-        return promise;
-    }
-);
+export const getProductList = createAsyncThunk("product/getProductList", async (params) => {
+    const promise = productApi.getProductList();
+    return promise;
+});
+
 const productSlice = createSlice({
     name: "product",
     initialState: {

@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import decode from "jwt-decode";
 import * as authApi from "../api/authApi";
-import { thunkWrapper } from "../utils/utilFunction";
 
 export const login = createAsyncThunk("auth/login", async (loginInfo, { rejectWithValue }) => {
     return authApi.login(loginInfo);
@@ -24,7 +23,6 @@ const token = localStorage.getItem("token");
 if (isTokenValid(token)) {
     initialState.isLoggedIn = true;
     initialState.userName = decode(token).userName;
-    console.log("set user", initialState.userName);
 }
 
 const authSlice = createSlice({
