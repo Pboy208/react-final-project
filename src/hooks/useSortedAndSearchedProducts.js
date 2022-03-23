@@ -14,17 +14,16 @@ const reducer = (state, action) => {
     }
 };
 
-const useSortedAndSearchedProducts = (inititalSortBy = "CREATED_TIME", initialSsearch = "") => {
+const useSortedAndSearchedProducts = (initialSortBy = "CREATED_TIME", initialSearch = "") => {
     const { error, status, data: productList, handleRequest } = useAsync();
     const [state, setState] = React.useReducer(reducer, {
-        sortBy: inititalSortBy,
-        search: initialSsearch,
+        sortBy: initialSortBy,
+        search: initialSearch,
     });
     const { sortBy, search } = state;
     const dispatch = useDispatch();
 
     const setSortBy = React.useCallback((sortBy) => {
-        console.log("Here");
         setState({ type: "SET_SORT_BY", sortBy });
     }, []);
 
@@ -33,9 +32,10 @@ const useSortedAndSearchedProducts = (inititalSortBy = "CREATED_TIME", initialSs
     }, []);
 
     React.useEffect(() => {
-        // console.log(dispatch(getProductListThunk()));
-        console.log("about to dispatch ");
-        handleRequest(dispatch(getProductList()).unwrap());
+        const debounce = setTimeout(() => {
+            handleRequest(dispatch(getProductList()).unwrap());
+        }, 500);
+        return () => clearTimeout(debounce);
     }, [dispatch, sortBy, handleRequest, search]);
 
     return { productList, status, error, setSortBy, setSearch, sortBy, search };

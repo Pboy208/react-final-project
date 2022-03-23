@@ -11,7 +11,7 @@ const Home = () => {
 
     const handleSearchChange = (e) => {
         const value = e.target.value;
-        console.log(value);
+        setSearch(value);
     };
 
     const handleSortByChange = (e) => {
@@ -27,7 +27,7 @@ const Home = () => {
                 onClickButton={handleClick}
                 value={search}
                 onChange={handleSearchChange}
-            />{" "}
+            />
             <TitlesAndSortByWrapper>
                 <ColumnTitles>
                     <Title flex={3}>Name</Title>
