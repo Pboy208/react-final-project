@@ -8,7 +8,7 @@ import AddProduct from "./components/AddProduct";
 import UpdateProduct from "./components/UpdateProduct";
 import PageNotFound from "./components/PageNotFound";
 import { useTheme } from "./context/ThemeContext";
-
+import ProtectedRoute from "./components/common/ProtectedRoute";
 const App = () => {
     const { theme } = useTheme();
 
@@ -18,11 +18,11 @@ const App = () => {
             <Layout>
                 <Routes>
                     <Route path="/" exact element={<Navigate to="/home" />} />
-                    <Route path="/login" exact element={<Login />} />
+                    <Route path="/login" exact element={<Login/>} />
                     <Route path="/register" exact element={<Register />} />
-                    <Route path="/home" exact element={<Home />} />
-                    <Route path="/product/create" exact element={<AddProduct />} />
-                    <Route path="/product/:productId" exact element={<UpdateProduct />} />
+                    <Route path="/home" exact element={<ProtectedRoute component={Home} />} />
+                    <Route path="/product/create" exact element={<ProtectedRoute component={AddProduct} />} />
+                    <Route path="/product/:productId" exact element={<ProtectedRoute component={UpdateProduct} />} />
                     <Route path="/*" element={<PageNotFound />} />
                 </Routes>
             </Layout>
