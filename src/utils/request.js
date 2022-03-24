@@ -7,6 +7,8 @@ const generateUrlWithParams = (givenUrl, params) => {
     return url;
 };
 
+const getToken = () => localStorage.getItem("token");
+
 export const createRequest = async ({
     endpoint,
     method = "GET",
@@ -19,7 +21,7 @@ export const createRequest = async ({
     const requestConfig = {
         method,
         headers: {
-            authorization: token ? `Bearer ${token}` : null,
+            authorization: token ? `Bearer ${getToken()}` : null,
             accept: "application/json",
             "Content-Type": "application/json",
         },
