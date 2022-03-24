@@ -12,25 +12,19 @@ export const getProduct = createAsyncThunk("product/get", async (id) => {
     return productApi.getProduct(id);
 });
 
+export const updateProduct = createAsyncThunk("product/update", async (product) => {
+    return productApi.updateProduct(product);
+});
+
 const productSlice = createSlice({
     name: "product",
     initialState: {
         isLoading: false,
-        error:false,
+        error: false,
         byIds: {},
         ids: [],
     },
     reducers: {
-        modifyProductList(state, action) {
-            if (state.ids.includes(action.payload.id)) {
-                state.byIds[action.payload.id] = {
-                    ...state.byIds[action.payload.id],
-                    ...action.payload,
-                };
-            }
-            state.byIds = { ...state.byIds, [action.payload.id]: action.payload };
-            state.ids = [...state.ids, ...action.payload.id];
-        },
         deleteProduct(state, action) {
             state.ids = state.ids.filter((id) => id !== action.payload.id);
             delete state.byIds[action.payload.id];
@@ -54,6 +48,25 @@ const productSlice = createSlice({
         [getProduct.rejected]: (state, action) => {
             console.log("in reducer extra", action);
         },
+        [updateProduct.fulfilled]: (state, action) => {
+            const product = action.payload.data;
+            if (state.ids.includes(product.id)) {
+                state.byIds[product.id] = {
+                    ...state.byIds[product.id],
+                    ...product,
+                };
+            }
+            state.byIds = { ...state.byIds, [product.id]: product };
+            state.ids = [...state.ids, ...product.id];
+            state.isLoading = false;
+        },
+        [updateProduct.pending]: (state, action) => {
+            state.isLoading = true;
+        },
+        [updateProduct.rejected]: (state, action) => {
+            state.error = action.error;
+            state.isLoading = false;
+        },
     },
 });
 
@@ -63,14 +76,6 @@ export const addproductThunk = thunkWrapper((product) => async (dispatch) => {
 
     const newProduct = (await response.json()).data;
     dispatch(productSlice.actions.modifyProductList(newProduct));
-});
-
-export const updateProductThunk = thunkWrapper((product) => async (dispatch) => {
-    const response = await productApi.updateProduct(product);
-    if (!response.ok) throw response.status;
-
-    const newProduct = (await response.json()).data;
-    dispatch(productSlice.actions.deleteProduct(newProduct));
 });
 
 export const deleteProductThunk = thunkWrapper((id) => async (dispatch) => {
