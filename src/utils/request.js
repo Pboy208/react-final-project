@@ -1,9 +1,6 @@
-export const formatVnd = (n) => n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " vnd";
-
-const baseUrl = "http://localhost:3000";
+import { BASE_URL } from "../constants";
 
 const generateUrlWithParams = (givenUrl, params) => {
-    console.log(params);
     if (!params.search) params.search = "";
     const url = new URL(givenUrl);
     url.search = new URLSearchParams(params);
@@ -17,7 +14,7 @@ export const createRequest = async ({
     token = null,
     params = null,
 }) => {
-    const url = baseUrl + endpoint;
+    const url = BASE_URL + endpoint;
     console.log("params pass in ", params);
     const requestUrl = params ? generateUrlWithParams(url, params) : url;
     const requestConfig = {
@@ -41,14 +38,3 @@ export const createRequest = async ({
         throw error;
     }
 };
-
-export const thunkWrapper =
-    (fn) =>
-    (action, ...agrs) =>
-    async (dispatch) => {
-        try {
-            return await fn(action, ...agrs)(dispatch);
-        } catch (statusCode) {
-            dispatch(statusCode);
-        }
-    };

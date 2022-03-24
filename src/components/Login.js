@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { Form, Button, Loader } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import validationSchema from "../utils/schemas/login-schemas";
+import validationSchema from "../utils/schemas/loginSchema";
 import useAsync from "../hooks/useAsync";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authSlice";

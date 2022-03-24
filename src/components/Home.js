@@ -28,7 +28,8 @@ const Home = () => {
                 onClickButton={handleClick}
                 value={search}
                 onChange={handleSearchChange}
-                buttonIcon={status === "pending" ? "cloudDownload" : "search"}
+                buttonIcon={null}
+                buttonText="Sort by"
             />
             <TitlesAndSortByWrapper>
                 <ColumnTitles>

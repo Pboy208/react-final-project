@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { Form, Button, Loader } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import validationSchema from "../utils/schemas/register-schemas";
+import validationSchema from "../utils/schemas/registerSchema";
 
 const Register = () => {
     const {

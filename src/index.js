@@ -12,15 +12,17 @@ import initiateDB from "./mocks/database/indexedDB";
 import { worker as server } from "./mocks/browser";
 import { Provider } from "react-redux";
 import { store } from "./store/index";
+import { BASE_URL } from "./constants";
 
 initiateDB();
-const fullUrl = new URL("http://localhost:3000");
+const fullUrl = new URL(BASE_URL);
 server.start({
     quiet: true,
     serviceWorker: {
         url: fullUrl.pathname + "mockServiceWorker.js",
     },
 });
+
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>

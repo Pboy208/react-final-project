@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { formatVnd } from "../../utils/utilFunction";
+import { formatVnd } from "../../utils/formatter";
 import ConfirmModal from "./ConfirmModal";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../../store/productSlice";

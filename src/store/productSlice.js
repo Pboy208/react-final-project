@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { normalize } from "normalizr";
-import * as normalizerSchema from "../utils/schemas/normalizr-schema";
-import { thunkWrapper } from "../utils/utilFunction";
-import * as productApi from "../api/productApi";
+import * as normalizerSchema from "../utils/schemas/normalizrSchemas";
+import * as productApi from "../api/productAPIs";
 
 export const getProductList = createAsyncThunk("product/getList", async (params) => {
     return productApi.getProductList(params);
@@ -36,16 +35,10 @@ const productSlice = createSlice({
             state.ids = normalizedData.result;
             console.log("here");
         },
-        [getProductList.rejected]: (state, action) => {
-            console.log("in reducer extra", action);
-        },
         [getProduct.fulfilled]: (state, action) => {
             const normalizedData = normalize(action.payload.data, normalizerSchema.product);
             state.byIds = { ...state.byIds, ...normalizedData.entities.product };
             state.ids = [...state.ids, normalizedData.result];
-        },
-        [getProduct.rejected]: (state, action) => {
-            console.log("in reducer extra", action);
         },
         [updateProduct.fulfilled]: (state, action) => {
             const product = action.payload.data;
@@ -81,12 +74,12 @@ const productSlice = createSlice({
     },
 });
 
-export const addproductThunk = thunkWrapper((product) => async (dispatch) => {
+export const addproductThunk = (product) => async (dispatch) => {
     const response = await productApi.addProduct(product);
     if (!response.ok) throw response.status;
 
     const newProduct = (await response.json()).data;
     dispatch(productSlice.actions.modifyProductList(newProduct));
-});
+};
 
 export default productSlice.reducer;
