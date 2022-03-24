@@ -1,13 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
-import { SearchBox, Dropdown, Icon, Button } from "@ahaui/react";
 import ProductList from "../components/ProductList";
 import useSortedAndSearchedProducts from "../hooks/useSortedAndSearchedProducts";
 import LoadingSpinner from "./common/LoadingSpinner";
 const Home = () => {
     const { status, productList, setSortBy, setSearch, sortBy, search } =
         useSortedAndSearchedProducts();
-    const handleClick = () => console.log("clicked");
 
     const handleSearchChange = (e) => {
         const value = e.target.value;
@@ -15,7 +13,7 @@ const Home = () => {
     };
 
     const handleSortByChange = (e) => {
-        const value = e.target.id;
+        const value = e.target.value;
         setSortBy(value);
     };
 
@@ -23,69 +21,20 @@ const Home = () => {
         return <LoadingSpinner isLoading={status === "pending"} />;
     return (
         <Wrapper>
-            <SearchBar
-                placeholder="Search..."
-                onClickButton={handleClick}
-                value={search}
-                onChange={handleSearchChange}
-                buttonIcon={null}
-                buttonText="Sort by"
-            />
+            <SearchAndSortBy>
+                <SearchBox value={search} onChange={handleSearchChange} placeholder="Search..." />
+                <SortBy value={sortBy} onChange={handleSortByChange}>
+                    <option value="CREATED_TIME">Recently added</option>
+                    <option value="PRICE_INCREASE">Price increasing</option>
+                    <option value="PRICE_DECREASE">Price decreasing</option>
+                </SortBy>
+            </SearchAndSortBy>
             <TitlesAndSortByWrapper>
                 <ColumnTitles>
                     <Title flex={3}>Name</Title>
                     <Title flex={1}>Price</Title>
                     <Title flex={1}>Image</Title>
                 </ColumnTitles>
-                <Dropdown
-                    alignRight
-                    style={{ marginTop: "20px", width: "16%" }}
-                    className="u-flex u-justifyContentEnd"
-                >
-                    <Dropdown.Button
-                        variant="secondary"
-                        style={{
-                            fontSize: "14px",
-                            width: "80%",
-                            paddingTop: "0px",
-                            paddingBottom: "0px",
-                        }}
-                    >
-                        <Button.Label>Sort by:</Button.Label>
-                        <Button.Label>
-                            {sortBy === "CREATED_TIME"
-                                ? "Currently added"
-                                : sortBy === "PRICE_INCREASE"
-                                ? "Price increase"
-                                : "Price decrease"}
-                        </Button.Label>
-                    </Dropdown.Button>
-                    <Dropdown.Container
-                        style={{
-                            backgroundColor: "#DEE2EA",
-                            top: "100%",
-                            left: "20%",
-                            width: "80%",
-                        }}
-                        className="u-paddingVerticalExtraSmall"
-                    >
-                        <Dropdown.Item styled={{ cursor: "pointer" }}>
-                            <div id="CREATED_TIME" onClick={handleSortByChange}>
-                                Currently added
-                            </div>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <div id="PRICE_INCREASE" onClick={handleSortByChange}>
-                                Price increase
-                            </div>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <div id="PRICE_DECREASE" onClick={handleSortByChange}>
-                                Price decrease
-                            </div>
-                        </Dropdown.Item>
-                    </Dropdown.Container>
-                </Dropdown>
             </TitlesAndSortByWrapper>
             <ProductList productList={productList} />
         </Wrapper>
@@ -100,9 +49,25 @@ const Wrapper = styled.div`
     align-items: center;
 `;
 
-const SearchBar = styled(SearchBox)`
+const SearchAndSortBy = styled.div`
     width: 60%;
     margin: 12px 0;
+    display: flex;
+`;
+const SearchBox = styled.input`
+    flex: 4;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border: 1px solid;
+    border-right: none;
+    font-size: 14px;
+    padding: 10px 20px;
+`;
+const SortBy = styled.select`
+    flex: 1;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: center;
 `;
 
 const TitlesAndSortByWrapper = styled.div`
