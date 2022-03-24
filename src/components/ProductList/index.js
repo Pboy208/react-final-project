@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Product from "./Product";
 
 const ProductList = ({ productList = [] }) => {
-    if (productList.length === 0) return <div>loading...</div>;
     return (
         <List>
             {productList.map((product) => (
