@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ProductList from "../components/ProductList";
 import useSortedAndSearchedProducts from "../hooks/useSortedAndSearchedProducts";
 import LoadingSpinner from "./common/LoadingSpinner";
+import { Link } from "react-router-dom";
 const Home = () => {
     const { status, productList, setSortBy, setSearch, sortBy, search } =
         useSortedAndSearchedProducts();
@@ -29,13 +30,14 @@ const Home = () => {
                     <option value="PRICE_DECREASE">Price decreasing</option>
                 </SortBy>
             </SearchAndSortBy>
-            <TitlesAndSortByWrapper>
+            <TitlesAndAddBtn>
                 <ColumnTitles>
                     <Title flex={5}>Name</Title>
                     <Title flex={2}>Price</Title>
                     <Title flex={1}>Image</Title>
                 </ColumnTitles>
-            </TitlesAndSortByWrapper>
+                <AddBtn to="/product/create">Add a product</AddBtn>
+            </TitlesAndAddBtn>
             <ProductList productList={productList} />
         </Wrapper>
     );
@@ -70,7 +72,7 @@ const SortBy = styled.select`
     text-align: center;
 `;
 
-const TitlesAndSortByWrapper = styled.div`
+const TitlesAndAddBtn = styled.div`
     width: 100%;
     display: flex;
     gap: 20px;
@@ -93,6 +95,17 @@ const Title = styled.div`
     border-top-right-radius: 16px;
     border-top-left-radius: 4px;
     border-bottom: none;
+`;
+
+const AddBtn = styled(Link)`
+    width: 10%;
+    border: 1px solid;
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+    text-align: center;
+    height: 30px;
+    margin-right: 4.5%;
+    cursor: pointer;
 `;
 
 export default Home;
