@@ -8,17 +8,17 @@ export const logIn = controllerWrapper(async (req, res, ctx) => {
         return res(
             ctx.status(401),
             ctx.json({
-                message: "Login failed",
+                message: "Login failed, wrong username or password",
             })
         );
-    return res(ctx.json({ message: "Success", data: token }));
+    return res(ctx.json({ message: "Login success", data: token }));
 });
 
 export const register = controllerWrapper(async (req, res, ctx) => {
     const registerInfo = req.body;
     try {
         await Authen.register(registerInfo);
-        return res(ctx.json({ message: "Success" }));
+        return res(ctx.json({ message: "Register success" }));
     } catch (error) {
         return res(
             ctx.status(409),

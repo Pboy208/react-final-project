@@ -8,7 +8,6 @@ const getRequestParams = (req) => {
 };
 
 const getSortFormula = (sortBy) => {
-    console.log("sortBy", sortBy);
     switch (sortBy) {
         case "PRICE_DECREASE":
             return (a, b) => b.price - a.price;
@@ -21,7 +20,6 @@ const getSortFormula = (sortBy) => {
 };
 
 const hasSearch = (title, search) => {
-    console.log(title, search);
     const titleWords = title.split(" ");
     const searchWords = search.split(" ");
 
@@ -37,23 +35,22 @@ const hasSearch = (title, search) => {
 
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
     const { sortBy, search } = getRequestParams(req);
-    console.log(sortBy, search);
     let productList = await Product.getAll();
     if (search) productList = productList.filter((product) => hasSearch(product.title, search));
     productList.sort(getSortFormula(sortBy));
-    return res(ctx.json({ message: "Success", data: productList }));
+    return res(ctx.json({ message: "Get success", data: productList }));
 });
 
 export const getProduct = controllerWrapper(async (req, res, ctx) => {
     const product = await Product.get(req.params.id);
     if (!product)
         return res(
-            ctx.status(401),
+            ctx.status(404),
             ctx.json({
                 message: "Get failed, id not found",
             })
         );
-    return res(ctx.json({ message: "Success", data: product }));
+    return res(ctx.json({ message: "Get success", data: product }));
 });
 
 export const addProduct = controllerWrapper(async (req, res, ctx) => {
@@ -65,29 +62,29 @@ export const addProduct = controllerWrapper(async (req, res, ctx) => {
                 message: "Add failed, duplicated item",
             })
         );
-    return res(ctx.json({ message: "Success", data: product }));
+    return res(ctx.json({ message: "Create success", data: product }));
 });
 
 export const updateProduct = controllerWrapper(async (req, res, ctx) => {
     const product = await Product.update(req.body);
     if (!product)
         return res(
-            ctx.status(401),
+            ctx.status(404),
             ctx.json({
                 message: "Update failed, id not found",
             })
         );
-    return res(ctx.json({ message: "Success", data: product }));
+    return res(ctx.json({ message: "Update success", data: product }));
 });
 
 export const deleteProduct = controllerWrapper(async (req, res, ctx) => {
     const result = await Product.erase(req.params.id);
     if (!result)
         return res(
-            ctx.status(401),
+            ctx.status(404),
             ctx.json({
                 message: "Delete failed, id not found",
             })
         );
-    return res(ctx.json({ message: "Success" }));
+    return res(ctx.json({ message: "Delete success" }));
 });

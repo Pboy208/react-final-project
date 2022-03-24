@@ -15,7 +15,6 @@ export const createRequest = async ({
     params = null,
 }) => {
     const url = BASE_URL + endpoint;
-    console.log("params pass in ", params);
     const requestUrl = params ? generateUrlWithParams(url, params) : url;
     const requestConfig = {
         method,
@@ -26,15 +25,12 @@ export const createRequest = async ({
         },
         body: body ? JSON.stringify(body) : null,
     };
-    console.log("about to fetch", requestUrl, requestConfig);
     try {
         const response = await fetch(requestUrl, requestConfig);
-        console.log(response);
         const payload = await response.json();
         if (!response.ok) throw { code: response.status.toString(), message: payload.message };
         return payload;
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };

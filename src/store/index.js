@@ -3,27 +3,33 @@ import productReducer from "./productSlice";
 import authReducer from "./authSlice";
 import * as Toast from "../components/common/Toast";
 const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
-    console.log("in error middleware", action);
     if (!action.error) return next(action);
-    Toast.error(action.error.message);
+    const { message, code } = action.error;
+    switch (code) {
+        case "401":
+        case "404":
+        case "409":
+        case "500":
+            return Toast.error(message);
+        default:
+            console.log("Un-catched status code:::", action);
+            return Toast.error("unknown error");
+    }
+};
+
+const httpStatusHandlerMiddleware = (store) => (next) => (action) => {
+    console.log(action);
+    const status = action.meta?.requestStatus || null;
+    if (!status) return next(action);
+    store.dispatch({
+        type: "product/setIsLoading",
+        payload: status === "pending" ? true : false,
+    });
     next(action);
-    // switch (action) {
-    //     case 401:
-    //     case 402:
-    //     case 403:
-    //     case 409:
-    //     case 500:
-    //         console.log("Catched in error handler middleware:::", action);
-    //         console.log(Toast);
-    //         Toast.error({ message: action });
-    //         break;
-    //     default:
-    //         console.log("Un-catched status code:::", action);
-    //         break;
-    // }
 };
 
 export const store = configureStore({
     reducer: { product: productReducer, auth: authReducer },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(httpErrorHandlerMiddleware),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(httpStatusHandlerMiddleware, httpErrorHandlerMiddleware),
 });

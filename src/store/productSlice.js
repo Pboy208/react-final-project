@@ -12,6 +12,7 @@ export const getProduct = createAsyncThunk("product/get", async (id) => {
 });
 
 export const updateProduct = createAsyncThunk("product/update", async (product) => {
+    console.log("begin update");
     return productApi.updateProduct(product);
 });
 
@@ -27,17 +28,20 @@ const productSlice = createSlice({
     name: "product",
     initialState: {
         isLoading: false,
-        error: false,
         byIds: {},
         ids: [],
     },
-    reducers: {},
+    reducers: {
+        setLoading: (state, action) => {
+            console.log("begin set is loading", action.payload);
+            state.isLoading = action.payload;
+        },
+    },
     extraReducers: {
         [getProductList.fulfilled]: (state, action) => {
             const normalizedData = normalize(action.payload.data, normalizerSchema.arrayOfProduct);
             state.byIds = normalizedData.entities.product;
             state.ids = normalizedData.result;
-            console.log("here");
         },
         [getProduct.fulfilled]: (state, action) => {
             const normalizedData = normalize(action.payload.data, normalizerSchema.product);
@@ -54,32 +58,15 @@ const productSlice = createSlice({
             }
             state.byIds = { ...state.byIds, [product.id]: product };
             state.ids = [...state.ids, ...product.id];
-            state.isLoading = false;
-        },
-        [updateProduct.pending]: (state, action) => {
-            state.isLoading = true;
-        },
-        [updateProduct.rejected]: (state, action) => {
-            state.error = action.error;
-            state.isLoading = false;
         },
         [deleteProduct.fulfilled]: (state, action) => {
             state.ids = state.ids.filter((id) => id !== action.payload.id);
             delete state.byIds[action.payload.id];
-            state.isLoading = false;
         },
         [addProduct.fulfilled]: (state, action) => {
             const product = action.payload.data;
             state.byIds = { ...state.byIds, [product.id]: product };
             state.ids = [...state.ids, ...product.id];
-            state.isLoading = false;
-        },
-        [deleteProduct.pending]: (state, action) => {
-            state.isLoading = true;
-        },
-        [deleteProduct.rejected]: (state, action) => {
-            state.error = action.error;
-            state.isLoading = false;
         },
     },
 });

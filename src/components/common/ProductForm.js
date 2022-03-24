@@ -26,7 +26,7 @@ const ProductForm = ({ product, handleFormSubmit }) => {
 
     React.useEffect(() => {
         reset(product);
-    }, [product, imageUrl]);
+    }, [product]);
 
     return (
         <Wrapper>
