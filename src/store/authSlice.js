@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import decode from "jwt-decode";
 import * as authApi from "../api/authApi";
 
-export const login = createAsyncThunk("auth/login", async (loginInfo, { rejectWithValue }) => {
+export const login = createAsyncThunk("auth/login", async (loginInfo) => {
     return authApi.login(loginInfo);
 });
 
@@ -36,11 +36,8 @@ const authSlice = createSlice({
         },
     },
     extraReducers: {
-        [login.rejected]: (state, action) => {
-            console.log("first rejected", action);
-            return action;
-        },
         [login.fulfilled]: (state, action) => {
+            console.log("here");
             localStorage.setItem("token", action.payload.data);
             state.isLoggedIn = true;
             state.userName = decode(action.payload.data).userName;

@@ -108,21 +108,13 @@ const TitlesAndSortByWrapper = styled.div`
     display: flex;
     gap: 20px;
     justify-content: space-between;
+    align-items: flex-end;
 `;
-
-const SortBySelection = styled.select`
-    width: 20%;
-    margin-top: 20px;
-    border-bottom: none;
-`;
-
-const SortBy = styled.option``;
 
 const ColumnTitles = styled.div`
     margin-top: 20px;
     display: flex;
     width: 80%;
-    align-self: flex-start;
     gap: 10px;
 `;
 

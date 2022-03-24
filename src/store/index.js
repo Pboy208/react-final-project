@@ -3,11 +3,10 @@ import productReducer from "./productSlice";
 import authReducer from "./authSlice";
 import * as Toast from "../components/common/Toast";
 const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
-    console.log("in error middleware");
+    console.log("in error middleware", action);
     if (!action.error) return next(action);
     Toast.error(action.error.message);
-
-    // if (!Number.isInteger(action.message)) return next(action);
+    next(action);
     // switch (action) {
     //     case 401:
     //     case 402:
