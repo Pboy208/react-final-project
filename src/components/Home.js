@@ -5,7 +5,7 @@ import useSortedAndSearchedProducts from "../hooks/useSortedAndSearchedProducts"
 import LoadingSpinner from "./common/LoadingSpinner";
 import { Link } from "react-router-dom";
 const Home = () => {
-    const { status, productList, setSortBy, setSearch, sortBy, search } =
+    const { isLoading, productList, setSortBy, setSearch, sortBy, search } =
         useSortedAndSearchedProducts();
 
     const handleSearchChange = (e) => {
@@ -18,8 +18,7 @@ const Home = () => {
         setSortBy(value);
     };
 
-    if (!productList || status === "pending")
-        return <LoadingSpinner isLoading={status === "pending"} />;
+    if (!productList || isLoading) return <LoadingSpinner isLoading={isLoading} />;
     return (
         <Wrapper>
             <SearchAndSortBy>

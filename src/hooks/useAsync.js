@@ -50,12 +50,10 @@ function useAsync(initialState) {
             dispatch({ type: "pending" });
             promise
                 .then((response) => {
-                    console.log("Resolved in useAsync", response);
                     dispatch({ type: "resolved", data: response.data });
                     return;
                 })
                 .catch((error) => {
-                    console.log("Rejected in useAsync", error);
                     dispatch({ type: "rejected", error });
                     return;
                 });

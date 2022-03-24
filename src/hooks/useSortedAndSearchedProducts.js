@@ -1,6 +1,5 @@
 import * as React from "react";
-import useAsync from "./useAsync";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProductList } from "../store/productSlice";
 
 const reducer = (state, action) => {
@@ -15,11 +14,12 @@ const reducer = (state, action) => {
 };
 
 const useSortedAndSearchedProducts = (initialSortBy = "CREATED_TIME", initialSearch = "") => {
-    const { error, status, data: productList, handleRequest } = useAsync();
+    const { isLoading, byIds, ids, isFirstLoad } = useSelector((state) => state.product);
     const [state, setState] = React.useReducer(reducer, {
         sortBy: initialSortBy,
         search: initialSearch,
     });
+    const productList = ids.map((id) => byIds[id]);
     const { sortBy, search } = state;
     const dispatch = useDispatch();
 
@@ -33,13 +33,14 @@ const useSortedAndSearchedProducts = (initialSortBy = "CREATED_TIME", initialSea
 
     React.useEffect(() => {
         const debounce = setTimeout(() => {
-            console.log("search for fetch", search);
-            handleRequest(dispatch(getProductList({ sortBy, search })).unwrap());
+            console.log("still fetch", productList);
+            dispatch(getProductList({ sortBy, search })).unwrap();
         }, 500);
+        if (isFirstLoad) clearTimeout(debounce);
         return () => clearTimeout(debounce);
-    }, [dispatch, sortBy, handleRequest, search]);
+    }, [dispatch, sortBy, search]);
 
-    return { productList, status, error, setSortBy, setSearch, sortBy, search };
+    return { productList, isLoading, setSortBy, setSearch, sortBy, search };
 };
 
 export default useSortedAndSearchedProducts;
