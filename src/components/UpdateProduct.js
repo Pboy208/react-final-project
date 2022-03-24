@@ -1,33 +1,47 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductForm from "./common/ProductForm";
-import { getProduct } from "../store/productSlice";
-// const initialProduct = {
-//     id: "Testing id",
-//     price: 5200000,
-//     title: "ULTRABOOST 22",
-//     imageUrl:
-//         "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fbaf991a78bc4896a3e9ad7800abcec6_9366/ULTRABOOST_22_DJen_GZ0127_01_standard.jpg",
-//     createdTimestamp: new Date(1647869066410),
-// };
+import { getProduct, updateProduct } from "../store/productSlice";
+import { Loader } from "@ahaui/react";
+import styled from "styled-components";
 
 const UpdateProduct = () => {
     const { productId } = useParams();
-    let product = useSelector((state) => state.product.byIds?.[productId]);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
+    let { byIds, isLoading, error } = useSelector((state) => state.product);
+    let product = byIds[productId];
     React.useEffect(() => {
         if (!product) {
             dispatch(getProduct(productId)).unwrap();
         }
     }, [dispatch, productId]);
 
-    const handleFormSubmit = React.useCallback((product) => {
-        console.log("Update product saved", product);
-    }, []);
+    const handleFormSubmit = React.useCallback(
+        (product) => {
+            dispatch(updateProduct(product))
+                .unwrap()
+                .then(() => navigate("/home"));
+        },
+        [dispatch, navigate]
+    );
 
-    return <ProductForm product={product} handleFormSubmit={handleFormSubmit} />;
+    return (
+        <>
+            <ProductForm product={product} handleFormSubmit={handleFormSubmit} />
+            {isLoading && <LoadingSpinner aria-label="Loading" size="large" />}
+        </>
+    );
 };
+
+const LoadingSpinner = styled(Loader)`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+`;
 
 export default UpdateProduct;

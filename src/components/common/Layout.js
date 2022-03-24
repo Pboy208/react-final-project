@@ -27,6 +27,7 @@ const Body = styled.div`
     flex: 1 999999;
     width: 90%;
     margin: 0 auto;
+    position: relative;
 `;
 
 export default Layout;
