@@ -30,6 +30,7 @@ const productSlice = createSlice({
         isLoading: false,
         byIds: {},
         ids: [],
+        isFirstLoad: true,
     },
     reducers: {
         setLoading: (state, action) => {
@@ -42,6 +43,7 @@ const productSlice = createSlice({
             const normalizedData = normalize(action.payload.data, normalizerSchema.arrayOfProduct);
             state.byIds = normalizedData.entities.product;
             state.ids = normalizedData.result;
+            state.isFirstLoad = false;
         },
         [getProduct.fulfilled]: (state, action) => {
             const normalizedData = normalize(action.payload.data, normalizerSchema.product);
