@@ -63,7 +63,7 @@ const productSlice = createSlice({
             state.ids = [product.id, ...state.ids];
         },
         [deleteProduct.fulfilled]: (state, action) => {
-            state.ids = state.ids.filter((id) => id !== action.payload.id);
+            state.ids = state.ids.filter((id) => id !== action.meta.arg);
             delete state.byIds[action.payload.id];
         },
         [addProduct.fulfilled]: (state, action) => {
