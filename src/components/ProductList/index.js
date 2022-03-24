@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 
-const ProductList = ({ productList = [] }) => {
+const ProductList = React.memo(({ productList = [] }) => {
     return (
         <List>
             {productList.map((product) => (
@@ -10,7 +10,7 @@ const ProductList = ({ productList = [] }) => {
             ))}
         </List>
     );
-};
+});
 
 const List = styled.ul`
     width: 100%;

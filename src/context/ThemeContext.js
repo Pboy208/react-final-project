@@ -5,16 +5,12 @@ const ThemeContext = React.createContext();
 const ThemeProvider = React.memo(({ initialTheme = "light", children }) => {
     const [theme, setTheme] = React.useState(initialTheme);
 
-    const toggleTheme = React.useCallback(() => {
-        setTheme((prev) => (prev === "light" ? "dark" : "light"));
-    }, []);
-
     const value = React.useMemo(
         () => ({
             theme,
-            toggleTheme,
+            toggleTheme: () => setTheme((prev) => (prev === "light" ? "dark" : "light")),
         }),
-        [theme, toggleTheme]
+        [theme]
     );
 
     return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

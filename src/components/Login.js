@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Loader } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "../utils/schemas/loginSchema";
-import useAsync from "../hooks/useAsync";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import * as Toast from "./common/Toast";
+
 const Login = () => {
     const {
         register,
