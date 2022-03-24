@@ -31,8 +31,8 @@ const Home = () => {
             </SearchAndSortBy>
             <TitlesAndSortByWrapper>
                 <ColumnTitles>
-                    <Title flex={3}>Name</Title>
-                    <Title flex={1}>Price</Title>
+                    <Title flex={5}>Name</Title>
+                    <Title flex={2}>Price</Title>
                     <Title flex={1}>Image</Title>
                 </ColumnTitles>
             </TitlesAndSortByWrapper>

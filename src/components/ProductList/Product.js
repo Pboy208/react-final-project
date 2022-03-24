@@ -36,8 +36,8 @@ const Product = ({ product = initialProduct }) => {
             <LoadingSpinner isLoading={isLoading} />
             <Wrapper>
                 <ProductInformation>
-                    <Information flex={3}>{title}</Information>
-                    <Information flex={1}>{formatVnd(price)}</Information>
+                    <Information flex={5}>{title}</Information>
+                    <Information flex={2}>{formatVnd(price)}</Information>
                     <Information flex={1}>
                         <ImagePreview>
                             Preview
@@ -129,7 +129,8 @@ const Button = styled.div`
 `;
 
 const ImagePreview = styled.div`
-    width: fit-content;
+    padding-right: 20px;
+    text-align: center;
     cursor: pointer;
     &:hover img {
         display: unset;
