@@ -5,7 +5,7 @@ import { Form, Button, Loader } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "../utils/schemas/loginSchema";
 import useAsync from "../hooks/useAsync";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import * as Toast from "./common/Toast";
@@ -18,21 +18,18 @@ const Login = () => {
         mode: "onChange",
         resolver: yupResolver(validationSchema),
     });
-    const { status, handleRequest } = useAsync();
+    const { isLoading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const isLoading = status === "pending" ? true : false;
     const isEmailInvalid = !!errors.email;
     const isPasswordInvalid = !!errors.password;
 
     const handleLogin = (loginInfo) => {
-        handleRequest(
-            dispatch(login(loginInfo))
-                .unwrap()
-                .then(() => navigate("/home"))
-                .then(() => Toast.success("Login Successful"))
-        );
+        dispatch(login(loginInfo))
+            .unwrap()
+            .then(() => Toast.success(`Login success`))
+            .then(() => navigate("/home"));
     };
     return (
         <LoginForm onSubmit={handleSubmit(handleLogin)}>

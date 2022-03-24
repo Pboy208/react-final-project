@@ -9,6 +9,7 @@ export const login = createAsyncThunk("auth/login", async (loginInfo) => {
 const initialState = {
     isLoggedIn: false,
     userName: "",
+    isLoading: false,
 };
 
 const isTokenValid = (token) => {
@@ -34,10 +35,12 @@ const authSlice = createSlice({
             state.userName = "";
             localStorage.removeItem("token");
         },
+        setIsLoading(state, action) {
+            state.isLoading = action.payload;
+        },
     },
     extraReducers: {
         [login.fulfilled]: (state, action) => {
-            console.log("here");
             localStorage.setItem("token", action.payload.data);
             state.isLoggedIn = true;
             state.userName = decode(action.payload.data).userName;

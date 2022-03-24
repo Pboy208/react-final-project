@@ -21,8 +21,9 @@ const httpStatusHandlerMiddleware = (store) => (next) => (action) => {
     console.log(action);
     const status = action.meta?.requestStatus || null;
     if (!status) return next(action);
+    const stateName = action.type.split("/")[0];
     store.dispatch({
-        type: "product/setIsLoading",
+        type: `${stateName}/setIsLoading`,
         payload: status === "pending" ? true : false,
     });
     next(action);
