@@ -58,8 +58,9 @@ const productSlice = createSlice({
                     ...product,
                 };
             }
-            state.byIds = { ...state.byIds, [product.id]: product };
-            state.ids = [...state.ids, ...product.id];
+            //move id of product to the start of array ids
+            state.ids = state.ids.filter((id) => id !== product.id);
+            state.ids = [product.id, ...state.ids];
         },
         [deleteProduct.fulfilled]: (state, action) => {
             state.ids = state.ids.filter((id) => id !== action.payload.id);
@@ -68,7 +69,7 @@ const productSlice = createSlice({
         [addProduct.fulfilled]: (state, action) => {
             const product = action.payload.data;
             state.byIds = { ...state.byIds, [product.id]: product };
-            state.ids = [...state.ids, ...product.id];
+            state.ids = [product.id, ...state.ids];
         },
     },
 });
