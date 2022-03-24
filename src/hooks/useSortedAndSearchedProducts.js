@@ -40,10 +40,8 @@ const useSortedAndSearchedProducts = (initialSortBy = "CREATED_TIME", initialSea
         }, 500);
 
         // when user move to other page, and return to this one, we don't want to fetch again
-        if (!isFirstLoad && justMounted) {
-            setState({ type: "SET_JUST_MOUNTED" });
-            clearTimeout(debounce);
-        }
+        if (!isFirstLoad && justMounted) clearTimeout(debounce);
+        setState({ type: "SET_JUST_MOUNTED" });
         return () => clearTimeout(debounce);
     }, [dispatch, sortBy, search]);
 
