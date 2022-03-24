@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductForm from "./common/ProductForm";
 import { getProduct, updateProduct } from "../store/productSlice";
-import { Loader } from "@ahaui/react";
-import styled from "styled-components";
+import LoadingSpinner from "./common/LoadingSpinner";
 
 const UpdateProduct = () => {
     const { productId } = useParams();
@@ -30,18 +29,9 @@ const UpdateProduct = () => {
     return (
         <>
             <ProductForm product={product} handleFormSubmit={handleFormSubmit} />
-            {isLoading && <LoadingSpinner aria-label="Loading" size="large" />}
+            <LoadingSpinner isLoading={isLoading} />
         </>
     );
 };
-
-const LoadingSpinner = styled(Loader)`
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-`;
 
 export default UpdateProduct;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { SearchBox, Dropdown, Icon, Button } from "@ahaui/react";
 import ProductList from "../components/ProductList";
 import useSortedAndSearchedProducts from "../hooks/useSortedAndSearchedProducts";
-
+import LoadingSpinner from "./common/LoadingSpinner";
 const Home = () => {
     const { status, productList, setSortBy, setSearch, sortBy, search } =
         useSortedAndSearchedProducts();
@@ -19,7 +19,8 @@ const Home = () => {
         setSortBy(value);
     };
 
-    if (!productList || status === "pending") return <div>loading</div>;
+    if (!productList || status === "pending")
+        return <LoadingSpinner isLoading={status === "pending"} />;
     return (
         <Wrapper>
             <SearchBar

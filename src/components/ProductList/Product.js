@@ -6,6 +6,7 @@ import ConfirmModal from "./ConfirmModal";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../../store/productSlice";
 import * as Toast from "../common/Toast";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const initialProduct = {
     id: "Testing id",
@@ -32,6 +33,7 @@ const Product = ({ product = initialProduct }) => {
 
     return (
         <>
+            <LoadingSpinner isLoading={isLoading} />
             <Wrapper>
                 <ProductInformation>
                     <Information flex={3}>{title}</Information>
