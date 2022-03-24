@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { formatVnd } from "../../utils/utilFunction";
 import ConfirmModal from "./ConfirmModal";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct } from "../../store/productSlice";
+import * as Toast from "../common/Toast";
 
 const initialProduct = {
     id: "Testing id",
@@ -16,9 +19,13 @@ const initialProduct = {
 const Product = ({ product = initialProduct }) => {
     const { title, imageUrl, price, id } = product;
     const [isModalShow, setIsModalShow] = React.useState(false);
+    const { isLoading, error } = useSelector((state) => state.product);
+    const dispatch = useDispatch();
 
     const handleDelete = () => {
-        console.log("delete ", id);
+        dispatch(deleteProduct(id))
+            .unwrap()
+            .then(() => Toast.success("Delete success"));
     };
 
     const toggleIsModalShow = () => setIsModalShow((prev) => !prev);

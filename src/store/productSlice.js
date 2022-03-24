@@ -16,6 +16,10 @@ export const updateProduct = createAsyncThunk("product/update", async (product) 
     return productApi.updateProduct(product);
 });
 
+export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
+    return productApi.deleteProduct(id);
+});
+
 const productSlice = createSlice({
     name: "product",
     initialState: {
@@ -24,12 +28,7 @@ const productSlice = createSlice({
         byIds: {},
         ids: [],
     },
-    reducers: {
-        deleteProduct(state, action) {
-            state.ids = state.ids.filter((id) => id !== action.payload.id);
-            delete state.byIds[action.payload.id];
-        },
-    },
+    reducers: {},
     extraReducers: {
         [getProductList.fulfilled]: (state, action) => {
             const normalizedData = normalize(action.payload.data, normalizerSchema.arrayOfProduct);
@@ -67,6 +66,18 @@ const productSlice = createSlice({
             state.error = action.error;
             state.isLoading = false;
         },
+        [deleteProduct.fulfilled]: (state, action) => {
+            state.ids = state.ids.filter((id) => id !== action.payload.id);
+            delete state.byIds[action.payload.id];
+            state.isLoading = false;
+        },
+        [deleteProduct.pending]: (state, action) => {
+            state.isLoading = true;
+        },
+        [deleteProduct.rejected]: (state, action) => {
+            state.error = action.error;
+            state.isLoading = false;
+        },
     },
 });
 
@@ -78,13 +89,4 @@ export const addproductThunk = thunkWrapper((product) => async (dispatch) => {
     dispatch(productSlice.actions.modifyProductList(newProduct));
 });
 
-export const deleteProductThunk = thunkWrapper((id) => async (dispatch) => {
-    const response = await productApi.deleteProduct(id);
-    if (!response.ok) throw response.status;
-
-    dispatch(productSlice.actions.modifyProductList(id));
-});
-
 export default productSlice.reducer;
-export const { replaceProductList, addProduct, modifyProductList, deleteProduct } =
-    productSlice.actions;
