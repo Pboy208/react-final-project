@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "./FallbackComponent";
 
-const Layout = ({ children }) => {
+const Layout = React.memo(({ children }) => {
     return (
         <Wrapper>
             <ErrorBoundary FallbackComponent={FallbackComponent}>
@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
             </ErrorBoundary>
         </Wrapper>
     );
-};
+});
 
 const Wrapper = styled.div`
     min-height: 100vh;

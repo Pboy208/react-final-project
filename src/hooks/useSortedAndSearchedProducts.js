@@ -22,7 +22,9 @@ const useSortedAndSearchedProducts = (initialSortBy = "CREATED_TIME", initialSea
         search: initialSearch,
         justMounted: true,
     });
-    const productList = ids.map((id) => byIds[id]);
+    const productList = React.useMemo(() => ids.map((id) => byIds[id]), [ids, byIds]);
+
+    console.log("in custom hook");
     const { sortBy, search, justMounted } = state;
     const dispatch = useDispatch();
 

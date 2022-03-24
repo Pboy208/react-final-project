@@ -7,7 +7,7 @@ import validationSchema from "../../utils/schemas/productFormSchema";
 
 const imageFallback = "https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg";
 
-const ProductForm = ({ product, handleFormSubmit }) => {
+const ProductForm = React.memo(({ product, handleFormSubmit }) => {
     const {
         reset,
         register,
@@ -65,7 +65,7 @@ const ProductForm = ({ product, handleFormSubmit }) => {
             <ProductImage src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl} />
         </Wrapper>
     );
-};
+});
 
 const ProductImage = styled.img`
     width: 40%;
