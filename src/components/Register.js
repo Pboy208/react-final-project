@@ -4,28 +4,41 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Loader } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "../utils/schemas/registerSchema";
-
+import useAsync from "../hooks/useAsync";
+import * as authAPIs from "../api/authAPIs";
+import * as Toast from "../components/common/Toast";
 const Register = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm({
         mode: "onChange",
         resolver: yupResolver(validationSchema),
     });
-    const isLoading = true;
-
+    const { status, handleRequest, error } = useAsync();
+    const isLoading = status === "pending";
     const isUserNameInvalid = !!errors.userName;
     const isPasswordInvalid = !!errors.password;
     const isConfirmPasswordInvalid = !!errors.confirmPassword;
     const isEmailInvalid = !!errors.email;
 
-    const printData = (data) => {
-        console.log(data);
+    const handleRegister = (registerInfo) => {
+        handleRequest(authAPIs.register(registerInfo));
     };
+
+    React.useEffect(() => {
+        if (status === "resolved") {
+            Toast.success("Register success");
+            reset();
+        } else if (status === "rejected") {
+            Toast.error(error.message);
+        }
+    }, [status]);
+
     return (
-        <RegisterForm onSubmit={handleSubmit(printData)}>
+        <RegisterForm onSubmit={handleSubmit(handleRegister)}>
             <Form.Group style={{ width: "32%" }} controlId="registerForm.email">
                 <Form.Label>Email</Form.Label>
                 <Form.Input

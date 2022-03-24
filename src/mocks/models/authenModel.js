@@ -22,7 +22,11 @@ export const logIn = async ({ email, password }) => {
 
 export const register = async (registerInfo) => {
     const store = await getAuthenStore();
-    const request = store.put({ ...registerInfo, id: uuid() });
+    const request = store.put({
+        ...registerInfo,
+        id: uuid(),
+        password: md5(registerInfo.password),
+    });
 
     let resolvePromise;
     let rejectPromise;
