@@ -19,6 +19,10 @@ export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
     return productApi.deleteProduct(id);
 });
 
+export const addProduct = createAsyncThunk("product/add", async (product) => {
+    return productApi.addProduct(product);
+});
+
 const productSlice = createSlice({
     name: "product",
     initialState: {
@@ -64,6 +68,12 @@ const productSlice = createSlice({
             delete state.byIds[action.payload.id];
             state.isLoading = false;
         },
+        [addProduct.fulfilled]: (state, action) => {
+            const product = action.payload.data;
+            state.byIds = { ...state.byIds, [product.id]: product };
+            state.ids = [...state.ids, ...product.id];
+            state.isLoading = false;
+        },
         [deleteProduct.pending]: (state, action) => {
             state.isLoading = true;
         },
@@ -73,13 +83,5 @@ const productSlice = createSlice({
         },
     },
 });
-
-export const addproductThunk = (product) => async (dispatch) => {
-    const response = await productApi.addProduct(product);
-    if (!response.ok) throw response.status;
-
-    const newProduct = (await response.json()).data;
-    dispatch(productSlice.actions.modifyProductList(newProduct));
-};
 
 export default productSlice.reducer;

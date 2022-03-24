@@ -19,17 +19,14 @@ const ProductForm = ({ product, handleFormSubmit }) => {
         resolver: yupResolver(validationSchema),
         defaultValues: product,
     });
-
-    React.useEffect(() => {
-        reset(product);
-    }, [product]);
-
-    const isLoading = true;
     const imageUrl = getFieldValues("imageUrl");
-
     const isPriceInvalid = !!errors.price;
     const isImageUrlInvalid = !!errors.imageUrl;
     const isTitleInvalid = !!errors.title;
+
+    React.useEffect(() => {
+        reset(product);
+    }, [product, imageUrl]);
 
     return (
         <Wrapper>
@@ -62,9 +59,7 @@ const ProductForm = ({ product, handleFormSubmit }) => {
                     <Form.Feedback type="invalid">{errors?.price?.message}</Form.Feedback>
                 </Form.Group>
                 <Button size={"small"} variant="primary" style={{ width: "10%" }}>
-                    <Button.Label style={{ fontWeight: "500" }}>
-                        {isLoading ? <Loader aria-label="Loading" size="small" /> : "Login"}
-                    </Button.Label>
+                    <Button.Label style={{ fontWeight: "500" }}>Save</Button.Label>
                 </Button>
             </RegisterForm>
             <ProductImage src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl} />
