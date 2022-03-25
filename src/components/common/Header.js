@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../store/authSlice";
+import { device } from "../../constants/mediaQuery";
 const Header = () => {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const { pathname } = useLocation();
@@ -62,6 +63,9 @@ const Actions = styled.div`
     align-items: center;
     height: 100%;
     gap: 20px;
+    @media ${device.mobile} {
+        gap: 0px;
+    }
 `;
 
 const Side = styled.div`
@@ -80,6 +84,11 @@ const Button = styled.div`
     & i {
         font-size: var(--button-size);
     }
+    @media ${device.mobile} {
+        & i {
+            font-size: 16px;
+        }
+    }
 `;
 
 const NavigateButton = styled(Link)`
@@ -92,6 +101,13 @@ const NavigateButton = styled(Link)`
     font-size: var(--font-size);
     & i {
         font-size: var(--button-size);
+    }
+
+    @media ${device.mobile} {
+        font-size: 10px;
+        & i {
+            font-size: 16px;
+        }
     }
 `;
 

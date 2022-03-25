@@ -108,6 +108,12 @@ const Information = styled.span`
     &:last-child {
         min-width: 66px;
     }
+
+    @media ${device.tablet} {
+        padding-left: 10px;
+        height: 40px;
+    }
+
     @media ${device.mobile} {
         padding-left: 4px;
         height: 48px;

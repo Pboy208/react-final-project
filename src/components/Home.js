@@ -69,6 +69,7 @@ const SearchBox = styled.input`
     padding: 10px 20px;
     @media ${device.mobile} {
         flex: 1;
+        font-size: 14px;
     }
 `;
 const SortBy = styled.select`
@@ -77,6 +78,9 @@ const SortBy = styled.select`
     border-bottom-right-radius: 8px;
     text-align: center;
     font-size: var(--font-size);
+    @media ${device.mobile} {
+        font-size: 14px;
+    }
 `;
 
 const SortOption = styled.option`
@@ -117,6 +121,10 @@ const Title = styled.div`
     &:last-child {
         min-width: 66px;
     }
+    @media ${device.tablet} {
+        padding-left: 10px;
+        height: 40px;
+    }
 
     @media ${device.mobile} {
         padding-left: 4px;
@@ -137,6 +145,10 @@ const AddBtn = styled(Link)`
     margin-right: 4.5%;
     font-size: var(--font-size);
     cursor: pointer;
+    @media ${device.tablet} {
+        padding-left: 10px;
+        height: 40px;
+    }
     @media ${device.mobile} {
         height: 48px;
     }
