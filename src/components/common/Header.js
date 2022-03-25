@@ -64,7 +64,7 @@ const Actions = styled.div`
     height: 100%;
     gap: 20px;
     @media ${device.mobile} {
-        gap: 0px;
+        gap: 10px;
     }
 `;
 
