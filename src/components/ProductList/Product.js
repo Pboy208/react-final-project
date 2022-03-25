@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct } from "../../store/productSlice";
 import * as Toast from "../common/Toast";
 import LoadingSpinner from "../common/LoadingSpinner";
+import { device } from "../../constants/mediaQuery";
 const ConfirmModal = React.lazy(() => import("./ConfirmModal"));
 
-const Product = ({ product  }) => {
+const Product = ({ product }) => {
     const { title, imageUrl, price, id } = product;
     const [isModalShow, setIsModalShow] = React.useState(false);
     const { isLoading } = useSelector((state) => state.product);
@@ -94,9 +95,22 @@ const Information = styled.span`
     border-right: 1px solid;
     border-left: 1px solid;
     padding-left: 20px;
-    overflow: hidden;
+    font-size: var(--font-size);
     &:first-child {
         border-left: none;
+        overflow: hidden;
+    }
+
+    &:nth-child(2) {
+        min-width: 80px;
+    }
+
+    &:last-child {
+        min-width: 66px;
+    }
+    @media ${device.mobile} {
+        padding-left: 4px;
+        height: 48px;
     }
 `;
 
@@ -105,7 +119,7 @@ const NavigateButton = styled(Link)`
     height: fit-content;
     & i {
         height: fit-content;
-        font-size: 24px;
+        font-size: var(--button-size);
     }
 `;
 
@@ -115,7 +129,7 @@ const Button = styled.div`
     cursor: pointer;
     & i {
         height: fit-content;
-        font-size: 24px;
+        font-size: var(--button-size);
     }
 `;
 

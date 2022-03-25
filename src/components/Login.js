@@ -33,25 +33,25 @@ const Login = () => {
     };
     return (
         <LoginForm onSubmit={handleSubmit(handleLogin)}>
-            <Form.Group controlId="loginForm.email">
+            <FormGroup controlId="loginForm.email">
                 <Form.Label>Email</Form.Label>
                 <Form.Input
                     type="text"
                     isInvalid={isEmailInvalid}
                     {...register("email")}
                 ></Form.Input>
-                <Form.Feedback type="invalid">{errors?.email?.message}</Form.Feedback>
-            </Form.Group>
-            <Form.Group controlId="loginForm.password">
+                <FormFeedback type="invalid">{errors?.email?.message}</FormFeedback>
+            </FormGroup>
+            <FormGroup controlId="loginForm.password">
                 <Form.Label>Password</Form.Label>
                 <Form.Input
                     type="password"
                     isInvalid={isPasswordInvalid}
                     {...register("password")}
                 ></Form.Input>
-                <Form.Feedback type="invalid">{errors?.password?.message}</Form.Feedback>
-            </Form.Group>
-            <Button size={"small"} variant="primary" style={{ width: "10%" }}>
+                <FormFeedback type="invalid">{errors?.password?.message}</FormFeedback>
+            </FormGroup>
+            <Button size={"small"} variant="primary" style={{ width: "max(10%,60px)" }}>
                 <Button.Label style={{ fontWeight: "500" }}>
                     {isLoading ? <Loader aria-label="Loading" size="small" /> : "Login"}
                 </Button.Label>
@@ -62,13 +62,20 @@ const Login = () => {
 
 const LoginForm = styled.form`
     min-height: 100%;
-    width: 70%;
+    width: var(--card-width);
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid;
     margin: 40px auto;
     padding: 60px;
+`;
+
+const FormGroup = styled(Form.Group)`
+    width: var(--field-responsive-width);
+`;
+const FormFeedback = styled(Form.Feedback)`
+    font-size: var(--font-size);
 `;
 
 export default Login;

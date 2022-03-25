@@ -4,6 +4,7 @@ import ProductList from "../components/ProductList";
 import useSortedAndSearchedProducts from "../hooks/useSortedAndSearchedProducts";
 import LoadingSpinner from "./common/LoadingSpinner";
 import { Link } from "react-router-dom";
+import { device } from "../constants/mediaQuery";
 const Home = () => {
     const { isLoading, productList, setSortBy, setSearch, sortBy, search } =
         useSortedAndSearchedProducts();
@@ -24,9 +25,9 @@ const Home = () => {
             <SearchAndSortBy>
                 <SearchBox value={search} onChange={handleSearchChange} placeholder="Search..." />
                 <SortBy value={sortBy} onChange={handleSortByChange}>
-                    <option value="CREATED_TIME">Recently added</option>
-                    <option value="PRICE_INCREASE">Price increasing</option>
-                    <option value="PRICE_DECREASE">Price decreasing</option>
+                    <SortOption value="CREATED_TIME">Recently added</SortOption>
+                    <SortOption value="PRICE_INCREASE">Price increasing</SortOption>
+                    <SortOption value="PRICE_DECREASE">Price decreasing</SortOption>
                 </SortBy>
             </SearchAndSortBy>
             <TitlesAndAddBtn>
@@ -54,6 +55,9 @@ const SearchAndSortBy = styled.div`
     width: 60%;
     margin: 12px 0;
     display: flex;
+    @media ${device.mobile} {
+        width: 90%;
+    }
 `;
 const SearchBox = styled.input`
     flex: 4;
@@ -61,14 +65,22 @@ const SearchBox = styled.input`
     border-bottom-left-radius: 8px;
     border: 1px solid;
     border-right: none;
-    font-size: 14px;
+    font-size: var(--font-size);
     padding: 10px 20px;
+    @media ${device.mobile} {
+        flex: 1;
+    }
 `;
 const SortBy = styled.select`
     flex: 1;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     text-align: center;
+    font-size: var(--font-size);
+`;
+
+const SortOption = styled.option`
+    font-size: var(--font-size);
 `;
 
 const TitlesAndAddBtn = styled.div`
@@ -94,6 +106,22 @@ const Title = styled.div`
     border-top-right-radius: 16px;
     border-top-left-radius: 4px;
     border-bottom: none;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size);
+
+    &:nth-child(2) {
+        min-width: 80px;
+    }
+
+    &:last-child {
+        min-width: 66px;
+    }
+
+    @media ${device.mobile} {
+        padding-left: 4px;
+        height: 48px;
+    }
 `;
 
 const AddBtn = styled(Link)`
@@ -103,8 +131,15 @@ const AddBtn = styled(Link)`
     border-bottom: none;
     text-align: center;
     height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 4.5%;
+    font-size: var(--font-size);
     cursor: pointer;
+    @media ${device.mobile} {
+        height: 48px;
+    }
 `;
 
 export default Home;

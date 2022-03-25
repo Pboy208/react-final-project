@@ -35,49 +35,49 @@ const Register = () => {
         } else if (status === "rejected") {
             Toast.error(error.message);
         }
-    }, [error.message, reset, status]);
+    }, [reset, status]);
 
     return (
         <RegisterForm onSubmit={handleSubmit(handleRegister)}>
-            <Form.Group style={{ width: "32%" }} controlId="registerForm.email">
+            <FormGroup controlId="registerForm.email">
                 <Form.Label>Email</Form.Label>
                 <Form.Input
                     type="text"
                     isInvalid={isEmailInvalid}
                     {...register("email")}
                 ></Form.Input>
-                <Form.Feedback type="invalid">{errors?.email?.message}</Form.Feedback>
-            </Form.Group>
-            <Form.Group style={{ width: "32%" }} controlId="registerForm.userName">
+                <FormFeedback type="invalid">{errors?.email?.message}</FormFeedback>
+            </FormGroup>
+            <FormGroup controlId="registerForm.userName">
                 <Form.Label>User name</Form.Label>
                 <Form.Input
                     type="text"
                     isInvalid={isUserNameInvalid}
                     {...register("userName")}
                 ></Form.Input>
-                <Form.Feedback type="invalid">{errors?.userName?.message}</Form.Feedback>
-            </Form.Group>
-            <Form.Group style={{ width: "32%" }} controlId="registerForm.password">
+                <FormFeedback type="invalid">{errors?.userName?.message}</FormFeedback>
+            </FormGroup>
+            <FormGroup controlId="registerForm.password">
                 <Form.Label>Password</Form.Label>
                 <Form.Input
                     type="password"
                     isInvalid={isPasswordInvalid}
                     {...register("password")}
                 ></Form.Input>
-                <Form.Feedback type="invalid">{errors?.password?.message}</Form.Feedback>
-            </Form.Group>
-            <Form.Group style={{ width: "32%" }} controlId="registerForm.confirmPassword">
+                <FormFeedback type="invalid">{errors?.password?.message}</FormFeedback>
+            </FormGroup>
+            <FormGroup controlId="registerForm.confirmPassword">
                 <Form.Label>Confirm password</Form.Label>
                 <Form.Input
                     type="password"
                     isInvalid={isConfirmPasswordInvalid}
                     {...register("confirmPassword")}
                 ></Form.Input>
-                <Form.Feedback type="invalid">{errors?.confirmPassword?.message}</Form.Feedback>
-            </Form.Group>
-            <Button size={"small"} variant="primary" style={{ width: "10%" }}>
+                <FormFeedback type="invalid">{errors?.confirmPassword?.message}</FormFeedback>
+            </FormGroup>
+            <Button size={"small"} variant="primary" style={{ width: "max(10%,70px)" }}>
                 <Button.Label style={{ fontWeight: "500" }}>
-                    {isLoading ? <Loader aria-label="Loading" size="small" /> : "Login"}
+                    {isLoading ? <Loader aria-label="Loading" size="small" /> : "Register"}
                 </Button.Label>
             </Button>
         </RegisterForm>
@@ -86,13 +86,22 @@ const Register = () => {
 
 const RegisterForm = styled.form`
     min-height: 100%;
-    width: 70%;
+    width: var(--card-width);
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid;
     margin: 40px auto;
     padding: 60px;
+`;
+
+const FormGroup = styled(Form.Group)`
+    max-width: var(--field-responsive-width);
+    font-size: 14px;
+`;
+
+const FormFeedback = styled(Form.Feedback)`
+    font-size: var(--font-size);
 `;
 
 export default Register;
