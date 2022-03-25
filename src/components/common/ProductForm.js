@@ -9,17 +9,18 @@ const imageFallback = "https://banksiafdn.com/wp-content/uploads/2019/10/placeho
 
 const ProductForm = React.memo(({ product, handleFormSubmit }) => {
     const {
+        watch,
         reset,
         register,
         handleSubmit,
         formState: { errors },
-        getValues: getFieldValues,
     } = useForm({
         mode: "onChange",
         resolver: yupResolver(validationSchema),
         defaultValues: product,
     });
-    const imageUrl = getFieldValues("imageUrl");
+
+    const imageUrl = watch(["imageUrl"])[0];
     const isPriceInvalid = !!errors.price;
     const isImageUrlInvalid = !!errors.imageUrl;
     const isTitleInvalid = !!errors.title;
