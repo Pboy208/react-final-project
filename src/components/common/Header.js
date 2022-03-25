@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../store/authSlice";
+import { logout } from "../../store/authSlice";
 import { device } from "../../constants/mediaQuery";
 const Header = () => {
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -12,7 +12,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const logoutHandler = () => {
-        dispatch(logOut());
+        dispatch(logout());
         navigate("/login");
     };
 

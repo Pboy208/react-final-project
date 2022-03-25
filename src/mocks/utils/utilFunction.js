@@ -11,3 +11,4 @@ export const controllerWrapper = (fn) => async (req, res, ctx) => {
         );
     }
 };
+

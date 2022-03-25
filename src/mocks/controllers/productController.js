@@ -1,11 +1,14 @@
 import { controllerWrapper } from "../utils/utilFunction";
 import * as Product from "../models/productModel";
+import { verifyToken } from "../models/authenModel";
 
 const getRequestParams = (req) => {
     let sortBy = req.url.searchParams.getAll("sortBy")[0];
     let search = req.url.searchParams.getAll("search")[0] || null;
     return { sortBy, search };
 };
+
+const getTokenFromRequest = (req) => req.headers["_headers"].authorization.split(" ")[1];
 
 const getSortFormula = (sortBy) => {
     switch (sortBy) {
@@ -34,6 +37,13 @@ const hasSearch = (title, search) => {
 };
 
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
+    if (!(await verifyToken(getTokenFromRequest(req))))
+        return res(
+            ctx.status(401),
+            ctx.json({
+                message: "Your session has expired, please login again",
+            })
+        );
     const { sortBy, search } = getRequestParams(req);
     let productList = await Product.getAll();
     if (search) productList = productList.filter((product) => hasSearch(product.title, search));
@@ -42,6 +52,13 @@ export const getProducts = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const getProduct = controllerWrapper(async (req, res, ctx) => {
+    if (!(await verifyToken(getTokenFromRequest(req))))
+        return res(
+            ctx.status(401),
+            ctx.json({
+                message: "Your session has expired, please login again",
+            })
+        );
     const product = await Product.get(req.params.id);
     if (!product)
         return res(
@@ -54,6 +71,13 @@ export const getProduct = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const addProduct = controllerWrapper(async (req, res, ctx) => {
+    if (!(await verifyToken(getTokenFromRequest(req))))
+        return res(
+            ctx.status(401),
+            ctx.json({
+                message: "Your session has expired, please login again",
+            })
+        );
     const product = await Product.add(req.body);
     if (!product)
         return res(
@@ -66,6 +90,13 @@ export const addProduct = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const updateProduct = controllerWrapper(async (req, res, ctx) => {
+    if (!(await verifyToken(getTokenFromRequest(req))))
+        return res(
+            ctx.status(401),
+            ctx.json({
+                message: "Your session has expired, please login again",
+            })
+        );
     const product = await Product.update(req.body);
     if (!product)
         return res(
@@ -78,6 +109,13 @@ export const updateProduct = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const deleteProduct = controllerWrapper(async (req, res, ctx) => {
+    if (!(await verifyToken(getTokenFromRequest(req))))
+        return res(
+            ctx.status(401),
+            ctx.json({
+                message: "Your session has expired, please login again",
+            })
+        );
     const result = await Product.erase(req.params.id);
     if (!result)
         return res(

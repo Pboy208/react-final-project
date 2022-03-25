@@ -7,6 +7,9 @@ const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
     const { message, code } = action.error;
     switch (code) {
         case "401":
+            store.dispatch({
+                type: "auth/logout",
+            });
         case "404":
         case "409":
         case "500":

@@ -14,9 +14,13 @@ const initialState = {
 
 const isTokenValid = (token) => {
     if (!token) return false;
-    const decodedToken = decode(token);
-    const remainTimeInSeconds = decodedToken.exp - Math.floor(Date.now() / 1000);
-    return remainTimeInSeconds > 0 ? true : false;
+    try {
+        const decodedToken = decode(token);
+        const remainTimeInSeconds = decodedToken.exp - Math.floor(Date.now() / 1000);
+        return remainTimeInSeconds > 0 ? true : false;
+    } catch (e) {
+        return false;
+    }
 };
 
 const token = localStorage.getItem("token");
@@ -30,7 +34,7 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        logOut(state) {
+        logout(state) {
             state.isLoggedIn = false;
             state.userName = "";
             localStorage.removeItem("token");
@@ -50,4 +54,4 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 
-export const { logIn, logOut } = authSlice.actions;
+export const { logIn, logout } = authSlice.actions;

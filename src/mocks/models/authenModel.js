@@ -1,7 +1,8 @@
 import { getAuthenStore } from "../database/indexedDB";
 import { v4 as uuid } from "uuid";
 import md5 from "md5";
-
+import sign from "jwt-encode";
+import decode from "jwt-decode";
 export const logIn = async ({ email, password }) => {
     const store = await getAuthenStore();
     const emailPasswordIndex = store.index("email_password");
@@ -13,8 +14,7 @@ export const logIn = async ({ email, password }) => {
     query.onsuccess = async () => {
         const user = query.result;
         if (!user) resolvePromise(null);
-        const token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxlbyBOZ3V5ZW4iLCJpYXQiOjE2NDc2MTUzOTksImV4cCI6NzM2NDc2MTUzOTl9.mVRG2x_W8U8fBUjwb1nO7GErmuneTdPv4JSGyUfcaLk";
+        const token = sign(user.id, "SECRET_KEY");
         resolvePromise(token);
     };
     return promise;
@@ -43,5 +43,26 @@ export const register = async (registerInfo) => {
         //email is dupplicate
         rejectPromise();
     };
+    return promise;
+};
+
+export const verifyToken = async (token) => {
+    let resolvePromise;
+    let userId;
+    const promise = new Promise((resolve) => (resolvePromise = resolve));
+    try {
+        userId = decode(token);
+    } catch (error) {
+        console.log("error in verify token", error);
+        return false;
+    }
+    const store = await getAuthenStore();
+    const query = store.get(userId);
+    query.onsuccess = async () => {
+        const user = query.result;
+        if (!user) resolvePromise(false);
+        resolvePromise(true);
+    };
+
     return promise;
 };

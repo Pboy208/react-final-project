@@ -11,6 +11,7 @@ const Wrapper = styled.div`
     align-items: center;
     min-height: min(10vh, 100px);
     border-top: 1px solid;
+    width: 100%;
 `;
 
 export default Footer;
