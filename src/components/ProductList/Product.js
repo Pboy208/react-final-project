@@ -1,34 +1,35 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { formatVnd } from "../../utils/utilFunction";
-import ConfirmModal from "./ConfirmModal";
+import { formatVnd } from "../../utils/formatter";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct } from "../../store/productSlice";
+import * as Toast from "../common/Toast";
+import LoadingSpinner from "../common/LoadingSpinner";
+import { device } from "../../constants/mediaQuery";
+const ConfirmModal = React.lazy(() => import("./ConfirmModal"));
 
-const initialProduct = {
-    id: "Testing id",
-    price: 5200000,
-    title: "ULTRABOOST 22",
-    imageUrl:
-        "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fbaf991a78bc4896a3e9ad7800abcec6_9366/ULTRABOOST_22_DJen_GZ0127_01_standard.jpg",
-    createdTimestamp: new Date(1647869066410),
-};
-
-const Product = ({ product = initialProduct }) => {
+const Product = ({ product }) => {
     const { title, imageUrl, price, id } = product;
     const [isModalShow, setIsModalShow] = React.useState(false);
+    const { isLoading } = useSelector((state) => state.product);
+    const dispatch = useDispatch();
 
     const handleDelete = () => {
-        console.log("delete ", id);
+        dispatch(deleteProduct(id))
+            .unwrap()
+            .then(() => Toast.success("Delete success"));
     };
 
     const toggleIsModalShow = () => setIsModalShow((prev) => !prev);
 
     return (
         <>
+            <LoadingSpinner isLoading={isLoading} />
             <Wrapper>
                 <ProductInformation>
-                    <Information flex={3}>{title}</Information>
-                    <Information flex={1}>{formatVnd(price)}</Information>
+                    <Information flex={5}>{title}</Information>
+                    <Information flex={2}>{formatVnd(price)}</Information>
                     <Information flex={1}>
                         <ImagePreview>
                             Preview
@@ -94,9 +95,28 @@ const Information = styled.span`
     border-right: 1px solid;
     border-left: 1px solid;
     padding-left: 20px;
-    overflow: hidden;
+    font-size: var(--font-size);
     &:first-child {
         border-left: none;
+        overflow: hidden;
+    }
+
+    &:nth-child(2) {
+        min-width: 80px;
+    }
+
+    &:last-child {
+        min-width: 66px;
+    }
+
+    @media ${device.tablet} {
+        padding-left: 10px;
+        height: 40px;
+    }
+
+    @media ${device.mobile} {
+        padding-left: 4px;
+        height: 48px;
     }
 `;
 
@@ -105,7 +125,7 @@ const NavigateButton = styled(Link)`
     height: fit-content;
     & i {
         height: fit-content;
-        font-size: 24px;
+        font-size: var(--button-size);
     }
 `;
 
@@ -115,12 +135,13 @@ const Button = styled.div`
     cursor: pointer;
     & i {
         height: fit-content;
-        font-size: 24px;
+        font-size: var(--button-size);
     }
 `;
 
 const ImagePreview = styled.div`
-    width: fit-content;
+    padding-right: 20px;
+    text-align: center;
     cursor: pointer;
     &:hover img {
         display: unset;

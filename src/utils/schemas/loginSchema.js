@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import authMessage from "../constants/auth-message";
+import authMessage from "../../constants/authMessages";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required(authMessage.EMAIL_REQUIRED).email(authMessage.EMAIL_INVALID),

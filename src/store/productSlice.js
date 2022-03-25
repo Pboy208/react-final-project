@@ -1,79 +1,77 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { normalize } from "normalizr";
-import * as normalizerSchema from "../utils/schemas/normalizr-schema";
-import { thunkWrapper } from "../utils/utilFunction";
-import * as productApi from "../api/productApi";
+import * as normalizerSchema from "../utils/schemas/normalizrSchemas";
+import * as productApi from "../api/productAPIs";
+
+export const getProductList = createAsyncThunk("product/getList", async (params) => {
+    return productApi.getProductList(params);
+});
+
+export const getProduct = createAsyncThunk("product/get", async (id) => {
+    return productApi.getProduct(id);
+});
+
+export const updateProduct = createAsyncThunk("product/update", async (product) => {
+    console.log("begin update");
+    return productApi.updateProduct(product);
+});
+
+export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
+    return productApi.deleteProduct(id);
+});
+
+export const addProduct = createAsyncThunk("product/add", async (product) => {
+    return productApi.addProduct(product);
+});
 
 const productSlice = createSlice({
     name: "product",
     initialState: {
+        isLoading: false,
         byIds: {},
         ids: [],
+        isFirstLoad: true,
     },
     reducers: {
-        replaceProductList(state, action) {
-            state.byIds = action.payload.byIds;
-            state.ids = action.payload.ids;
-        },
-        addProduct(state, action) {
-            state.byIds = { ...state.byIds, ...action.payload.byIds };
-            state.ids = [...state.ids, ...action.payload.ids];
-        },
-        modifyProductList(state, action) {
-            if (state.ids.includes(action.payload.id)) {
-                state.byIds[action.payload.id] = {
-                    ...state.byIds[action.payload.id],
-                    ...action.payload,
-                };
-            }
-            state.byIds = { ...state.byIds, [action.payload.id]: action.payload };
-            state.ids = [...state.ids, ...action.payload.id];
-        },
-        deleteProduct(state, action) {
-            state.ids = state.ids.filter((id) => id !== action.payload.id);
-            delete state.byIds[action.payload.id];
+        setLoading: (state, action) => {
+            console.log("begin set is loading", action.payload);
+            state.isLoading = action.payload;
         },
     },
-});
-
-export const getProductListThunk = thunkWrapper((filter, search) => async (dispatch) => {
-    const response = await fetch(...productApi.getProductList());
-    if (!response.ok) throw response.status;
-
-    const data = (await response.json()).data;
-    const normalizedData = normalize(data, normalizerSchema.arrayOfProduct);
-
-    const normalizedProductList = {
-        byIds: normalizedData.entities.product,
-        ids: normalizedData.result,
-    };
-
-    dispatch(productSlice.actions.replaceProductList(normalizedProductList));
-});
-
-export const addproductThunk = thunkWrapper((product) => async (dispatch) => {
-    const response = await fetch(...productApi.addProduct(product));
-    if (!response.ok) throw response.status;
-
-    const newProduct = (await response.json()).data;
-    dispatch(productSlice.actions.modifyProductList(newProduct));
-});
-
-export const updateProductThunk = thunkWrapper((product) => async (dispatch) => {
-    const response = await fetch(...productApi.updateProduct(product));
-    if (!response.ok) throw response.status;
-
-    const newProduct = (await response.json()).data;
-    dispatch(productSlice.actions.deleteProduct(newProduct));
-});
-
-export const deleteProductThunk = thunkWrapper((id) => async (dispatch) => {
-    const response = await fetch(...productApi.deleteProduct(id));
-    if (!response.ok) throw response.status;
-
-    dispatch(productSlice.actions.modifyProductList(id));
+    extraReducers: {
+        [getProductList.fulfilled]: (state, action) => {
+            const normalizedData = normalize(action.payload.data, normalizerSchema.arrayOfProduct);
+            state.byIds = normalizedData.entities.product;
+            state.ids = normalizedData.result;
+            state.isFirstLoad = false;
+        },
+        [getProduct.fulfilled]: (state, action) => {
+            const normalizedData = normalize(action.payload.data, normalizerSchema.product);
+            state.byIds = { ...state.byIds, ...normalizedData.entities.product };
+            state.ids = [...state.ids, normalizedData.result];
+        },
+        [updateProduct.fulfilled]: (state, action) => {
+            const product = action.payload.data;
+            if (state.ids.includes(product.id)) {
+                state.byIds[product.id] = {
+                    ...state.byIds[product.id],
+                    ...product,
+                };
+            }
+            //move id of product to the start of array ids
+            state.ids = state.ids.filter((id) => id !== product.id);
+            state.ids = [product.id, ...state.ids];
+        },
+        [deleteProduct.fulfilled]: (state, action) => {
+            state.ids = state.ids.filter((id) => id !== action.meta.arg);
+            delete state.byIds[action.payload.id];
+        },
+        [addProduct.fulfilled]: (state, action) => {
+            const product = action.payload.data;
+            state.byIds = { ...state.byIds, [product.id]: product };
+            state.ids = [product.id, ...state.ids];
+        },
+    },
 });
 
 export default productSlice.reducer;
-export const { replaceProductList, addProduct, modifyProductList, deleteProduct } =
-    productSlice.actions;

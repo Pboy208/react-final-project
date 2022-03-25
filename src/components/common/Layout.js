@@ -5,28 +5,29 @@ import styled from "styled-components";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "./FallbackComponent";
 
-const Layout = ({ children }) => {
+const Layout = React.memo(({ children }) => {
     return (
-        <Wrapper>
-            <ErrorBoundary FallbackComponent={FallbackComponent}>
+        <ErrorBoundary FallbackComponent={FallbackComponent}>
+            <Wrapper>
                 <Header />
                 <Body>{children}</Body>
                 <Footer />
-            </ErrorBoundary>
-        </Wrapper>
+            </Wrapper>
+        </ErrorBoundary>
     );
-};
+});
 
 const Wrapper = styled.div`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 const Body = styled.div`
     flex: 1 999999;
-    width: 90%;
-    margin: 0 auto;
+    width: var(--wrapper-width);
+    position: relative;
 `;
 
 export default Layout;

@@ -1,15 +1,19 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../store/authSlice";
+import { device } from "../../constants/mediaQuery";
 const Header = () => {
-    const isLoggedIn = false;
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const { pathname } = useLocation();
     const { theme, toggleTheme } = useTheme();
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const logoutHandler = () => {
-        console.log("logout");
+        dispatch(logout());
+        navigate("/login");
     };
 
     const renderNavigationBar = () => {
@@ -47,7 +51,7 @@ const Header = () => {
 const Wrapper = styled.div`
     min-height: min(8vh, 150px);
     margin: 0 auto;
-    width: 90%;
+    width: var(--wrapper-width);
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid;
@@ -59,6 +63,9 @@ const Actions = styled.div`
     align-items: center;
     height: 100%;
     gap: 20px;
+    @media ${device.mobile} {
+        gap: 10px;
+    }
 `;
 
 const Side = styled.div`
@@ -67,7 +74,7 @@ const Side = styled.div`
 
 const Logo = styled(Link)`
     font-family: "Rouge Script";
-    font-size: 100px;
+    font-size: var(--logo-font-size);
     margin: 0;
     text-align: "center";
 `;
@@ -75,7 +82,12 @@ const Logo = styled(Link)`
 const Button = styled.div`
     cursor: pointer;
     & i {
-        font-size: 28px;
+        font-size: var(--button-size);
+    }
+    @media ${device.mobile} {
+        & i {
+            font-size: 16px;
+        }
     }
 `;
 
@@ -86,9 +98,16 @@ const NavigateButton = styled(Link)`
     justify-content: flex-start;
     align-items: center;
     gap: 4px;
-    font-size: 16px;
+    font-size: var(--font-size);
     & i {
-        font-size: 20px;
+        font-size: var(--button-size);
+    }
+
+    @media ${device.mobile} {
+        font-size: 10px;
+        & i {
+            font-size: 16px;
+        }
     }
 `;
 

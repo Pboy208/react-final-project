@@ -48,14 +48,15 @@ function useAsync(initialState) {
     const handleRequest = React.useCallback(
         (promise) => {
             dispatch({ type: "pending" });
-            promise.then(
-                (data) => {
-                    dispatch({ type: "resolved", data });
-                },
-                (error) => {
+            promise
+                .then((response) => {
+                    dispatch({ type: "resolved", data: response.data });
+                    return;
+                })
+                .catch((error) => {
                     dispatch({ type: "rejected", error });
-                }
-            );
+                    return;
+                });
         },
         [dispatch]
     );
