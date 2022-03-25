@@ -35,7 +35,7 @@ const Register = () => {
         } else if (status === "rejected") {
             Toast.error(error.message);
         }
-    }, [status]);
+    }, [error.message, reset, status]);
 
     return (
         <RegisterForm onSubmit={handleSubmit(handleRegister)}>

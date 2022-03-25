@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-import { Form, Button, Loader } from "@ahaui/react";
+import { Form, Button } from "@ahaui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validationSchema from "../../utils/schemas/productFormSchema";
 
@@ -26,7 +26,7 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
 
     React.useEffect(() => {
         reset(product);
-    }, [product]);
+    }, [product, reset]);
 
     return (
         <Wrapper>

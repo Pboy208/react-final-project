@@ -9,13 +9,13 @@ const UpdateProduct = () => {
     const { productId } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    let { byIds, isLoading, error } = useSelector((state) => state.product);
+    let { byIds, isLoading } = useSelector((state) => state.product);
     let product = byIds[productId];
     React.useEffect(() => {
         if (!product) {
             dispatch(getProduct(productId)).unwrap();
         }
-    }, [dispatch, productId]);
+    }, [dispatch, product, productId]);
 
     const handleFormSubmit = React.useCallback(
         (product) => {
