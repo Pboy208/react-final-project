@@ -17,7 +17,7 @@ test("Should show error when fields are invalid", async () => {
     // render component
     render(<Register />);
 
-    // type login info
+    // type register info
     await act(async () => userEvent.type(screen.getByLabelText(/email/i), registerInfo.email));
     await act(async () =>
         userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName),
@@ -46,7 +46,7 @@ test("Should show error when fields are null", async () => {
     // render component
     render(<Register />);
 
-    // press login button
+    // press register button
     await act(async () => userEvent.click(screen.getByRole("button", { name: /register/i })));
 
     // check error message
@@ -76,7 +76,7 @@ test("Should redirect and show toast when register with valid information", asyn
     // render component
     render(<Register />);
 
-    // type login info
+    // type register info
     await act(async () => userEvent.type(screen.getByLabelText(/email/i), registerInfo.email));
     await act(async () =>
         userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName),
@@ -88,7 +88,7 @@ test("Should redirect and show toast when register with valid information", asyn
         userEvent.type(screen.getAllByLabelText(/password/i)[1], registerInfo.confirmPassword),
     );
 
-    // press login button
+    // press register button
     await act(async () => userEvent.click(screen.getByRole("button", { name: /register/i })));
 
     // wait for response
@@ -98,37 +98,37 @@ test("Should redirect and show toast when register with valid information", asyn
     expect(screen.queryByText("Register success")).toBeInTheDocument();
 });
 
-// test("Should show error toast when register with invalid information", async () => {
-//     // make valid data
-//     const registerInfo = {
-//         email: "phuong@gmail.com",
-//         userName: "testing user",
-//         password: "phuong123",
-//         confirmPassword: "phuong123",
-//     };
+test("Should show error toast when register with invalid information", async () => {
+    // make valid data
+    const registerInfo = {
+        email: "phuong@gmail.com",
+        userName: "testing user",
+        password: "phuong123",
+        confirmPassword: "phuong123",
+    };
 
-//     // render component
-//     render(<Register />);
+    // render component
+    render(<Register />);
 
-//     // type login info
-//     await act(async () => userEvent.type(screen.getByLabelText(/email/i), registerInfo.email));
-//     await act(async () =>
-//         userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName),
-//     );
-//     await act(async () =>
-//         userEvent.type(screen.getAllByLabelText(/password/i)[0], registerInfo.password),
-//     );
-//     await act(async () =>
-//         userEvent.type(screen.getAllByLabelText(/password/i)[1], registerInfo.confirmPassword),
-//     );
+    // type register info
+    await act(async () => userEvent.type(screen.getByLabelText(/email/i), registerInfo.email));
+    await act(async () =>
+        userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName),
+    );
+    await act(async () =>
+        userEvent.type(screen.getAllByLabelText(/password/i)[0], registerInfo.password),
+    );
+    await act(async () =>
+        userEvent.type(screen.getAllByLabelText(/password/i)[1], registerInfo.confirmPassword),
+    );
 
-//     // press login button
-//     await act(async () => userEvent.click(screen.getByRole("button", { name: /register/i })));
+    // press register button
+    await act(async () => userEvent.click(screen.getByRole("button", { name: /register/i })));
 
-//     // wait for response
-//     await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    // wait for response
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-//     //expect success toast and redirect to home page
-//     screen.debug();
-//     expect(screen.queryByText("Register failed, email has already been used")).toBeInTheDocument();
-// });
+    //expect success toast and redirect to home page
+    screen.debug();
+    expect(screen.queryByText("Register failed, email has already been used")).toBeInTheDocument();
+});

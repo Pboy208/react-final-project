@@ -46,7 +46,9 @@ const Register = () => {
                     isInvalid={isEmailInvalid}
                     {...register("email")}
                 ></Form.Input>
-                <FormFeedback type="invalid">{errors?.email?.message}</FormFeedback>
+                <FormFeedback type="invalid" role="alert">
+                    {errors?.email?.message}
+                </FormFeedback>
             </FormGroup>
             <FormGroup controlId="registerForm.userName">
                 <Form.Label>User name</Form.Label>
@@ -55,7 +57,9 @@ const Register = () => {
                     isInvalid={isUserNameInvalid}
                     {...register("userName")}
                 ></Form.Input>
-                <FormFeedback type="invalid">{errors?.userName?.message}</FormFeedback>
+                <FormFeedback type="invalid" role="alert">
+                    {errors?.userName?.message}
+                </FormFeedback>
             </FormGroup>
             <FormGroup controlId="registerForm.password">
                 <Form.Label>Password</Form.Label>
@@ -64,7 +68,9 @@ const Register = () => {
                     isInvalid={isPasswordInvalid}
                     {...register("password")}
                 ></Form.Input>
-                <FormFeedback type="invalid">{errors?.password?.message}</FormFeedback>
+                <FormFeedback type="invalid" role="alert">
+                    {errors?.password?.message}
+                </FormFeedback>
             </FormGroup>
             <FormGroup controlId="registerForm.confirmPassword">
                 <Form.Label>Confirm password</Form.Label>
@@ -73,7 +79,9 @@ const Register = () => {
                     isInvalid={isConfirmPasswordInvalid}
                     {...register("confirmPassword")}
                 ></Form.Input>
-                <FormFeedback type="invalid">{errors?.confirmPassword?.message}</FormFeedback>
+                <FormFeedback type="invalid" role="alert">
+                    {errors?.confirmPassword?.message}
+                </FormFeedback>
             </FormGroup>
             <Button size={"small"} variant="primary" style={{ width: "max(10%,70px)" }}>
                 <Button.Label style={{ fontWeight: "500" }}>
