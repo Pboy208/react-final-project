@@ -39,7 +39,9 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
                         isInvalid={isTitleInvalid}
                         {...register("title")}
                     ></Form.Input>
-                    <Form.Feedback type="invalid">{errors?.title?.message}</Form.Feedback>
+                    <Form.Feedback type="invalid" role="alert">
+                        {errors?.title?.message}
+                    </Form.Feedback>
                 </Form.Group>
                 <Form.Group style={{ width: "100%" }} controlId="productForm.imageUrl">
                     <Form.Label>Image url</Form.Label>
@@ -48,7 +50,9 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
                         isInvalid={isImageUrlInvalid}
                         {...register("imageUrl")}
                     ></Form.Input>
-                    <Form.Feedback type="invalid">{errors?.imageUrl?.message}</Form.Feedback>
+                    <Form.Feedback type="invalid" role="alert">
+                        {errors?.imageUrl?.message}
+                    </Form.Feedback>
                 </Form.Group>
                 <Form.Group style={{ width: "100%" }} controlId="productForm.price">
                     <Form.Label>Price</Form.Label>
@@ -57,7 +61,9 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
                         isInvalid={isPriceInvalid}
                         {...register("price")}
                     ></Form.Input>
-                    <Form.Feedback type="invalid">{errors?.price?.message}</Form.Feedback>
+                    <Form.Feedback type="invalid" role="alert">
+                        {errors?.price?.message}
+                    </Form.Feedback>
                 </Form.Group>
                 <Button size={"small"} variant="primary" style={{ width: "10%" }}>
                     <Button.Label style={{ fontWeight: "500" }}>Save</Button.Label>

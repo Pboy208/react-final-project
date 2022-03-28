@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "fake-indexeddb": "^3.1.7",
     "jwt-decode": "^3.1.2",
     "jwt-encode": "^1.0.1",
     "md5": "^2.3.0",

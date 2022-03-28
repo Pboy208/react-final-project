@@ -9,6 +9,8 @@ const validationSchema = Yup.object().shape({
     imageUrl: Yup.string()
         .required(productMessage.IMAGE_URL_REQUIRED)
         .url(productMessage.IMAGE_URL_INVALID),
-    price: Yup.number(productMessage.PRICE_INVALID).required(productMessage.PRICE_REQUIRED),
+    price: Yup.number()
+        .typeError(productMessage.PRICE_INVALID)
+        .required(productMessage.PRICE_REQUIRED),
 });
 export default validationSchema;

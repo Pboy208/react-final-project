@@ -40,7 +40,9 @@ const Login = () => {
                     isInvalid={isEmailInvalid}
                     {...register("email")}
                 ></Form.Input>
-                <FormFeedback type="invalid">{errors?.email?.message}</FormFeedback>
+                <FormFeedback type="invalid" role="alert">
+                    {errors?.email?.message}
+                </FormFeedback>
             </FormGroup>
             <FormGroup controlId="loginForm.password">
                 <Form.Label>Password</Form.Label>
@@ -49,7 +51,9 @@ const Login = () => {
                     isInvalid={isPasswordInvalid}
                     {...register("password")}
                 ></Form.Input>
-                <FormFeedback type="invalid">{errors?.password?.message}</FormFeedback>
+                <FormFeedback type="invalid" role="alert">
+                    {errors?.password?.message}
+                </FormFeedback>
             </FormGroup>
             <Button size={"small"} variant="primary" style={{ width: "max(10%,60px)" }}>
                 <Button.Label style={{ fontWeight: "500" }}>
