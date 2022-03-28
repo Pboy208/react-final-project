@@ -3,6 +3,8 @@
 import userEvent from "@testing-library/user-event";
 import Login from "../components/Login";
 import { render, act, screen } from "../utils/test";
+// import server from "../test/server";
+import { waitForElementToBeRemoved } from "@testing-library/react";
 
 test("Should show error when fields are invalid", async () => {
     // make invalid data
@@ -35,4 +37,31 @@ test("Should show error when fields are null", async () => {
     // check error message
     expect(screen.getAllByRole("alert")[0].textContent).toBe("Email is required");
     expect(screen.getAllByRole("alert")[1].textContent).toBe("Password is required");
+});
+
+test("Should TEST", async () => {
+    // make invalid data
+    const loginInfo = {
+        email: "phuong@gmail.com",
+        password: "phuong123",
+    };
+
+    // render component
+    render(<Login />);
+
+    // type login infoß
+    await act(async () => userEvent.type(screen.getByLabelText(/email/i), loginInfo.email));
+    await act(async () => userEvent.type(screen.getByLabelText(/password/i), loginInfo.password));
+
+    // press login button
+    await act(async () => userEvent.click(screen.getByRole("button", { name: /login/i })));
+
+    // screen.debug();
+    // wait for response
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    // check error message
+    // expect(screen.getAllByRole("alert")[0].textContent).toBe("Email is invalid");
+    // expect(screen.getAllByRole("alert")[1].textContent).toBe(
+    //     "Password must be at least 5 characters",
+    // );
 });

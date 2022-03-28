@@ -1,17 +1,18 @@
 import { rest } from "msw";
 import * as authController from "./controllers/authController";
 import * as productController from "./controllers/productController";
+import { BASE_URL } from "../constants";
 
 export const handlers = [
     //authentication APIs
-    rest.post("/token/refresh"),
-    rest.post("/login", authController.logIn),
-    rest.post("/register", authController.register),
+    rest.post(BASE_URL + "/token/refresh"),
+    rest.post(BASE_URL + "/login", authController.logIn),
+    rest.post(BASE_URL + "/register", authController.register),
 
     //products APIs
-    rest.get("/products", productController.getProducts),
-    rest.get("/product/:id", productController.getProduct),
-    rest.post("/product", productController.addProduct),
-    rest.put("/product/:id", productController.updateProduct),
-    rest.delete("/product/:id", productController.deleteProduct),
+    rest.get(BASE_URL + "/products", productController.getProducts),
+    rest.get(BASE_URL + "/product/:id", productController.getProduct),
+    rest.post(BASE_URL + "/product", productController.addProduct),
+    rest.put(BASE_URL + "/product/:id", productController.updateProduct),
+    rest.delete(BASE_URL + "/product/:id", productController.deleteProduct),
 ];
