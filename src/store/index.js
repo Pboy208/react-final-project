@@ -10,6 +10,7 @@ const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
             store.dispatch({
                 type: "auth/logout",
             });
+        case "400":
         case "404":
         case "409":
         case "500":

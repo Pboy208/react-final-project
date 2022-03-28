@@ -6,10 +6,10 @@ export const logIn = controllerWrapper(async (req, res, ctx) => {
     const token = await Authen.logIn(logInInfo);
     if (!token)
         return res(
-            ctx.status(401),
+            ctx.status(400),
             ctx.json({
                 message: "Login failed, wrong username or password",
-            })
+            }),
         );
     return res(ctx.json({ message: "Login success", data: token }));
 });
@@ -24,7 +24,7 @@ export const register = controllerWrapper(async (req, res, ctx) => {
             ctx.status(409),
             ctx.json({
                 message: "Register failed, email has already been used",
-            })
+            }),
         );
     }
 });
