@@ -29,7 +29,8 @@ const Login = () => {
         dispatch(login(loginInfo))
             .unwrap()
             .then(() => Toast.success(`Login success`))
-            .then(() => navigate("/home"));
+            .then(() => navigate("/home"))
+            .catch((error) => {});
     };
     return (
         <LoginForm onSubmit={handleSubmit(handleLogin)}>

@@ -4,15 +4,18 @@ import { render as rtlRender } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "../context/ThemeContext";
+import { ToastContainer } from "@ahaui/react";
 
 const render = (ui, { ...options } = {}) => {
     const Wrapper = ({ children }) => (
         <Provider store={store}>
             <ThemeProvider>
+                <ToastContainer />
                 <Router>{children}</Router>
             </ThemeProvider>
         </Provider>
     );
+
     return rtlRender(ui, { wrapper: Wrapper, ...options });
 };
 
@@ -20,10 +23,12 @@ const renderApp = ({ ...options } = {}) => {
     const Wrapper = ({ children }) => (
         <Provider store={store}>
             <ThemeProvider>
+                <ToastContainer />
                 <Router>{children}</Router>
             </ThemeProvider>
         </Provider>
     );
+
     return rtlRender(App, { wrapper: Wrapper, ...options });
 };
 

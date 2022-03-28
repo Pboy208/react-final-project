@@ -13,9 +13,9 @@ export const logIn = async ({ email, password }) => {
 
     query.onsuccess = async () => {
         const user = query.result;
-        if (!user) resolvePromise(null);
+        if (!user) return resolvePromise(null);
         const token = sign(user.id, "SECRET_KEY");
-        resolvePromise(token);
+        return resolvePromise(token);
     };
     return promise;
 };
@@ -60,8 +60,8 @@ export const verifyToken = async (token) => {
     const query = store.get(userId);
     query.onsuccess = async () => {
         const user = query.result;
-        if (!user) resolvePromise(false);
-        resolvePromise(true);
+        if (!user) return resolvePromise(false);
+        return resolvePromise(true);
     };
 
     return promise;

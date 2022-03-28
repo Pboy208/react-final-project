@@ -10,8 +10,8 @@ export const getAll = async () => {
 
     query.onsuccess = async () => {
         const productList = query.result;
-        if (!productList) resolvePromise([]);
-        resolvePromise(productList);
+        if (!productList) return resolvePromise([]);
+        return resolvePromise(productList);
     };
     return promise;
 };
@@ -25,8 +25,8 @@ export const get = async (id) => {
 
     query.onsuccess = async () => {
         const product = query.result;
-        if (!product) resolvePromise(null);
-        resolvePromise(product);
+        if (!product) return resolvePromise(null);
+        return resolvePromise(product);
     };
     return promise;
 };
@@ -44,8 +44,8 @@ export const add = async (product) => {
     query.onsuccess = async () => {
         const result = query.result;
         console.log("on query add success", result);
-        if (!result) resolvePromise(false);
-        resolvePromise(product);
+        if (!result) return resolvePromise(false);
+        return resolvePromise(product);
     };
     return promise;
 };
@@ -58,14 +58,14 @@ export const update = async (product) => {
     const promise = new Promise((resolve) => (resolvePromise = resolve));
 
     query.onsuccess = async () => {
-        if (!product) resolvePromise(false);
+        if (!product) return resolvePromise(false);
         product.createdTimestamp = Date.now();
         query.result.createdTimestamp = Date.now();
         query.result.title = product.title;
         query.result.price = product.price;
         query.result.imageUrl = product.imageUrl;
         store.put(query.result);
-        resolvePromise(query.result);
+        return resolvePromise(query.result);
     };
     return promise;
 };
