@@ -55,7 +55,7 @@ function Product({ product }) {
           onConfirm={handleDelete}
           message="Do you really want to delete this item"
           content={title}
-          turnOff={toggleConfirmDeleteModal}
+          onHide={toggleConfirmDeleteModal}
         />
       )}
     </>
@@ -150,7 +150,7 @@ const ImagePreview = styled.div`
   padding-right: 20px;
   text-align: center;
   cursor: pointer;
-  
+
   &:hover img {
     display: unset;
   }

@@ -1,12 +1,10 @@
 import React from 'react';
 import { Modal, Button } from '@ahaui/react';
 
-function ConfirmModal({ turnOff, onConfirm, message, content, onHide }) {
-  const handleCancel = () => turnOff();
-
+function ConfirmModal({ onConfirm, message, content, onHide }) {
   const handleConfirm = () => {
     onConfirm();
-    turnOff();
+    onHide();
   };
 
   return (
@@ -16,12 +14,12 @@ function ConfirmModal({ turnOff, onConfirm, message, content, onHide }) {
       size="small"
       onHide={onHide}
     >
-      <Modal.Header id="dsfs">
+      <Modal.Header>
         <Modal.Title>{message}</Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ textAlign: 'center' }}>{content}</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCancel} width="full">
+        <Button variant="secondary" onClick={onHide} width="full">
           Cancel
         </Button>
         <Button variant="negative" onClick={handleConfirm} width="full">
