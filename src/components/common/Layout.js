@@ -5,15 +5,17 @@ import Header from './Header';
 import Footer from './Footer';
 import FallbackComponent from './FallbackComponent';
 
-const Layout = React.memo(({ children }) => (
-  <ErrorBoundary FallbackComponent={FallbackComponent}>
-    <Wrapper>
-      <Header />
-      <Body>{children}</Body>
-      <Footer />
-    </Wrapper>
-  </ErrorBoundary>
-));
+function Layout({ children }) {
+  return (
+    <ErrorBoundary FallbackComponent={FallbackComponent}>
+      <Wrapper>
+        <Header />
+        <Body>{children}</Body>
+        <Footer />
+      </Wrapper>
+    </ErrorBoundary>
+  );
+}
 
 const Wrapper = styled.div`
   min-height: 100vh;

@@ -9,7 +9,7 @@ import validationSchema from '../../utils/schemas/productFormSchema';
 const imageFallback =
   'https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg';
 
-const ProductForm = React.memo(({ product, handleFormSubmit }) => {
+function ProductForm({ product, handleFormSubmit }) {
   const {
     watch,
     reset,
@@ -76,7 +76,7 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
       />
     </Wrapper>
   );
-});
+}
 
 const ProductImage = styled.img`
   width: 40%;
