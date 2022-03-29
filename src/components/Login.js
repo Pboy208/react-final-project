@@ -29,9 +29,11 @@ function Login() {
   const handleLogin = (loginInfo) => {
     dispatch(login(loginInfo))
       .unwrap()
-      .then(() => Toast.success(`Login success`))
-      .then(() => navigate('/home'))
-      .catch(() => {});
+      .then(() => {
+        Toast.success(`Login success`);
+        navigate('/home');
+      })
+      .catch(console.error);
   };
 
   return (

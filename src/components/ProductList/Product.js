@@ -19,7 +19,8 @@ function Product({ product }) {
   const handleDelete = () => {
     dispatch(deleteProduct(id))
       .unwrap()
-      .then(() => Toast.success('Delete success'));
+      .then(() => Toast.success('Delete success'))
+      .catch(console.error);
   };
 
   const toggleIsModalShow = () => setIsModalShow((prev) => !prev);

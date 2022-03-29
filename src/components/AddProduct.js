@@ -19,7 +19,8 @@ function AddProduct() {
   const handleFormSubmit = React.useCallback((product) => {
     dispatch(addProduct(product))
       .unwrap()
-      .then(() => navigate('/home'));
+      .then(() => navigate('/home'))
+      .catch(console.error);
   }, []);
 
   return (

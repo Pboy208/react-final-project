@@ -22,7 +22,8 @@ function UpdateProduct() {
     (updatedProduct) => {
       dispatch(updateProduct(updatedProduct))
         .unwrap()
-        .then(() => navigate('/home'));
+        .then(() => navigate('/home'))
+        .catch(console.error);
     },
     [dispatch, navigate],
   );
