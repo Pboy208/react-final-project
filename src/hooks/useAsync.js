@@ -16,15 +16,21 @@ function useSafeDispatch(dispatch) {
   );
 }
 
+const actionTypes = {
+  pending: 'pending',
+  resolved: 'resolved',
+  rejected: 'rejected',
+};
+
 function asyncReducer(state, action) {
   switch (action.type) {
-    case 'pending': {
+    case actionTypes.pending: {
       return { status: 'pending', data: null, error: null };
     }
-    case 'resolved': {
+    case actionTypes.resolved: {
       return { status: 'resolved', data: action.data, error: null };
     }
-    case 'rejected': {
+    case actionTypes.rejected: {
       return { status: 'rejected', data: null, error: action.error };
     }
     default: {
@@ -40,31 +46,30 @@ function useAsync(initialState) {
     error: null,
     ...initialState,
   });
-
   const dispatch = useSafeDispatch(unsafeDispatch);
-
   const { data, error, status } = state;
 
   const handleRequest = React.useCallback(
     (promise) => {
-      dispatch({ type: 'pending' });
+      dispatch({ type: actionTypes.pending });
       promise
         .then((response) => {
-          dispatch({ type: 'resolved', data: response.data });
+          dispatch({ type: actionTypes.resolved, data: response.data });
         })
         .catch((rejectedError) => {
-          dispatch({ type: 'rejected', error: rejectedError });
+          dispatch({ type: actionTypes.rejected, error: rejectedError });
         });
     },
     [dispatch],
   );
 
   const setData = React.useCallback(
-    (newData) => dispatch({ type: 'resolved', data: newData }),
+    (newData) => dispatch({ type: actionTypes.resolved, data: newData }),
     [dispatch],
   );
+
   const setError = React.useCallback(
-    (newError) => dispatch({ type: 'rejected', error: newError }),
+    (newError) => dispatch({ type: actionTypes.rejected, error: newError }),
     [dispatch],
   );
 
