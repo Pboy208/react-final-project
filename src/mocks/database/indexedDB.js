@@ -1,6 +1,6 @@
 import * as productListJSON from './productList.json';
 import * as authListJSON from './authList.json';
-import 'fake-indexeddb/auto';
+// import 'fake-indexeddb/auto';
 
 const { indexedDB } = window;
 
@@ -25,8 +25,18 @@ const initiateProductsDB = () => {
 
     const store = transaction.objectStore('productList');
 
-    store.delete(IDBKeyRange.lowerBound(1));
-    productList.map((product) => store.put(product));
+    // un comment this to enable restore database after each refresh
+    // store.delete(IDBKeyRange.lowerBound(1));
+
+    const firstQuery = store.getAll();
+    firstQuery.onsuccess = () => {
+      const initialProductList = firstQuery.result;
+      console.log(initialProductList);
+
+      if (initialProductList.length === 0) {
+        productList.map((product) => store.put(product));
+      }
+    };
 
     transaction.oncomplete = () => {
       db.close();
@@ -56,8 +66,18 @@ const initiateAuthenDB = () => {
 
     const store = transaction.objectStore('authen');
 
-    store.delete(IDBKeyRange.lowerBound(1));
-    authList.map((user) => store.put(user));
+    // un comment this to enable restore database after each refresh
+    // store.delete(IDBKeyRange.lowerBound(1));
+
+    const firstQuery = store.getAll();
+    firstQuery.onsuccess = () => {
+      const initialProductList = firstQuery.result;
+      console.log(initialProductList);
+
+      if (initialProductList.length === 0) {
+        authList.map((user) => store.put(user));
+      }
+    };
 
     transaction.oncomplete = () => {
       db.close();
