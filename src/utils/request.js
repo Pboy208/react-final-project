@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-/* eslint-disable no-throw-literal */
 /* eslint-disable import/prefer-default-export */
 import { BASE_URL } from '../constants';
 
@@ -33,7 +32,10 @@ export const createRequest = async ({
 
   const response = await fetch(requestUrl, requestConfig);
   const payload = await response.json();
-  if (!response.ok)
-    throw { code: response.status.toString(), message: payload.message };
+  if (!response.ok) {
+    const error = new Error(payload.message);
+    error.code = response.status.toString();
+    throw error;
+  }
   return payload;
 };
