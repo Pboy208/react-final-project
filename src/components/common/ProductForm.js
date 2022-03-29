@@ -12,6 +12,7 @@ const imageFallback =
 function ProductForm({ product, handleFormSubmit }) {
   const {
     watch,
+    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -20,11 +21,15 @@ function ProductForm({ product, handleFormSubmit }) {
     resolver: yupResolver(validationSchema),
     defaultValues: product,
   });
-
   const imageUrl = watch(['imageUrl'])[0];
   const isPriceInvalid = !!errors.price;
   const isImageUrlInvalid = !!errors.imageUrl;
   const isTitleInvalid = !!errors.title;
+
+  React.useEffect(() => {
+    // reset form when product is updated after first time rendered as null product
+    reset(product);
+  }, [product, reset]);
 
   return (
     <Wrapper>
@@ -52,7 +57,7 @@ function ProductForm({ product, handleFormSubmit }) {
           </Form.Feedback>
         </FormGroup>
         <FormGroup controlId="productForm.price">
-          <Form.Label>Price</Form.Label>
+          <Form.Label>Price (VND)</Form.Label>
           <Form.Input
             type="text"
             isInvalid={isPriceInvalid}
@@ -63,7 +68,7 @@ function ProductForm({ product, handleFormSubmit }) {
           </Form.Feedback>
         </FormGroup>
         <SaveButton size="small" variant="primary">
-          <Button.Label class=".u-text500">Save</Button.Label>
+          <Button.Label>Save</Button.Label>
         </SaveButton>
       </StyledForm>
       <ProductImage
