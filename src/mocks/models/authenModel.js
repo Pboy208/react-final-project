@@ -17,7 +17,7 @@ export const logIn = async ({ email, password }) => {
   query.onsuccess = async () => {
     const user = query.result;
     if (!user) return resolvePromise(null);
-    const token = sign(user.id, 'SECRET_KEY');
+    const token = sign({ userId: user.id }, 'SECRET_KEY');
     return resolvePromise(token);
   };
   return promise;
@@ -54,7 +54,7 @@ export const verifyToken = async (token) => {
   let userId;
   const promise = new Promise((resolve) => (resolvePromise = resolve));
   try {
-    userId = decode(token);
+    userId = decode(token).userId;
   } catch (error) {
     console.log('error in verify token', error);
     return false;

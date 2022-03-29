@@ -17,9 +17,7 @@ const isTokenValid = (token) => {
   if (!token) return false;
   try {
     const decodedToken = decode(token);
-    const remainTimeInSeconds =
-      decodedToken.exp - Math.floor(Date.now() / 1000);
-    return remainTimeInSeconds > 0;
+    return !!decodedToken.userId;
   } catch (e) {
     return false;
   }
@@ -30,6 +28,8 @@ const token = localStorage.getItem('token');
 if (isTokenValid(token)) {
   initialState.isLoggedIn = true;
   initialState.userName = decode(token).userName;
+} else {
+  console.log(token);
 }
 
 const authSlice = createSlice({
