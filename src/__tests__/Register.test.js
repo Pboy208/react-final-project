@@ -92,10 +92,10 @@ test("Should redirect and show toast when register with valid information", asyn
     await act(async () => userEvent.click(screen.getByRole("button", { name: /register/i })));
 
     // wait for response
-    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    await waitForElementToBeRemoved(() => screen.queryByLabelText(/loading/i));
 
     //expect success toast and redirect to home page
-    expect(screen.queryByText("Register success")).toBeInTheDocument();
+    expect(screen.getByText("Register success")).toBeInTheDocument();
 });
 
 test("Should show error toast when register with invalid information", async () => {
@@ -126,9 +126,8 @@ test("Should show error toast when register with invalid information", async () 
     await act(async () => userEvent.click(screen.getByRole("button", { name: /register/i })));
 
     // wait for response
-    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    await waitForElementToBeRemoved(() => screen.queryByLabelText(/loading/i));
 
     //expect success toast and redirect to home page
-    screen.debug();
-    expect(screen.queryByText("Register failed, email has already been used")).toBeInTheDocument();
+    expect(screen.getByText("Register failed, email has already been used")).toBeInTheDocument();
 });
