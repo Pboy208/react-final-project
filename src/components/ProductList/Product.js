@@ -158,12 +158,17 @@ const ImagePreview = styled.div`
 
 const Image = styled.img`
   display: none;
-  position: absolute;
+  position: fixed;
   z-index: 2;
   height: min(72vh, 36vw);
   background-color: white;
-  top: 4vh;
-  left: 16vw;
+  border: 3px solid;
+  border-radius: 12px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 `;
 
 export default Product;
