@@ -12,7 +12,6 @@ const imageFallback =
 function ProductForm({ product, handleFormSubmit }) {
   const {
     watch,
-    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -26,10 +25,6 @@ function ProductForm({ product, handleFormSubmit }) {
   const isPriceInvalid = !!errors.price;
   const isImageUrlInvalid = !!errors.imageUrl;
   const isTitleInvalid = !!errors.title;
-
-  React.useEffect(() => {
-    reset(product);
-  }, [product, reset]);
 
   return (
     <Wrapper>
