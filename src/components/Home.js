@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import sortByConstant from '../constants/sortBy';
 import ProductList from './ProductList';
 import useSortedAndSearchedProducts from '../hooks/useSortedAndSearchedProducts';
 import LoadingSpinner from './common/LoadingSpinner';
@@ -32,9 +33,15 @@ function Home() {
           placeholder="Search..."
         />
         <SortBy value={sortBy} onChange={handleSortByChange}>
-          <SortOption value="CREATED_TIME">Recently added</SortOption>
-          <SortOption value="PRICE_INCREASE">Price increasing</SortOption>
-          <SortOption value="PRICE_DECREASE">Price decreasing</SortOption>
+          <SortOption value={sortByConstant.recentlyAdded}>
+            Recently added
+          </SortOption>
+          <SortOption value={sortByConstant.priceIncrease}>
+            Price increasing
+          </SortOption>
+          <SortOption value={sortByConstant.priceDecrease}>
+            Price decreasing
+          </SortOption>
         </SortBy>
       </SearchAndSortBy>
       <TitlesAndAddBtn>
@@ -161,7 +168,7 @@ const AddBtn = styled(Link)`
     padding-left: 10px;
     height: 40px;
   }
-  
+
   @media ${device.mobile} {
     height: 48px;
   }
