@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Button } from '@ahaui/react';
+import styled from 'styled-components';
 
 function ConfirmModal({ onConfirm, message, content, onHide }) {
   const handleConfirm = () => {
@@ -8,16 +9,11 @@ function ConfirmModal({ onConfirm, message, content, onHide }) {
   };
 
   return (
-    <Modal
-      style={{ width: '80%', margin: 'auto' }}
-      show
-      size="small"
-      onHide={onHide}
-    >
+    <StyledModal show size="small" onHide={onHide}>
       <Modal.Header>
         <Modal.Title>{message}</Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ textAlign: 'center' }}>{content}</Modal.Body>
+      <ModalBody>{content}</ModalBody>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide} width="full">
           Cancel
@@ -26,8 +22,17 @@ function ConfirmModal({ onConfirm, message, content, onHide }) {
           Yes
         </Button>
       </Modal.Footer>
-    </Modal>
+    </StyledModal>
   );
 }
+
+const StyledModal = styled(Modal)`
+  width: '80%';
+  margin: 'auto';
+`;
+
+const ModalBody = styled(Modal.Body)`
+  text-align: center;
+`;
 
 export default ConfirmModal;

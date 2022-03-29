@@ -85,15 +85,15 @@ function Register() {
           {errors?.confirmPassword?.message}
         </FormFeedback>
       </FormGroup>
-      <Button size="small" variant="primary" style={{ width: 'max(10%,70px)' }}>
-        <Button.Label style={{ fontWeight: '500' }}>
+      <RegisterButton size="small" variant="primary">
+        <Button.Label>
           {isLoading ? (
             <Loader aria-label="Loading" size="small" />
           ) : (
             'Register'
           )}
         </Button.Label>
-      </Button>
+      </RegisterButton>
     </RegisterForm>
   );
 }
@@ -116,6 +116,10 @@ const FormGroup = styled(Form.Group)`
 
 const FormFeedback = styled(Form.Feedback)`
   font-size: var(--font-size);
+`;
+
+const RegisterButton = styled(Button)`
+  width: max(10%, 70px);
 `;
 
 export default Register;

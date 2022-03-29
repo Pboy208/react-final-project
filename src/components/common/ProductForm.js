@@ -33,8 +33,8 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
 
   return (
     <Wrapper>
-      <RegisterForm onSubmit={handleSubmit(handleFormSubmit)}>
-        <Form.Group style={{ width: '100%' }} controlId="productForm.title">
+      <StyledForm onSubmit={handleSubmit(handleFormSubmit)}>
+        <FormGroup controlId="productForm.title">
           <Form.Label>Title</Form.Label>
           <Form.Input
             type="text"
@@ -44,8 +44,8 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
           <Form.Feedback type="invalid" role="alert">
             {errors?.title?.message}
           </Form.Feedback>
-        </Form.Group>
-        <Form.Group style={{ width: '100%' }} controlId="productForm.imageUrl">
+        </FormGroup>
+        <FormGroup controlId="productForm.imageUrl">
           <Form.Label>Image url</Form.Label>
           <Form.Input
             type="text"
@@ -55,8 +55,8 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
           <Form.Feedback type="invalid" role="alert">
             {errors?.imageUrl?.message}
           </Form.Feedback>
-        </Form.Group>
-        <Form.Group style={{ width: '100%' }} controlId="productForm.price">
+        </FormGroup>
+        <FormGroup controlId="productForm.price">
           <Form.Label>Price</Form.Label>
           <Form.Input
             type="text"
@@ -66,11 +66,11 @@ const ProductForm = React.memo(({ product, handleFormSubmit }) => {
           <Form.Feedback type="invalid" role="alert">
             {errors?.price?.message}
           </Form.Feedback>
-        </Form.Group>
-        <Button size="small" variant="primary" style={{ width: '10%' }}>
-          <Button.Label style={{ fontWeight: '500' }}>Save</Button.Label>
-        </Button>
-      </RegisterForm>
+        </FormGroup>
+        <SaveButton size="small" variant="primary">
+          <Button.Label class=".u-text500">Save</Button.Label>
+        </SaveButton>
+      </StyledForm>
       <ProductImage
         src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl}
       />
@@ -84,12 +84,20 @@ const ProductImage = styled.img`
   object-fit: cover;
 `;
 
-const RegisterForm = styled.form`
+const StyledForm = styled.form`
   height: 100%;
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+`;
+
+const FormGroup = styled(Form.Group)`
+  width: '100%';
+`;
+
+const SaveButton = styled(Button)`
+  width: max('10%', '70px');
 `;
 
 const Wrapper = styled.div`

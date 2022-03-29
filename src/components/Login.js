@@ -60,11 +60,11 @@ function Login() {
           {errors?.password?.message}
         </FormFeedback>
       </FormGroup>
-      <Button size="small" variant="primary" style={{ width: 'max(10%,60px)' }}>
-        <Button.Label style={{ fontWeight: '500' }}>
+      <LoginButton size="small" variant="primary">
+        <Button.Label>
           {isLoading ? <Loader aria-label="Loading" size="small" /> : 'Login'}
         </Button.Label>
-      </Button>
+      </LoginButton>
     </LoginForm>
   );
 }
@@ -85,6 +85,10 @@ const FormGroup = styled(Form.Group)`
 `;
 const FormFeedback = styled(Form.Feedback)`
   font-size: var(--font-size);
+`;
+
+const LoginButton = styled(Button)`
+  width: max(10%, 70px);
 `;
 
 export default Login;
