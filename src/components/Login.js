@@ -30,7 +30,7 @@ function Login() {
     dispatch(login(loginInfo))
       .unwrap()
       .then(() => {
-        Toast.success(`Login success`);
+        Toast.success('Login success');
         navigate('/home');
       })
       .catch(console.error);

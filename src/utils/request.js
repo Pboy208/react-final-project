@@ -19,7 +19,7 @@ export const createRequest = async ({
   token = null,
   params = null,
 }) => {
-  const url = BASE_URL + endpoint;
+  const url = `${BASE_URL}${endpoint}`;
   const requestUrl = params ? generateUrlWithParams(url, params) : url;
   const requestConfig = {
     method,
