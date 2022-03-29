@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import productMessage from '../../constants/productMessage';
+import productMessage from 'constants/productMessage';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string()

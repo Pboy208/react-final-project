@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import { rest } from 'msw';
+import { BASE_URL } from 'constants';
 import * as authController from './controllers/authController';
 import * as productController from './controllers/productController';
-import { BASE_URL } from '../constants';
 
 export const handlers = [
   // authentication APIs

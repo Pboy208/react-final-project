@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-fallthrough */
 import { configureStore } from '@reduxjs/toolkit';
+import * as Toast from 'components/common/Toast';
 import productReducer from './productSlice';
 import authReducer from './authSlice';
-import * as Toast from '../components/common/Toast';
 
 const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
   if (!action.error) return next(action);

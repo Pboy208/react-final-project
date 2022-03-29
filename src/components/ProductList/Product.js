@@ -2,11 +2,11 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { formatVnd } from '../../utils/formatter';
-import { deleteProduct } from '../../store/productSlice';
-import * as Toast from '../common/Toast';
-import LoadingSpinner from '../common/LoadingSpinner';
-import { device } from '../../constants/mediaQuery';
+import { device } from 'constants/mediaQuery';
+import { formatVnd } from 'utils/formatter';
+import { deleteProduct } from 'store/productSlice';
+import * as Toast from 'components/common/Toast';
+import LoadingSpinner from 'components/common/LoadingSpinner';
 
 const ConfirmModal = React.lazy(() => import('./ConfirmModal'));
 

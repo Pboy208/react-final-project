@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
 import { waitForElementToBeRemoved } from '@testing-library/react';
-import Login from '../components/Login';
-import { render, act, screen } from '../utils/test';
+import Login from 'components/Login';
+import { render, act, screen } from 'utils/test';
 
 test('Should show error when fields are invalid', async () => {
   // make invalid data

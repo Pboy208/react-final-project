@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import sortByConstant from '../constants/sortBy';
+import sortByConstant from 'constants/sortBy';
+import useSortedAndSearchedProducts from 'hooks/useSortedAndSearchedProducts';
+import { device } from 'constants/mediaQuery';
 import ProductList from './ProductList';
-import useSortedAndSearchedProducts from '../hooks/useSortedAndSearchedProducts';
 import LoadingSpinner from './common/LoadingSpinner';
-import { device } from '../constants/mediaQuery';
 
 function Home() {
   const { isLoading, productList, setSortBy, setSearch, sortBy, search } =

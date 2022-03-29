@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
-import ProductForm from '../components/common/ProductForm';
-import { render, act, screen } from '../utils/test';
+import ProductForm from 'components/common/ProductForm';
+import { render, act, screen } from 'utils/test';
 
 test('Should show product information', async () => {
   // mock valid data

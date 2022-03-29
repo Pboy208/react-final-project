@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { Form, Button, Loader } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import validationSchema from '../utils/schemas/registerSchema';
-import useAsync from '../hooks/useAsync';
-import * as authAPIs from '../api/authAPIs';
+import * as authAPIs from 'api/authAPIs';
+import validationSchema from 'utils/schemas/registerSchema';
+import useAsync from 'hooks/useAsync';
 import * as Toast from './common/Toast';
 
 function Register() {

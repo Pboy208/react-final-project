@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import authMessage from '../../constants/authMessages';
+import authMessage from 'constants/authMessages';
 
 const validationSchema = Yup.object().shape({
   userName: Yup.string()

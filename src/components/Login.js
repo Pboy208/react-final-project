@@ -6,8 +6,8 @@ import { Form, Button, Loader } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import validationSchema from '../utils/schemas/loginSchema';
-import { login } from '../store/authSlice';
+import validationSchema from 'utils/schemas/loginSchema';
+import { login } from 'store/authSlice';
 import * as Toast from './common/Toast';
 
 function Login() {

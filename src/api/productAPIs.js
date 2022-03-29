@@ -1,4 +1,4 @@
-import { createRequest } from '../utils/request';
+import { createRequest } from 'utils/request';
 
 export const getProductList = async (params = { sortBy: 'CREATED_TIME' }) =>
   createRequest({

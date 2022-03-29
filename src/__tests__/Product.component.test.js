@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import Product from '../components/ProductList/Product';
-import { render, screen } from '../utils/test';
+import Product from 'components/ProductList/Product';
+import { render, screen } from 'utils/test';
 
 const mockProduct = {
   id: '4aff282b-46b0-469b-b91a-52f0b2fccabb',

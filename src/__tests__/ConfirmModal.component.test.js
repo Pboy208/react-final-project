@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
-import ConfirmModal from '../components/ProductList/ConfirmModal';
-import { render, screen, act } from '../utils/test';
+import ConfirmModal from 'components/ProductList/ConfirmModal';
+import { render, screen, act } from 'utils/test';
 
 beforeEach(() => {
   const div = document.createElement('div');

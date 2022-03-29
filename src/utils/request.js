@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/prefer-default-export */
-import { BASE_URL } from '../constants';
+import { BASE_URL } from 'constants';
 
 const generateUrlWithParams = (givenUrl, params) => {
   if (!params.search) params.search = '';

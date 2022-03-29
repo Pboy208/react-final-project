@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { normalize } from 'normalizr';
-import * as normalizerSchema from '../utils/schemas/normalizrSchemas';
-import * as productApi from '../api/productAPIs';
+import * as normalizerSchema from 'utils/schemas/normalizrSchemas';
+import * as productApi from 'api/productAPIs';
 
 export const getProductList = createAsyncThunk('product/getList', (params) =>
   productApi.getProductList(params),

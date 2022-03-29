@@ -4,9 +4,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTheme } from '../../context/ThemeContext';
-import { logout } from '../../store/authSlice';
-import { device } from '../../constants/mediaQuery';
+import { useTheme } from 'context/ThemeContext';
+import { logout } from 'store/authSlice';
+import { device } from 'constants/mediaQuery';
 
 function Header() {
   const { isLoggedIn } = useSelector((state) => state.auth);

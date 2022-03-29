@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { device } from '../../constants/mediaQuery';
+import { device } from 'constants/mediaQuery';
 
 const themes = {
   light: {

@@ -1,4 +1,4 @@
-import { createRequest } from '../utils/request';
+import { createRequest } from 'utils/request';
 
 export const login = async (loginInfo) =>
   createRequest({

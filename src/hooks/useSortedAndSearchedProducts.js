@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProductList } from '../store/productSlice';
-import sortByConstant from '../constants/sortBy';
+import { getProductList } from 'store/productSlice';
+import sortByConstant from 'constants/sortBy';
 
 const actionTypes = {
   setSortBy: 'setSortby',

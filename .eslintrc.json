@@ -17,6 +17,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
-    "no-console": 0
+    "no-console": 0,
+    "import/no-unresolved": 0
   }
 }

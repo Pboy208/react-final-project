@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getProduct, updateProduct } from 'store/productSlice';
 import ProductForm from './common/ProductForm';
-import { getProduct, updateProduct } from '../store/productSlice';
 import LoadingSpinner from './common/LoadingSpinner';
 
 function UpdateProduct() {
