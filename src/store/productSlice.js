@@ -4,25 +4,23 @@ import { normalize } from 'normalizr';
 import * as normalizerSchema from '../utils/schemas/normalizrSchemas';
 import * as productApi from '../api/productAPIs';
 
-export const getProductList = createAsyncThunk(
-  'product/getList',
-  async (params) => productApi.getProductList(params),
+export const getProductList = createAsyncThunk('product/getList', (params) =>
+  productApi.getProductList(params),
 );
 
-export const getProduct = createAsyncThunk('product/get', async (id) =>
+export const getProduct = createAsyncThunk('product/get', (id) =>
   productApi.getProduct(id),
 );
 
-export const updateProduct = createAsyncThunk(
-  'product/update',
-  async (product) => productApi.updateProduct(product),
+export const updateProduct = createAsyncThunk('product/update', (product) =>
+  productApi.updateProduct(product),
 );
 
-export const deleteProduct = createAsyncThunk('product/delete', async (id) =>
+export const deleteProduct = createAsyncThunk('product/delete', (id) =>
   productApi.deleteProduct(id),
 );
 
-export const addProduct = createAsyncThunk('product/add', async (product) =>
+export const addProduct = createAsyncThunk('product/add', (product) =>
   productApi.addProduct(product),
 );
 
@@ -36,7 +34,6 @@ const productSlice = createSlice({
   },
   reducers: {
     setLoading: (state, action) => {
-      console.log('begin set is loading', action.payload);
       state.isLoading = action.payload;
     },
   },
