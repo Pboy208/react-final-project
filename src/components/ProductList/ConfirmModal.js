@@ -1,8 +1,7 @@
 import React from 'react';
 import { Modal, Button } from '@ahaui/react';
-import reactDom from 'react-dom';
 
-const ConfirmModal = ({ turnOff, onConfirm, message, content, onHide }) => {
+function ConfirmModal({ turnOff, onConfirm, message, content, onHide }) {
   const handleCancel = () => turnOff();
 
   const handleConfirm = () => {
@@ -10,7 +9,7 @@ const ConfirmModal = ({ turnOff, onConfirm, message, content, onHide }) => {
     turnOff();
   };
 
-  return reactDom.createPortal(
+  return (
     <Modal
       style={{ width: '80%', margin: 'auto' }}
       show
@@ -29,9 +28,8 @@ const ConfirmModal = ({ turnOff, onConfirm, message, content, onHide }) => {
           Yes
         </Button>
       </Modal.Footer>
-    </Modal>,
-    document.getElementById('portal'),
+    </Modal>
   );
-};
+}
 
 export default ConfirmModal;
