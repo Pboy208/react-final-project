@@ -110,8 +110,7 @@ const RegisterForm = styled.form`
 `;
 
 const FormGroup = styled(Form.Group)`
-  max-width: var(--field-responsive-width);
-  font-size: 14px;
+  width: var(--field-responsive-width);
 `;
 
 const FormFeedback = styled(Form.Feedback)`
