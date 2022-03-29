@@ -2,9 +2,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { Form, Button } from '@ahaui/react';
+import { Form, Button, Icon } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import validationSchema from 'utils/schemas/productFormSchema';
+import { useNavigate } from 'react-router-dom';
+// import { device } from 'constants/mediaQuery';
 
 const imageFallback =
   'https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg';
@@ -21,6 +23,7 @@ function ProductForm({ product, handleFormSubmit }) {
     resolver: yupResolver(validationSchema),
     defaultValues: product,
   });
+  const navigate = useNavigate();
   const imageUrl = watch(['imageUrl'])[0];
   const isPriceInvalid = !!errors.price;
   const isImageUrlInvalid = !!errors.imageUrl;
@@ -30,6 +33,8 @@ function ProductForm({ product, handleFormSubmit }) {
     // reset form when product is updated after first time rendered as null product
     reset(product);
   }, [product, reset]);
+
+  const redirectToHome = () => navigate('/home');
 
   return (
     <Wrapper>
@@ -74,6 +79,9 @@ function ProductForm({ product, handleFormSubmit }) {
       <ProductImage
         src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl}
       />
+      <GoBackButton onClick={redirectToHome}>
+        <Icon size="medium" name="arrowRoundBack" />
+      </GoBackButton>
     </Wrapper>
   );
 }
@@ -102,6 +110,14 @@ const SaveButton = styled(Button)`
   width: max(10%, 70px);
 `;
 
+const GoBackButton = styled(Button)`
+  position: absolute;
+  top: 4%;
+  left: 2%;
+  width: max(5%, 52px);
+  height: max(6%, 24px);
+`;
+
 const Wrapper = styled.div`
   display: flex;
   min-height: 100%;
@@ -113,5 +129,6 @@ const Wrapper = styled.div`
   gap: 40px;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 export default ProductForm;
