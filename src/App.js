@@ -16,7 +16,7 @@ const AddProduct = React.lazy(() => import("./components/AddProduct"));
 const UpdateProduct = React.lazy(() => import("./components/UpdateProduct"));
 
 const App = () => {
-    const { theme } = useTheme();
+    const { theme } = useTheme();    
     return (
         <>
             <GlobalStyle theme={theme} />

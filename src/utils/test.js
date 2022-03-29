@@ -29,7 +29,7 @@ const renderApp = ({ ...options } = {}) => {
         </Provider>
     );
 
-    return rtlRender(App, { wrapper: Wrapper, ...options });
+    return rtlRender(<App/>, { wrapper: Wrapper, ...options });
 };
 
 const token =
