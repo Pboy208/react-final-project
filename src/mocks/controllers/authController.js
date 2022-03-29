@@ -17,8 +17,8 @@ export const logIn = controllerWrapper(async (req, res, ctx) => {
 export const register = controllerWrapper(async (req, res, ctx) => {
   const registerInfo = req.body;
   try {
-    await Authen.register(registerInfo);
-    return res(ctx.json({ message: 'Register success' }));
+    const token = await Authen.register(registerInfo);
+    return res(ctx.json({ message: 'Register success', data: token }));
   } catch (error) {
     return res(
       ctx.status(409),

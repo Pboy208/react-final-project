@@ -25,9 +25,10 @@ export const logIn = async ({ email, password }) => {
 
 export const register = async (registerInfo) => {
   const store = await getAuthenStore();
+  const newUserId = uuid();
   const request = store.put({
     ...registerInfo,
-    id: uuid(),
+    id: newUserId,
     password: md5(registerInfo.password),
   });
 
@@ -39,12 +40,13 @@ export const register = async (registerInfo) => {
   });
 
   request.onsuccess = async () => {
-    resolvePromise();
+    const token = sign({ userId: newUserId }, 'SECRET_KEY');
+    resolvePromise(token);
   };
 
   request.onerror = async () => {
     // email is dupplicate
-    rejectPromise();
+    rejectPromise(null);
   };
   return promise;
 };

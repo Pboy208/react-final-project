@@ -7,6 +7,10 @@ export const login = createAsyncThunk('auth/login', (loginInfo) =>
   authApi.login(loginInfo),
 );
 
+export const register = createAsyncThunk('auth/login', (registerInfo) =>
+  authApi.register(registerInfo),
+);
+
 const initialState = {
   isLoggedIn: false,
   userName: '',
@@ -47,6 +51,11 @@ const authSlice = createSlice({
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
+      localStorage.setItem('token', action.payload.data);
+      state.isLoggedIn = true;
+      state.userName = decode(action.payload.data).userName;
+    },
+    [register.fulfilled]: (state, action) => {
       localStorage.setItem('token', action.payload.data);
       state.isLoggedIn = true;
       state.userName = decode(action.payload.data).userName;

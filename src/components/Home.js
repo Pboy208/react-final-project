@@ -30,7 +30,7 @@ function Home() {
         <SearchBox
           value={search}
           onChange={handleSearchChange}
-          placeholder="Search..."
+          placeholder="Search by name..."
         />
         <SortBy value={sortBy} onChange={handleSortByChange}>
           <SortOption value={sortByConstant.recentlyAdded}>
