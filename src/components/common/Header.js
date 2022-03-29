@@ -68,6 +68,7 @@ const Actions = styled.div`
   align-items: center;
   height: 100%;
   gap: 20px;
+
   @media ${device.mobile} {
     gap: 10px;
   }
@@ -86,9 +87,11 @@ const Logo = styled(Link)`
 
 const Button = styled.div`
   cursor: pointer;
+
   & i {
     font-size: var(--button-size);
   }
+
   @media ${device.mobile} {
     & i {
       font-size: 16px;
@@ -104,12 +107,14 @@ const NavigateButton = styled(Link)`
   align-items: center;
   gap: 4px;
   font-size: var(--font-size);
+
   & i {
     font-size: var(--button-size);
   }
 
   @media ${device.mobile} {
     font-size: 10px;
+    
     & i {
       font-size: 16px;
     }

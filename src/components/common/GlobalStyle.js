@@ -31,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
       --wrapper-width: 94%;
       --logo-font-size: 90px;
     }
+
     @media ${device.tablet} {
       --wrapper-width: 96%;
       --logo-font-size: 85px;
@@ -38,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
       --card-width: 85%;
 
     }
+
     @media ${device.mobile} {
       --wrapper-width: 98%;
       --logo-font-size: 60px;
@@ -48,6 +50,7 @@ const GlobalStyle = createGlobalStyle`
 
   a{
     color: ${({ theme }) => themes[theme].text} ;
+    
     &:hover {
         text-decoration: none;
     }

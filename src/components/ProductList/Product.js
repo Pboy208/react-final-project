@@ -100,6 +100,7 @@ const Information = styled.span`
   border-left: 1px solid;
   padding-left: 20px;
   font-size: var(--font-size);
+
   &:first-child {
     border-left: none;
     overflow: hidden;
@@ -127,6 +128,7 @@ const Information = styled.span`
 const NavigateButton = styled(Link)`
   display: flex;
   height: fit-content;
+
   & i {
     height: fit-content;
     font-size: var(--button-size);
@@ -137,6 +139,7 @@ const Button = styled.div`
   display: flex;
   height: fit-content;
   cursor: pointer;
+
   & i {
     height: fit-content;
     font-size: var(--button-size);
@@ -147,6 +150,7 @@ const ImagePreview = styled.div`
   padding-right: 20px;
   text-align: center;
   cursor: pointer;
+  
   &:hover img {
     display: unset;
   }
