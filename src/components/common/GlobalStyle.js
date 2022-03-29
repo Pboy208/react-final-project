@@ -1,19 +1,19 @@
-import { createGlobalStyle } from "styled-components";
-import { device } from "../../constants/mediaQuery";
+import { createGlobalStyle } from 'styled-components';
+import { device } from '../../constants/mediaQuery';
 
 const themes = {
-    light: {
-        body: "#FFF",
-        background: "white",
-        text: "#363537",
-        borderColor: "#363537",
-    },
-    dark: {
-        body: "#5C3D2E",
-        background: "rgb(0, 30, 60)",
-        text: "#FAFAFA",
-        borderColor: "#FAFAFA",
-    },
+  light: {
+    body: '#FFF',
+    background: 'white',
+    text: '#363537',
+    borderColor: '#363537',
+  },
+  dark: {
+    body: '#5C3D2E',
+    background: 'rgb(0, 30, 60)',
+    text: '#FAFAFA',
+    borderColor: '#FAFAFA',
+  },
 };
 
 const GlobalStyle = createGlobalStyle`
