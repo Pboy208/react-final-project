@@ -33,6 +33,7 @@ function Login() {
       .then(() => navigate('/home'))
       .catch(() => {});
   };
+
   return (
     <LoginForm onSubmit={handleSubmit(handleLogin)}>
       <FormGroup controlId="loginForm.email">

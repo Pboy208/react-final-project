@@ -11,6 +11,7 @@ function UpdateProduct() {
   const navigate = useNavigate();
   const { byIds, isLoading } = useSelector((state) => state.product);
   const product = byIds[productId];
+
   React.useEffect(() => {
     if (!product) {
       dispatch(getProduct(productId)).unwrap();

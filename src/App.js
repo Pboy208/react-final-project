@@ -35,7 +35,6 @@ function App() {
               exact
               element={<UnprotectedRoute component={Register} />}
             />
-
             <Route
               path="/home"
               exact

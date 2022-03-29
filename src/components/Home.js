@@ -22,6 +22,7 @@ function Home() {
 
   if (!productList || isLoading)
     return <LoadingSpinner isLoading={isLoading} />;
+    
   return (
     <Wrapper>
       <SearchAndSortBy>
