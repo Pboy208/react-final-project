@@ -88,11 +88,11 @@ const StyledForm = styled.form`
 `;
 
 const FormGroup = styled(Form.Group)`
-  width: '100%';
+  width: 100%;
 `;
 
 const SaveButton = styled(Button)`
-  width: max('10%', '70px');
+  width: max(10%, 70px);
 `;
 
 const Wrapper = styled.div`
