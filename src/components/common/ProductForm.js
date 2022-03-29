@@ -82,6 +82,8 @@ const ProductImage = styled.img`
   width: 40%;
   height: 100%;
   object-fit: cover;
+  border: 3px solid;
+  border-radius: 12px;
 `;
 
 const StyledForm = styled.form`
@@ -105,6 +107,7 @@ const Wrapper = styled.div`
   min-height: 100%;
   width: 100%;
   border: 1px solid;
+  border-radius: 12px;
   margin: 40px auto;
   padding: 60px;
   gap: 40px;

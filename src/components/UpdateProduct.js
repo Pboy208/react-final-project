@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProduct, updateProduct } from 'store/productSlice';
+import * as Toast from 'components/common/Toast';
 import ProductForm from './common/ProductForm';
 import LoadingSpinner from './common/LoadingSpinner';
 
@@ -22,7 +23,10 @@ function UpdateProduct() {
     (updatedProduct) => {
       dispatch(updateProduct(updatedProduct))
         .unwrap()
-        .then(() => navigate('/home'))
+        .then(() => {
+          Toast.success('Update success');
+          navigate('/home');
+        })
         .catch(console.error);
     },
     [dispatch, navigate],
