@@ -12,7 +12,8 @@ const ConfirmModal = React.lazy(() => import('./ConfirmModal'));
 
 function Product({ product }) {
   const { title, imageUrl, price, id } = product;
-  const [isModalShow, setIsModalShow] = React.useState(false);
+  const [isConfirmingDeleteProduct, setIsConfirmingDeleteProduct] =
+    React.useState(false);
   const { isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
@@ -23,7 +24,8 @@ function Product({ product }) {
       .catch(console.error);
   };
 
-  const toggleIsModalShow = () => setIsModalShow((prev) => !prev);
+  const toggleConfirmDeleteModal = () =>
+    setIsConfirmingDeleteProduct((prev) => !prev);
 
   return (
     <>
@@ -43,17 +45,17 @@ function Product({ product }) {
           <NavigateButton to={`/product/${id}`}>
             <i className="fa-solid fa-pen-to-square" />
           </NavigateButton>
-          <Button onClick={toggleIsModalShow}>
+          <Button onClick={toggleConfirmDeleteModal}>
             <i className="fa-solid fa-trash-can" />
           </Button>
         </ProductActions>
       </Wrapper>
-      {isModalShow && (
+      {isConfirmingDeleteProduct && (
         <ConfirmModal
           onConfirm={handleDelete}
           message="Do you really want to delete this item"
           content={title}
-          turnOff={toggleIsModalShow}
+          turnOff={toggleConfirmDeleteModal}
         />
       )}
     </>
