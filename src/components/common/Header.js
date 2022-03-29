@@ -9,7 +9,7 @@ import { logout } from '../../store/authSlice';
 import { device } from '../../constants/mediaQuery';
 
 function Header() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const { pathname } = useLocation();
   const { theme, toggleTheme } = useTheme();
   const dispatch = useDispatch();
@@ -114,7 +114,7 @@ const NavigateButton = styled(Link)`
 
   @media ${device.mobile} {
     font-size: 10px;
-    
+
     & i {
       font-size: 16px;
     }

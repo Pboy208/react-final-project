@@ -31,7 +31,6 @@ const useSortedAndSearchedProducts = (
     () => ids.map((id) => byIds[id]),
     [ids, byIds],
   );
-
   const { sortBy, search, justMounted } = state;
   const dispatch = useDispatch();
 
