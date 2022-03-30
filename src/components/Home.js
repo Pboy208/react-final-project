@@ -31,7 +31,7 @@ function Home() {
     setSortBy(value);
   };
 
-  if ((productList.length === 0 && isFirstLoad) || isLoading)
+  if (productList.length === 0 && isFirstLoad)
     return <LoadingSpinner isLoading />;
 
   return (
