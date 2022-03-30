@@ -66,3 +66,14 @@ test('Should show error when fields are invalid', async () => {
     `"Price is needed to be a number"`,
   );
 });
+
+test('Should redirect to home when click return button', async () => {
+  // render component
+  render(<ProductForm />);
+
+  // press return button
+  userEvent.click(screen.getByTestId('return-button'));
+
+  // expect to be redirected to home
+  expect(global.window.location.pathname).toEqual('/home');
+});

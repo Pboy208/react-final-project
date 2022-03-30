@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import styled from 'styled-components';
@@ -79,7 +80,7 @@ function ProductForm({ product, handleFormSubmit }) {
       <ProductImage
         src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl}
       />
-      <GoBackButton onClick={redirectToHome}>
+      <GoBackButton onClick={redirectToHome} data-testid="return-button">
         <Icon size="medium" name="arrowRoundBack" />
       </GoBackButton>
     </Wrapper>
