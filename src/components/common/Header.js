@@ -23,6 +23,7 @@ function Header() {
     isLoggedIn ? (
       <Button onClick={logoutHandler}>
         <i className="fa-solid fa-arrow-right-from-bracket" />
+        <ToolTip>Logout</ToolTip>
       </Button>
     ) : pathname === '/login' ? (
       <NavigateButton to="/register">
@@ -46,6 +47,7 @@ function Header() {
             <i
               className={`fa-solid ${theme === 'light' ? 'fa-sun' : 'fa-moon'}`}
             />
+            <ToolTip>Change theme</ToolTip>
           </Button>
         </Actions>
       </Side>
@@ -86,16 +88,46 @@ const Logo = styled(Link)`
 `;
 
 const Button = styled.div`
+  position: relative;
   cursor: pointer;
 
   & i {
     font-size: var(--button-size);
   }
 
+  &:hover span {
+    display: unset;
+  }
+
   @media ${device.mobile} {
     & i {
       font-size: 16px;
     }
+  }
+`;
+
+const ToolTip = styled.span`
+  position: absolute;
+  top: 110%;
+  right: 0;
+  display: none;
+  font-size: 16px;
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background-color: white;
+  color: black;
+  width: max-content;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    right: 6%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    /* border-color: transparent transparent #555 transparent; */
   }
 `;
 

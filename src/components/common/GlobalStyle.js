@@ -7,12 +7,14 @@ const themes = {
     background: 'white',
     text: '#363537',
     borderColor: '#363537',
+    toolTipBorderColor: '#363537',
   },
   dark: {
     body: '#171717',
     background: 'rgb(0, 30, 60)',
     text: '#FAFAFA',
     borderColor: '#FAFAFA',
+    toolTipBorderColor: '#FAFAFA',
   },
 };
 
@@ -60,6 +62,11 @@ const GlobalStyle = createGlobalStyle`
     background: ${({ theme }) => themes[theme].body};
     color: ${({ theme }) => themes[theme].text};
     border-color: ${({ theme }) => themes[theme].borderColor} !important;
+  }
+
+  span::after{
+    border-color: transparent transparent ${({ theme }) =>
+      themes[theme].toolTipBorderColor} transparent;
   }
 `;
 
