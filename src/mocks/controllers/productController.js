@@ -1,5 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-underscore-dangle */
+import * as mock from 'mocks/mockForTesting';
 import { controllerWrapper } from '../utils/utilFunction';
 import * as Product from '../models/productModel';
 import { verifyToken } from '../models/authenModel';
@@ -40,6 +41,27 @@ const hasSearch = (title, search) => {
 };
 
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
+  if (process.env.NODE_ENV === 'test') {
+    const { sortBy, search } = getRequestParams(req);
+    console.log(sortBy, search);
+    if (search)
+      return res(
+        ctx.json({ message: 'Get success', data: mock.searchedProductList }),
+      );
+    if (sortBy === 'PRICE_DECREASE')
+      return res(
+        ctx.json({
+          message: 'Get success',
+          data: mock.priceDecreaseProductList,
+        }),
+      );
+    return res(
+      ctx.json({
+        message: 'Get success',
+        data: mock.productList,
+      }),
+    );
+  }
   if (!(await verifyToken(getTokenFromRequest(req))))
     return res(
       ctx.status(401),

@@ -31,19 +31,7 @@ function Home() {
   };
 
   if ((productList.length === 0 && isFirstLoad) || isLoading)
-    return (
-      <Wrapper>
-        <SearchAndSortBy>
-          <SearchBox
-            value={search}
-            onChange={handleSortByChange}
-            placeholder="Search by name..."
-          />
-          <SortBy value="Recently added" onChange={handleSortByChange} />
-          <LoadingSpinner isLoading={isLoading} />
-        </SearchAndSortBy>
-      </Wrapper>
-    );
+    return <LoadingSpinner isLoading />;
 
   return (
     <Wrapper>
@@ -52,8 +40,13 @@ function Home() {
           value={search}
           onChange={handleSearchChange}
           placeholder="Search by name..."
+          data-testid="search-box"
         />
-        <SortBy value={sortBy} onChange={handleSortByChange}>
+        <SortBy
+          value={sortBy}
+          onChange={handleSortByChange}
+          data-testid="sort-by"
+        >
           <SortOption value={sortByConstant.recentlyAdded}>
             Recently added
           </SortOption>

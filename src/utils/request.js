@@ -18,7 +18,8 @@ export const createRequest = async ({
   token = null,
   params = null,
 }) => {
-  const url = `${BASE_URL}${endpoint}`;
+  const url = `${BASE_URL || 'http://localhost:3000'}${endpoint}`;
+  console.log(url);
   const requestUrl = params ? generateUrlWithParams(url, params) : url;
   const requestConfig = {
     method,
@@ -29,7 +30,6 @@ export const createRequest = async ({
     },
     body: body ? JSON.stringify(body) : null,
   };
-
   const response = await fetch(requestUrl, requestConfig);
   const payload = await response.json();
   if (!response.ok) {

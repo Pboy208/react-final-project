@@ -36,6 +36,12 @@ const productSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    resetProductState: (state) => {
+      state.isFirstLoad = true;
+      state.byIds = {};
+      state.ids = [];
+      state.isLoading = false;
+    },
   },
   extraReducers: {
     [getProductList.fulfilled]: (state, action) => {
@@ -80,3 +86,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
+export const { resetProductState } = productSlice.actions;
