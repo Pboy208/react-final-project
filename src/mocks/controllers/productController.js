@@ -107,6 +107,14 @@ export const getProduct = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const addProduct = controllerWrapper(async (req, res, ctx) => {
+  if (process.env.NODE_ENV === 'test') {
+    return res(
+      ctx.json({
+        message: 'Add success',
+        data: mock.product,
+      }),
+    );
+  }
   if (!(await verifyToken(getTokenFromRequest(req))))
     return res(
       ctx.status(401),
