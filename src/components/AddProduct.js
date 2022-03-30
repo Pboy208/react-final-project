@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addProduct } from 'store/productSlice';
+import * as Toast from 'components/common/Toast';
 import ProductForm from './common/ProductForm';
 import LoadingSpinner from './common/LoadingSpinner';
 
@@ -19,7 +20,10 @@ function AddProduct() {
   const handleFormSubmit = React.useCallback((product) => {
     dispatch(addProduct(product))
       .unwrap()
-      .then(() => navigate('/home'))
+      .then(() => {
+        Toast.success(`${product.title} is added`);
+        navigate('/home');
+      })
       .catch(console.error);
   }, []);
 
