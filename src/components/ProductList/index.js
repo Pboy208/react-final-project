@@ -2,13 +2,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Product from './Product';
 
-const ProductList = React.memo(({ productList = [] }) => (
-  <List>
-    {productList.map((product) => (
-      <Product key={product.id} product={product} />
-    ))}
-  </List>
-));
+const ProductList = React.memo(({ productList = [] }) => {
+  console.log(productList);
+  return (
+    <List>
+      {productList.map((product) => (
+        <Product key={product.id} product={product} />
+      ))}
+    </List>
+  );
+});
 
 const List = styled.ul`
   width: 100%;

@@ -1,6 +1,6 @@
 import * as productListJSON from './productList.json';
 import * as authListJSON from './authList.json';
-// import 'fake-indexeddb/auto';
+import 'fake-indexeddb/auto';
 
 const { indexedDB } = window;
 
@@ -31,7 +31,6 @@ const initiateProductsDB = () => {
     const firstQuery = store.getAll();
     firstQuery.onsuccess = () => {
       const initialProductList = firstQuery.result;
-      console.log(initialProductList);
 
       if (initialProductList.length === 0) {
         productList.map((product) => store.put(product));
@@ -72,7 +71,6 @@ const initiateAuthenDB = () => {
     const firstQuery = store.getAll();
     firstQuery.onsuccess = () => {
       const initialProductList = firstQuery.result;
-      console.log(initialProductList);
 
       if (initialProductList.length === 0) {
         authList.map((user) => store.put(user));

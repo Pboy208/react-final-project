@@ -27,9 +27,10 @@ test('Should show message ', async () => {
 test('Should call onConfirm,turnOff function when yes is pressed ', async () => {
   // mock onConfirm, turnOff functions
   const onConfirm = jest.fn();
-  const turnOff = jest.fn();
+  const onHide = jest.fn();
+  
   // render component
-  render(<ConfirmModal onConfirm={onConfirm} turnOff={turnOff} />);
+  render(<ConfirmModal onConfirm={onConfirm} onHide={onHide} />);
 
   // press confirm button
   await act(async () =>
@@ -38,5 +39,5 @@ test('Should call onConfirm,turnOff function when yes is pressed ', async () => 
 
   // expect onConfirm, turnOff functions to be called
   expect(onConfirm).toHaveBeenCalledTimes(1);
-  expect(turnOff).toHaveBeenCalledTimes(1);
+  expect(onHide).toHaveBeenCalledTimes(1);
 });
