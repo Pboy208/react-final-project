@@ -9,7 +9,7 @@ const themes = {
     borderColor: '#363537',
   },
   dark: {
-    body: '#5C3D2E',
+    body: '#171717',
     background: 'rgb(0, 30, 60)',
     text: '#FAFAFA',
     borderColor: '#FAFAFA',

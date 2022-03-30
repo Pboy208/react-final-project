@@ -8,7 +8,11 @@ const validationSchema = Yup.object().shape({
     .max(30, productMessage.TITLE_LENGTH_EXCEED),
   imageUrl: Yup.string()
     .required(productMessage.IMAGE_URL_REQUIRED)
-    .url(productMessage.IMAGE_URL_INVALID),
+    .url(productMessage.IMAGE_URL_INVALID)
+    .matches(
+      /^https?:\/\/.*\.(?:png|jpg)$/,
+      productMessage.IMAGE_URL_NOT_RIGHT_FORMAT,
+    ),
   price: Yup.number()
     .typeError(productMessage.PRICE_INVALID)
     .required(productMessage.PRICE_REQUIRED),

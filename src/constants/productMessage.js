@@ -5,6 +5,8 @@ const productMessage = {
 
   IMAGE_URL_REQUIRED: 'Image is required',
   IMAGE_URL_INVALID: 'Image url is invalid',
+  IMAGE_URL_NOT_RIGHT_FORMAT:
+    'Your image url should be either in .jpg or .png format',
 
   PRICE_REQUIRED: 'Price is required',
   PRICE_INVALID: 'Price is needed to be a number',
