@@ -1,19 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { ErrorBoundary } from 'react-error-boundary';
 import Header from './Header';
 import Footer from './Footer';
-import FallbackComponent from './FallbackComponent';
 
 function Layout({ children }) {
   return (
-    <ErrorBoundary FallbackComponent={FallbackComponent}>
-      <Wrapper>
-        <Header />
-        <Body>{children}</Body>
-        <Footer />
-      </Wrapper>
-    </ErrorBoundary>
+    <Wrapper>
+      <Header />
+      <Body>{children}</Body>
+      <Footer />
+    </Wrapper>
   );
 }
 

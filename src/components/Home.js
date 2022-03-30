@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import sortByConstant from 'constants/sortBy';
 import useSortedAndSearchedProducts from 'hooks/useSortedAndSearchedProducts';
 import { device } from 'constants/mediaQuery';
+import { EmptyState } from '@ahaui/react';
 import ProductList from './ProductList';
 import LoadingSpinner from './common/LoadingSpinner';
 
@@ -44,15 +46,27 @@ function Home() {
           </SortOption>
         </SortBy>
       </SearchAndSortBy>
-      <TitlesAndAddBtn>
-        <ColumnTitles>
-          <Title flex={5}>Name</Title>
-          <Title flex={2}>Price</Title>
-          <Title flex={1}>Image</Title>
-        </ColumnTitles>
-        <AddBtn to="/product/create">Add item</AddBtn>
-      </TitlesAndAddBtn>
-      <ProductList productList={productList} />
+      {productList.length > 0 ? (
+        <>
+          <TitlesAndAddBtn>
+            <ColumnTitles>
+              <Title flex={5}>Name</Title>
+              <Title flex={2}>Price</Title>
+              <Title flex={1}>Image</Title>
+            </ColumnTitles>
+            <AddBtn to="/product/create">Add item</AddBtn>
+          </TitlesAndAddBtn>
+          <ProductList productList={productList} />
+        </>
+      ) : (
+        <NotFoundWrapper>
+          <EmptyState src="https://raw.githubusercontent.com/gotitinc/aha-assets/master/gotit/emptyState/general.svg">
+            <EmptyState.Heading>
+              Can not found any item with name of "{search}""
+            </EmptyState.Heading>
+          </EmptyState>
+        </NotFoundWrapper>
+      )}
     </Wrapper>
   );
 }
@@ -172,6 +186,14 @@ const AddBtn = styled(Link)`
   @media ${device.mobile} {
     height: 48px;
   }
+`;
+
+const NotFoundWrapper = styled.div`
+  position: relative;
+  top: 10vh;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 `;
 
 export default Home;
