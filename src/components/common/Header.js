@@ -109,7 +109,7 @@ const Button = styled.div`
 const ToolTip = styled.span`
   position: absolute;
   top: 110%;
-  right: 0;
+  right: -20%;
   display: none;
   font-size: 16px;
   border: 1px solid;
@@ -123,7 +123,7 @@ const ToolTip = styled.span`
     content: '';
     position: absolute;
     bottom: 100%;
-    right: 6%;
+    right: 12px;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;

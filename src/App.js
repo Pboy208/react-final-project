@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from '@ahaui/react';
-import Layout from './components/common/Layout';
-import GlobalStyle from './components/common/GlobalStyle';
-import Login from './components/Login';
-import PageNotFound from './components/PageNotFound';
-import { useTheme } from './context/ThemeContext';
-import ProtectedRoute from './components/common/ProtectedRoute';
-import UnprotectedRoute from './components/common/UnprotectedRoute';
-import LoadingSpinner from './components/common/LoadingSpinner';
+import ProtectedRoute from 'components/common/ProtectedRoute';
+import UnprotectedRoute from 'components/common/UnprotectedRoute';
+import LoadingSpinner from 'components/common/LoadingSpinner';
+import Layout from 'components/common/Layout';
+import GlobalStyle from 'components/common/GlobalStyle';
+import Login from 'components/Login';
+import PageNotFound from 'components/PageNotFound';
+import { useTheme } from 'context/ThemeContext';
 
-const Home = React.lazy(() => import('./components/Home'));
-const Register = React.lazy(() => import('./components/Register'));
-const AddProduct = React.lazy(() => import('./components/AddProduct'));
-const UpdateProduct = React.lazy(() => import('./components/UpdateProduct'));
+const Home = React.lazy(() => import('components/Home'));
+const Register = React.lazy(() => import('components/Register'));
+const AddProduct = React.lazy(() => import('components/AddProduct'));
+const UpdateProduct = React.lazy(() => import('components/UpdateProduct'));
 
 function App() {
   const { theme } = useTheme();
