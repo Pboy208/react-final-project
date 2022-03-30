@@ -31,9 +31,7 @@ function UpdateProduct() {
     },
     [dispatch, navigate],
   );
-
-  if (!product) return <ProductForm />;
-
+  if (!product) return <LoadingSpinner isLoading />;
   return (
     <>
       <ProductForm product={product} handleFormSubmit={handleFormSubmit} />

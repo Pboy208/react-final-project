@@ -39,15 +39,16 @@ test('Should show sorted product list at first', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // choose sort by price decreasing
-  await act(async () =>
-    userEvent.selectOptions(screen.getByTestId('sort-by'), ['PRICE_DECREASE']),
-  );
 
-  // wait for response
+  userEvent.selectOptions(screen.getByTestId('sort-by'), ['PRICE_DECREASE']);
+
+  // wait for custom hook to change isLoading state
   await waitForElementToBeRemoved(() =>
     screen.getByText(mock.productList[0].title),
   );
-  //
+
+  // wait for response for second fetch
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to show sorted product list
   expect(
@@ -63,15 +64,16 @@ test('Should show searched product list ', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // type search info
-  await act(async () => {
-    userEvent.type(screen.getByTestId('search-box'), 'search');
-  });
 
-  // wait for response
+  userEvent.type(screen.getByTestId('search-box'), 'search');
+
+  // wait for custom hook to change isLoading state
   await waitForElementToBeRemoved(() =>
     screen.getByText(mock.productList[0].title),
   );
-  //
+
+  // wait for response for second fetch
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to show sorted product list
   expect(

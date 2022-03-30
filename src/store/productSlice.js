@@ -33,7 +33,7 @@ const productSlice = createSlice({
     isFirstLoad: true,
   },
   reducers: {
-    setLoading: (state, action) => {
+    setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
     resetProductState: (state) => {

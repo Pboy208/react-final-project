@@ -26,6 +26,7 @@ function Home() {
   };
 
   const handleSortByChange = (e) => {
+    console.log('changed sort by');
     const { value } = e.target;
     setSortBy(value);
   };
@@ -35,6 +36,7 @@ function Home() {
 
   return (
     <Wrapper>
+      <LoadingSpinner isLoading={isLoading} />
       <SearchAndSortBy>
         <SearchBox
           value={search}

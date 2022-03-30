@@ -80,6 +80,14 @@ export const getProducts = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const getProduct = controllerWrapper(async (req, res, ctx) => {
+  if (process.env.NODE_ENV === 'test') {
+    return res(
+      ctx.json({
+        message: 'Get success',
+        data: mock.product,
+      }),
+    );
+  }
   if (!(await verifyToken(getTokenFromRequest(req))))
     return res(
       ctx.status(401),
@@ -118,6 +126,14 @@ export const addProduct = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const updateProduct = controllerWrapper(async (req, res, ctx) => {
+  if (process.env.NODE_ENV === 'test') {
+    return res(
+      ctx.json({
+        message: 'Update success',
+        data: mock.product,
+      }),
+    );
+  }
   if (!(await verifyToken(getTokenFromRequest(req))))
     return res(
       ctx.status(401),
