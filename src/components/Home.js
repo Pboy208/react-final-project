@@ -10,8 +10,15 @@ import ProductList from './ProductList';
 import LoadingSpinner from './common/LoadingSpinner';
 
 function Home() {
-  const { isLoading, productList, setSortBy, setSearch, sortBy, search } =
-    useSortedAndSearchedProducts();
+  const {
+    isLoading,
+    productList,
+    setSortBy,
+    setSearch,
+    sortBy,
+    search,
+    isFirstLoad,
+  } = useSortedAndSearchedProducts();
 
   const handleSearchChange = (e) => {
     const { value } = e.target;
@@ -23,11 +30,15 @@ function Home() {
     setSortBy(value);
   };
 
-  if (!productList || isLoading)
+  if ((productList.length === 0 && isFirstLoad) || isLoading)
     return (
       <Wrapper>
         <SearchAndSortBy>
-          <SearchBox placeholder="Search by name..." />
+          <SearchBox
+            value={search}
+            onChange={handleSortByChange}
+            placeholder="Search by name..."
+          />
           <SortBy value="Recently added" onChange={handleSortByChange} />
           <LoadingSpinner isLoading={isLoading} />
         </SearchAndSortBy>

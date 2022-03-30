@@ -60,7 +60,15 @@ const useSortedAndSearchedProducts = (
     return () => clearTimeout(debounce);
   }, [dispatch, sortBy, search]);
 
-  return { productList, isLoading, setSortBy, setSearch, sortBy, search };
+  return {
+    productList,
+    isLoading,
+    setSortBy,
+    setSearch,
+    sortBy,
+    search,
+    isFirstLoad,
+  };
 };
 
 export default useSortedAndSearchedProducts;

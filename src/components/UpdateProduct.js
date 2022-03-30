@@ -11,7 +11,7 @@ function UpdateProduct() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { byIds, isLoading } = useSelector((state) => state.product);
-  const product = byIds[productId];
+  const product = byIds?.[productId];
 
   React.useEffect(() => {
     if (!product) {
@@ -31,6 +31,8 @@ function UpdateProduct() {
     },
     [dispatch, navigate],
   );
+
+  if (!product) return <ProductForm />;
 
   return (
     <>
