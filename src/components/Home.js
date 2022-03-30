@@ -24,7 +24,15 @@ function Home() {
   };
 
   if (!productList || isLoading)
-    return <LoadingSpinner isLoading={isLoading} />;
+    return (
+      <Wrapper>
+        <SearchAndSortBy>
+          <SearchBox placeholder="Search by name..." />
+          <SortBy value="Recently added" onChange={handleSortByChange} />
+          <LoadingSpinner isLoading={isLoading} />
+        </SearchAndSortBy>
+      </Wrapper>
+    );
 
   return (
     <Wrapper>
