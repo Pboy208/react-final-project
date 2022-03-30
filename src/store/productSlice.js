@@ -28,8 +28,8 @@ const productSlice = createSlice({
   name: 'product',
   initialState: {
     isLoading: false,
-    byIds: {},
-    ids: [],
+    byIds: null,
+    ids: null,
     isFirstLoad: true,
   },
   reducers: {

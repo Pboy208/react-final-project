@@ -35,7 +35,7 @@ const useSortedAndSearchedProducts = (
     justMounted: true,
   });
   const productList = React.useMemo(
-    () => ids.map((id) => byIds[id]),
+    () => (ids ? ids.map((id) => byIds[id]) : null),
     [ids, byIds],
   );
   const { sortBy, search, justMounted } = state;
