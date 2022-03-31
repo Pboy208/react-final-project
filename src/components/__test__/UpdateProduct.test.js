@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
-import { waitForElementToBeRemoved } from '@testing-library/react';
+import { waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import UpdateProduct from 'components/UpdateProduct';
 import { render, act, screen, resetReduxProductState } from 'utils/test';
 import * as mock from 'mocks/mockForTesting';
@@ -50,6 +50,8 @@ test('Should redirect to home and show update success toast', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect success toast and redirect to home page
-  expect(screen.getByText('Update success')).toBeInTheDocument();
+  await waitFor(() =>
+    expect(screen.getByText('Update success')).toBeInTheDocument(),
+  );
   expect(global.window.location.pathname).toEqual('/home');
 });

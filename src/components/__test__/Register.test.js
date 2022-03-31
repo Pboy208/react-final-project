@@ -2,7 +2,7 @@
 import userEvent from '@testing-library/user-event';
 import { waitForElementToBeRemoved } from '@testing-library/react';
 import Register from 'components/Register';
-import { render, act, screen } from 'utils/test';
+import { render, waitFor, act, screen } from 'utils/test';
 
 test('Should show error when fields are invalid', async () => {
   // make invalid data
@@ -161,7 +161,9 @@ test('Should show error toast when register with invalid information', async () 
   await waitForElementToBeRemoved(() => screen.queryByLabelText(/loading/i));
 
   // expect success toast and redirect to home page
-  expect(
-    screen.getByText('Register failed, email has already been used'),
-  ).toBeInTheDocument();
+  await waitFor(() =>
+    expect(
+      screen.getByText('Register failed, email has already been used'),
+    ).toBeInTheDocument(),
+  );
 });
