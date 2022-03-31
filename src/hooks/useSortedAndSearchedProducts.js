@@ -51,7 +51,7 @@ const useSortedAndSearchedProducts = (
 
   React.useEffect(() => {
     const debounce = setTimeout(() => {
-      dispatch(getProductList({ sortBy, search })).unwrap();
+      dispatch(getProductList({ sortBy, search }));
     }, 500);
 
     // when user move to other page, and return to this one, we don't want to fetch again
