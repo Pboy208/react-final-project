@@ -14,7 +14,7 @@ function Header() {
   const { theme, toggleTheme } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const logoutHandler = () => {
     dispatch(logout());
     navigate('/login');
@@ -75,7 +75,7 @@ const Actions = styled.div`
   height: 100%;
   gap: 20px;
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     gap: 10px;
   }
 `;
@@ -103,7 +103,7 @@ const Button = styled.div`
     display: unset;
   }
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     & i {
       font-size: 16px;
     }
@@ -148,7 +148,7 @@ const NavigateButton = styled(Link)`
     font-size: var(--button-size);
   }
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     font-size: 10px;
 
     & i {

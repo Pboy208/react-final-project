@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 export const Device = {
-  mobile: `(max-width: 550px)`,
-  tablet: `(max-width:  1100px)`,
-  laptop: `(max-width: 1500px)`,
+  MOBILE: `(max-width: 550px)`,
+  TABLET: `(max-width:  1100px)`,
+  LAPTOP: `(max-width: 1500px)`,
 };

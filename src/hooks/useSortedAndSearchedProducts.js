@@ -23,7 +23,7 @@ const reducer = (state, action) => {
 };
 
 const useSortedAndSearchedProducts = (
-  initialSortBy = SortByConstant.recentlyAdded,
+  initialSortBy = SortByConstant.RECENTLY_ADDED,
   initialSearch = '',
 ) => {
   const { isLoading, byIds, ids, isFirstLoad } = useSelector(

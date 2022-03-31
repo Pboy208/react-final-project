@@ -116,12 +116,12 @@ const Information = styled.span`
     min-width: 66px;
   }
 
-  @media ${Device.tablet} {
+  @media ${Device.TABLET} {
     padding-left: 10px;
     height: 40px;
   }
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     padding-left: 4px;
     height: 48px;
   }
