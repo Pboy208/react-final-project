@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductList } from 'store/productSlice';
-import sortByConstant from 'constants/sortBy';
+import SortByConstant from 'constants/sortBy';
 
 const actionTypes = {
   setSortBy: 'setSortby',
@@ -23,7 +23,7 @@ const reducer = (state, action) => {
 };
 
 const useSortedAndSearchedProducts = (
-  initialSortBy = sortByConstant.recentlyAdded,
+  initialSortBy = SortByConstant.recentlyAdded,
   initialSearch = '',
 ) => {
   const { isLoading, byIds, ids, isFirstLoad } = useSelector(

@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'context/ThemeContext';
 import { logout } from 'store/authSlice';
-import { device } from 'constants/mediaQuery';
+import { Device } from 'constants/mediaQuery';
 
 function Header() {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -74,7 +74,7 @@ const Actions = styled.div`
   height: 100%;
   gap: 20px;
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     gap: 10px;
   }
 `;
@@ -102,7 +102,7 @@ const Button = styled.div`
     display: unset;
   }
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     & i {
       font-size: 16px;
     }
@@ -147,7 +147,7 @@ const NavigateButton = styled(Link)`
     font-size: var(--button-size);
   }
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     font-size: 10px;
 
     & i {

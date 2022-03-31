@@ -1,4 +1,4 @@
-const authMessage = {
+const AuthMessage = {
   USER_NAME_REQUIRED: "User's name is required",
   USER_NAME_LENGTH_SHORT: "User's name must be at least 5 characters",
   USER_NAME_LENGTH_EXCEED: "User's name must not exceed 20 characters",
@@ -17,4 +17,4 @@ const authMessage = {
   LOGIN_SUCCESS: 'Login Successfully',
 };
 
-export default authMessage;
+export default AuthMessage;

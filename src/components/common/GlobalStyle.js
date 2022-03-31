@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { device } from 'constants/mediaQuery';
+import { Device } from 'constants/mediaQuery';
 
 const themes = {
   light: {
@@ -29,12 +29,12 @@ const GlobalStyle = createGlobalStyle`
     --field-responsive-width: max(32%,220px);
     --card-width: 70%;
 
-    @media ${device.laptop} {
+    @media ${Device.laptop} {
       --wrapper-width: 94%;
       --logo-font-size: 90px;
     }
 
-    @media ${device.tablet} {
+    @media ${Device.tablet} {
       --wrapper-width: 96%;
       --logo-font-size: 85px;
       --button-size:24px;
@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
 
     }
 
-    @media ${device.mobile} {
+    @media ${Device.mobile} {
       --wrapper-width: 98%;
       --logo-font-size: 60px;
       --card-width: 90%;

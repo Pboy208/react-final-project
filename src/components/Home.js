@@ -2,9 +2,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import sortByConstant from 'constants/sortBy';
+import SortByConstant from 'constants/sortBy';
 import useSortedAndSearchedProducts from 'hooks/useSortedAndSearchedProducts';
-import { device } from 'constants/mediaQuery';
+import { Device } from 'constants/mediaQuery';
 import { EmptyState } from '@ahaui/react';
 import ProductList from './ProductList';
 import LoadingSpinner from './common/LoadingSpinner';
@@ -49,13 +49,13 @@ function Home() {
           onChange={handleSortByChange}
           data-testid="sort-by"
         >
-          <SortOption value={sortByConstant.recentlyAdded}>
+          <SortOption value={SortByConstant.recentlyAdded}>
             Recently added
           </SortOption>
-          <SortOption value={sortByConstant.priceIncrease}>
+          <SortOption value={SortByConstant.priceIncrease}>
             Price increasing
           </SortOption>
-          <SortOption value={sortByConstant.priceDecrease}>
+          <SortOption value={SortByConstant.priceDecrease}>
             Price decreasing
           </SortOption>
         </SortBy>
@@ -98,7 +98,7 @@ const SearchAndSortBy = styled.div`
   margin: 12px 0;
   display: flex;
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     width: 90%;
   }
 `;
@@ -111,7 +111,7 @@ const SearchBox = styled.input`
   font-size: var(--font-size);
   padding: 10px 20px;
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     flex: 1;
     font-size: 14px;
   }
@@ -123,7 +123,7 @@ const SortBy = styled.select`
   text-align: center;
   font-size: var(--font-size);
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     font-size: 14px;
   }
 `;
@@ -167,12 +167,12 @@ const Title = styled.div`
     min-width: 66px;
   }
 
-  @media ${device.tablet} {
+  @media ${Device.tablet} {
     padding-left: 10px;
     height: 40px;
   }
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     padding-left: 4px;
     height: 48px;
   }
@@ -192,12 +192,12 @@ const AddBtn = styled(Link)`
   font-size: var(--font-size);
   cursor: pointer;
 
-  @media ${device.tablet} {
+  @media ${Device.tablet} {
     padding-left: 10px;
     height: 40px;
   }
 
-  @media ${device.mobile} {
+  @media ${Device.mobile} {
     height: 48px;
   }
 `;
