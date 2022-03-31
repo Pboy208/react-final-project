@@ -32,10 +32,7 @@ const token = localStorage.getItem('token');
 if (isTokenValid(token)) {
   initialState.isLoggedIn = true;
   initialState.userName = decode(token).userName;
-  console.log('valid Token');
-} else {
-  console.log('invalid Token', token);
-}
+} 
 
 const authSlice = createSlice({
   name: 'auth',

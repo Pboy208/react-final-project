@@ -16,11 +16,6 @@ const localStorageMock = (() => {
     setItem(key, value) {
       store[key] = value.toString();
     },
-    // reset() {
-    //   store.token =
-    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjMDM5NjAwNi1mODEyLTQ3MTAtOGI5OS0yNDc5YTk5ODgxNDIifQ.MKCD0leU3KoMJB8R7I_3TlSS0bZjZKBAbWHNIKDv7As';
-    // },
-
     clear() {
       store = {};
     },

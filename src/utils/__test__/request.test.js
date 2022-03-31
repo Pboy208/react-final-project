@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import { createRequest } from 'utils/request';
+import { token } from 'utils/test';
 
 beforeAll(() => {
   window.fetch = jest.fn();
@@ -24,7 +25,7 @@ test('Should see null fields at first', async () => {
   const expectedConfig = {
     method: 'GET',
     headers: {
-      authorization: 'Bearer null',
+      authorization: `Bearer ${token}`,
       accept: 'application/json',
       'Content-Type': 'application/json',
     },

@@ -28,7 +28,7 @@ test('Should call onConfirm,turnOff function when yes is pressed ', async () => 
   // mock onConfirm, turnOff functions
   const onConfirm = jest.fn();
   const onHide = jest.fn();
-  
+
   // render component
   render(<ConfirmModal onConfirm={onConfirm} onHide={onHide} />);
 

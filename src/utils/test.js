@@ -41,7 +41,7 @@ const renderAppWithRoute = (route = '/', { ...options } = {}) => {
 };
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e-[p=gfyJ1c2VybmFtZSI6IkxlbyBOZ3V5ZW4iLCJpYXQiOjE2NDc2MTUzOTksImV4cCI6NzM2NDc2MTUzOTl9.mVRG2x_W8U8fBUjwb1nO7GErmuneTdPv4JSGyUfcaLk';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjMDM5NjAwNi1mODEyLTQ3MTAtOGI5OS0yNDc5YTk5ODgxNDIifQ.MKCD0leU3KoMJB8R7I_3TlSS0bZjZKBAbWHNIKDv7As';
 
 const resetReduxProductState = () => store.dispatch(resetProductState());
 

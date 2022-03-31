@@ -42,6 +42,7 @@
       "src/index.js",
       "src/reportWebVitals.js",
       "src/constants",
+      "src/api",
       "src/components/common/GlobalStyle.js"
     ]
   },
