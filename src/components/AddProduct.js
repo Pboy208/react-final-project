@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addProduct } from 'store/productSlice';
 import * as Toast from 'components/common/Toast';
-import ProductForm from './common/ProductForm';
-import LoadingSpinner from './common/LoadingSpinner';
+import ProductForm from 'components/common/ProductForm';
+import LoadingSpinner from 'components/common/LoadingSpinner';
 
 const initialProduct = {
   price: 0,

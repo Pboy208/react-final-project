@@ -1,5 +1,5 @@
-import * as Authen from '../models/authenModel';
-import { controllerWrapper } from '../utils/utilFunction';
+import * as Authen from 'mocks/models/authenModel';
+import { controllerWrapper } from 'mocks/utils/utilFunction';
 
 export const logIn = controllerWrapper(async (req, res, ctx) => {
   const logInInfo = req.body;
