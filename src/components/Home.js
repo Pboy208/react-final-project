@@ -75,7 +75,7 @@ function Home() {
         <NotFoundWrapper>
           <EmptyState src="https://raw.githubusercontent.com/gotitinc/aha-assets/master/gotit/emptyState/general.svg">
             <EmptyState.Heading>
-              Can not found any item with name of "{search}""
+              Can not found any item with name of "{search}"
             </EmptyState.Heading>
           </EmptyState>
         </NotFoundWrapper>
