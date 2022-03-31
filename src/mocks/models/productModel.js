@@ -2,7 +2,7 @@
 /* eslint-disable no-promise-executor-return */
 /* eslint-disable no-return-assign */
 import { v4 as uuid } from 'uuid';
-import { getProductStore } from '../database/indexedDB';
+import { getProductStore } from 'mocks/database/indexedDB';
 
 export const getAll = async () => {
   const store = await getProductStore();

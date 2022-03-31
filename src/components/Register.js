@@ -8,7 +8,7 @@ import validationSchema from 'utils/schemas/registerSchema';
 import { register as registerThunk } from 'store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import * as Toast from './common/Toast';
+import * as Toast from 'components/common/Toast';
 
 function Register() {
   const {
@@ -38,7 +38,10 @@ function Register() {
   };
 
   return (
-    <RegisterForm onSubmit={handleSubmit(handleRegister)} data-testid="register-page">
+    <RegisterForm
+      onSubmit={handleSubmit(handleRegister)}
+      data-testid="register-page"
+    >
       <FormGroup controlId="registerForm.email">
         <Form.Label>Email</Form.Label>
         <Form.Input

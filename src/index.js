@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Provider } from 'react-redux';
+import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import FallbackComponent from './components/common/FallbackComponent';

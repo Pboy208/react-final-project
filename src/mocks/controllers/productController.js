@@ -1,9 +1,9 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-underscore-dangle */
 import * as mock from 'mocks/mockForTesting';
-import { controllerWrapper } from '../utils/utilFunction';
-import * as Product from '../models/productModel';
-import { verifyToken } from '../models/authenModel';
+import { controllerWrapper } from 'mocks/utils/utilFunction';
+import * as Product from 'mocks/models/productModel';
+import { verifyToken } from 'mocks/models/authenModel';
 
 const getRequestParams = (req) => {
   const sortBy = req.url.searchParams.getAll('sortBy')[0];

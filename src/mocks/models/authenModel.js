@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 import md5 from 'md5';
 import sign from 'jwt-encode';
 import decode from 'jwt-decode';
-import { getAuthenStore } from '../database/indexedDB';
+import { getAuthenStore } from 'mocks/database/indexedDB';
 
 export const logIn = async ({ email, password }) => {
   const store = await getAuthenStore();

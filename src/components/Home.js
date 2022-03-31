@@ -6,8 +6,8 @@ import SortByConstant from 'constants/sortBy';
 import useSortedAndSearchedProducts from 'hooks/useSortedAndSearchedProducts';
 import { Device } from 'constants/mediaQuery';
 import { EmptyState } from '@ahaui/react';
-import ProductList from './ProductList';
-import LoadingSpinner from './common/LoadingSpinner';
+import LoadingSpinner from 'components/common/LoadingSpinner';
+import ProductList from 'components/ProductList';
 
 function Home() {
   const {

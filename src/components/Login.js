@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import validationSchema from 'utils/schemas/loginSchema';
 import { login } from 'store/authSlice';
-import * as Toast from './common/Toast';
+import * as Toast from 'components/common/Toast';
 
 function Login() {
   const {
