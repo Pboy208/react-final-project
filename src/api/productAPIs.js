@@ -17,7 +17,7 @@ export const getProduct = async (id) =>
 
 export const addProduct = async (addInfo) =>
   createRequest({
-    endpoint: `/product/`,
+    endpoint: '/product',
     body: addInfo,
     method: 'POST',
     token: true,
