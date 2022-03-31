@@ -8,9 +8,6 @@ import { Form, Button, Icon } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import validationSchema from 'utils/schemas/productFormSchema';
 
-const imageFallback =
-  'https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg';
-
 function ProductForm({ product, handleFormSubmit }) {
   const {
     watch,
@@ -77,7 +74,11 @@ function ProductForm({ product, handleFormSubmit }) {
         </SaveButton>
       </StyledForm>
       <ProductImage
-        src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl}
+        src={
+          isImageUrlInvalid || !imageUrl
+            ? `/Assets/ImageFallback.jpeg`
+            : imageUrl
+        }
       />
       <GoBackButton onClick={redirectToHome} data-testid="return-button">
         <Icon size="medium" name="arrowRoundBack" />

@@ -12,7 +12,7 @@ function FallbackComponent({ error, resetErrorBoundary }) {
 
   return (
     <Wrapper>
-      <EmptyState src="https://raw.githubusercontent.com/gotitinc/aha-assets/master/gotit/emptyState/general.svg">
+      <EmptyState src="/Assets/EmptyState.svg">
         <EmptyState.Heading>There was an error:</EmptyState.Heading>
         <EmptyState.Description>{error.message}</EmptyState.Description>
         <Button variant="secondary" onClick={handleResetErrorBoundary}>
