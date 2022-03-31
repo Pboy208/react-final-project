@@ -2,9 +2,9 @@ import * as productListJSON from './productList.json';
 import * as authListJSON from './authList.json';
 
 const { indexedDB } = window;
+const { productList } = productListJSON.default;
+const { authList } = authListJSON.default;
 
-const { productList } = productListJSON;
-const { authList } = authListJSON;
 const initiateProductsDB = () => {
   const request = indexedDB.open('ProductsDatabase', 1);
 
