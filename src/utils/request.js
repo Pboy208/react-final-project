@@ -15,15 +15,15 @@ export const createRequest = async ({
   endpoint,
   method = 'GET',
   body = null,
-  token = null,
   params = null,
 }) => {
   const url = `${BASE_URL || 'http://localhost:3000'}${endpoint}`;
   const requestUrl = params ? generateUrlWithParams(url, params) : url;
+  const token = getToken();
   const requestConfig = {
     method,
     headers: {
-      authorization: token ? `Bearer ${getToken()}` : null,
+      authorization: token ? `Bearer ${token}` : null,
       accept: 'application/json',
       'Content-Type': 'application/json',
     },
