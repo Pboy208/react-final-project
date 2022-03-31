@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import { waitForElementToBeRemoved } from '@testing-library/react';
 import {

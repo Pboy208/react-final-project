@@ -1,11 +1,8 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import userEvent from '@testing-library/user-event';
-import { waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 import AddProduct from 'components/AddProduct';
 import { render, act, screen } from 'utils/test';
-import server from 'mocks/server';
-import { rest } from 'msw';
 import * as mock from 'mocks/mockForTesting';
 
 test('Should see null fields at first', async () => {

@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
-import { waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 import UpdateProduct from 'components/UpdateProduct';
 import { render, act, screen, resetReduxProductState } from 'utils/test';
-import server from 'mocks/server';
-import { rest } from 'msw';
 import * as mock from 'mocks/mockForTesting';
 
 jest.mock('react-router-dom', () => ({

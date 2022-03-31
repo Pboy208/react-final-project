@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
-import { waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { waitForElementToBeRemoved } from '@testing-library/react';
 import Home from 'components/Home';
-import { render, act, screen, resetReduxProductState } from 'utils/test';
-import server from 'mocks/server';
-import { rest } from 'msw';
+import { render, screen, resetReduxProductState } from 'utils/test';
 import * as mock from 'mocks/mockForTesting';
 
 afterEach(() => {
