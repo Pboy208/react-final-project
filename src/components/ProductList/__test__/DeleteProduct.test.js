@@ -1,8 +1,13 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
 import ProductList from 'components/ProductList';
-import { render, screen, act, waitForElementToBeRemoved } from 'utils/test';
+import {
+  render,
+  waitFor,
+  screen,
+  act,
+  waitForElementToBeRemoved,
+} from 'utils/test';
 import * as mock from 'mocks/mockForTesting';
 
 beforeEach(() => {
@@ -35,5 +40,7 @@ test('Should show confirm modal ', async () => {
 
   // screen.debug();
   // expect success toast
-  expect(screen.getByText('Delete success')).toBeInTheDocument();
+  await waitFor(() =>
+    expect(screen.getByText('Delete success')).toBeInTheDocument(),
+  );
 });

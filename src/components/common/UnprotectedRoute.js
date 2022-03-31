@@ -7,4 +7,5 @@ function UnprotectedRoute({ component: Component }) {
 
   return isLoggedIn ? <Navigate to="/home" /> : <Component />;
 }
+
 export default UnprotectedRoute;

@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
 import FallbackComponent from 'components/common/FallbackComponent';
-import { render, act, screen } from 'utils/test';
+import { render, screen } from 'utils/test';
 
 test('Should show error message and redirect when click try again', async () => {
   // mock resetErrorBoundary

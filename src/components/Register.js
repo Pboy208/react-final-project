@@ -12,6 +12,7 @@ import * as Toast from 'components/common/Toast';
 
 function Register() {
   const {
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
@@ -48,6 +49,7 @@ function Register() {
           type="text"
           isInvalid={isEmailInvalid}
           {...register('email')}
+          onBlur={(e) => setValue('email', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.email?.message}
@@ -59,6 +61,7 @@ function Register() {
           type="text"
           isInvalid={isUserNameInvalid}
           {...register('userName')}
+          onBlur={(e) => setValue('userName', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.userName?.message}
@@ -70,6 +73,7 @@ function Register() {
           type="password"
           isInvalid={isPasswordInvalid}
           {...register('password')}
+          onBlur={(e) => setValue('password', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.password?.message}
@@ -81,6 +85,7 @@ function Register() {
           type="password"
           isInvalid={isConfirmPasswordInvalid}
           {...register('confirmPassword')}
+          onBlur={(e) => setValue('confirmPassword', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.confirmPassword?.message}

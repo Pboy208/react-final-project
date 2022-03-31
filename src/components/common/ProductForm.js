@@ -3,16 +3,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, Icon } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import validationSchema from 'utils/schemas/productFormSchema';
-import { useNavigate } from 'react-router-dom';
-
-const imageFallback =
-  'https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg';
 
 function ProductForm({ product, handleFormSubmit }) {
   const {
+    setValue,
     watch,
     reset,
     register,
@@ -45,6 +43,7 @@ function ProductForm({ product, handleFormSubmit }) {
             type="text"
             isInvalid={isTitleInvalid}
             {...register('title')}
+            onBlur={(e) => setValue('title', e.target.value.trim())}
           />
           <Form.Feedback type="invalid" role="alert">
             {errors?.title?.message}
@@ -56,6 +55,7 @@ function ProductForm({ product, handleFormSubmit }) {
             type="text"
             isInvalid={isImageUrlInvalid}
             {...register('imageUrl')}
+            onBlur={(e) => setValue('imageUrl', e.target.value.trim())}
           />
           <Form.Feedback type="invalid" role="alert">
             {errors?.imageUrl?.message}
@@ -67,6 +67,7 @@ function ProductForm({ product, handleFormSubmit }) {
             type="text"
             isInvalid={isPriceInvalid}
             {...register('price')}
+            onBlur={(e) => setValue('price', e.target.value.trim())}
           />
           <Form.Feedback type="invalid" role="alert">
             {errors?.price?.message}
@@ -77,7 +78,11 @@ function ProductForm({ product, handleFormSubmit }) {
         </SaveButton>
       </StyledForm>
       <ProductImage
-        src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl}
+        src={
+          isImageUrlInvalid || !imageUrl
+            ? `/Assets/ImageFallback.jpeg`
+            : imageUrl
+        }
       />
       <GoBackButton onClick={redirectToHome} data-testid="return-button">
         <Icon size="medium" name="arrowRoundBack" />
@@ -131,4 +136,5 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
 `;
+
 export default ProductForm;

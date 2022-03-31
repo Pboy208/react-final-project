@@ -48,13 +48,13 @@ function Home() {
           onChange={handleSortByChange}
           data-testid="sort-by"
         >
-          <SortOption value={SortByConstant.recentlyAdded}>
+          <SortOption value={SortByConstant.RECENTLY_ADDED}>
             Recently added
           </SortOption>
-          <SortOption value={SortByConstant.priceIncrease}>
+          <SortOption value={SortByConstant.PRICE_INCREASE}>
             Price increasing
           </SortOption>
-          <SortOption value={SortByConstant.priceDecrease}>
+          <SortOption value={SortByConstant.PRICE_DECREASE}>
             Price decreasing
           </SortOption>
         </SortBy>
@@ -73,9 +73,9 @@ function Home() {
         </>
       ) : (
         <NotFoundWrapper>
-          <EmptyState src="https://raw.githubusercontent.com/gotitinc/aha-assets/master/gotit/emptyState/general.svg">
+          <EmptyState src="/Assets/EmptyState.svg">
             <EmptyState.Heading>
-              Can not found any item with name of "{search}""
+              Can not found any item with name of "{search}"
             </EmptyState.Heading>
           </EmptyState>
         </NotFoundWrapper>
@@ -97,10 +97,11 @@ const SearchAndSortBy = styled.div`
   margin: 12px 0;
   display: flex;
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     width: 90%;
   }
 `;
+
 const SearchBox = styled.input`
   flex: 4;
   border-top-left-radius: 8px;
@@ -110,11 +111,12 @@ const SearchBox = styled.input`
   font-size: var(--font-size);
   padding: 10px 20px;
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     flex: 1;
     font-size: 14px;
   }
 `;
+
 const SortBy = styled.select`
   flex: 1;
   border-top-right-radius: 8px;
@@ -122,7 +124,7 @@ const SortBy = styled.select`
   text-align: center;
   font-size: var(--font-size);
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     font-size: 14px;
   }
 `;
@@ -166,12 +168,12 @@ const Title = styled.div`
     min-width: 66px;
   }
 
-  @media ${Device.tablet} {
+  @media ${Device.TABLET} {
     padding-left: 10px;
     height: 40px;
   }
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     padding-left: 4px;
     height: 48px;
   }
@@ -191,12 +193,12 @@ const AddBtn = styled(Link)`
   font-size: var(--font-size);
   cursor: pointer;
 
-  @media ${Device.tablet} {
+  @media ${Device.TABLET} {
     padding-left: 10px;
     height: 40px;
   }
 
-  @media ${Device.mobile} {
+  @media ${Device.MOBILE} {
     height: 48px;
   }
 `;

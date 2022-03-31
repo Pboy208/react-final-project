@@ -12,6 +12,7 @@ import * as Toast from 'components/common/Toast';
 
 function Login() {
   const {
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
@@ -22,7 +23,6 @@ function Login() {
   const { isLoading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const isEmailInvalid = !!errors.email;
   const isPasswordInvalid = !!errors.password;
 
@@ -44,6 +44,7 @@ function Login() {
           type="text"
           isInvalid={isEmailInvalid}
           {...register('email')}
+          onBlur={(e) => setValue('email', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.email?.message}
@@ -55,6 +56,7 @@ function Login() {
           type="password"
           isInvalid={isPasswordInvalid}
           {...register('password')}
+          onBlur={(e) => setValue('password', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.password?.message}
@@ -83,6 +85,7 @@ const LoginForm = styled.form`
 const FormGroup = styled(Form.Group)`
   width: var(--field-responsive-width);
 `;
+
 const FormFeedback = styled(Form.Feedback)`
   font-size: var(--font-size);
 `;
