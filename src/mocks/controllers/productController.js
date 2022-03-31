@@ -43,7 +43,6 @@ const hasSearch = (title, search) => {
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
   if (process.env.NODE_ENV === 'test') {
     const { sortBy, search } = getRequestParams(req);
-    console.log(sortBy, search);
     if (search)
       return res(
         ctx.json({ message: 'Get success', data: mock.searchedProductList }),

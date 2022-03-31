@@ -15,7 +15,8 @@ const httpErrorHandlerMiddleware = (store) => (next) => (action) => {
     case '500':
       return Toast.error(message);
     default:
-      console.log('Un-catched status code:::', action);
+      if (process.env.NODE_ENV === 'development')
+        console.log('Un-catched status code:::', action);
       return Toast.error('Unknown error');
   }
 };
