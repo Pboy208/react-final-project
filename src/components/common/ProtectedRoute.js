@@ -7,4 +7,5 @@ function ProtectedRoute({ component: Component }) {
 
   return isLoggedIn ? <Component /> : <Navigate to="/login" />;
 }
+
 export default ProtectedRoute;

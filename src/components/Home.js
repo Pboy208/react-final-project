@@ -101,6 +101,7 @@ const SearchAndSortBy = styled.div`
     width: 90%;
   }
 `;
+
 const SearchBox = styled.input`
   flex: 4;
   border-top-left-radius: 8px;
@@ -115,6 +116,7 @@ const SearchBox = styled.input`
     font-size: 14px;
   }
 `;
+
 const SortBy = styled.select`
   flex: 1;
   border-top-right-radius: 8px;

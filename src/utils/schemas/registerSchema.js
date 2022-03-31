@@ -19,4 +19,5 @@ const validationSchema = Yup.object().shape({
     .max(40, authMessage.PASSWORD_LENGTH_EXCEED)
     .oneOf([Yup.ref('password'), null], authMessage.CONFIRM_PASSWORD_NOT_MATCH),
 });
+
 export default validationSchema;

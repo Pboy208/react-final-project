@@ -3,10 +3,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, Icon } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import validationSchema from 'utils/schemas/productFormSchema';
-import { useNavigate } from 'react-router-dom';
 
 const imageFallback =
   'https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg';
@@ -131,4 +131,5 @@ const Wrapper = styled.div`
   align-items: center;
   position: relative;
 `;
+
 export default ProductForm;

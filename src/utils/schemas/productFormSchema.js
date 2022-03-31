@@ -17,4 +17,5 @@ const validationSchema = Yup.object().shape({
     .typeError(ProductMessage.PRICE_INVALID)
     .required(ProductMessage.PRICE_REQUIRED),
 });
+
 export default validationSchema;

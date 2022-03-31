@@ -22,7 +22,6 @@ function Login() {
   const { isLoading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const isEmailInvalid = !!errors.email;
   const isPasswordInvalid = !!errors.password;
 
@@ -83,6 +82,7 @@ const LoginForm = styled.form`
 const FormGroup = styled(Form.Group)`
   width: var(--field-responsive-width);
 `;
+
 const FormFeedback = styled(Form.Feedback)`
   font-size: var(--font-size);
 `;

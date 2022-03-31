@@ -14,6 +14,7 @@ function Header() {
   const { theme, toggleTheme } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const logoutHandler = () => {
     dispatch(logout());
     navigate('/login');
