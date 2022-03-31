@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductList } from 'store/productSlice';
 import SortByConstant from 'constants/sortBy';
 
-const actionTypes = {
-  setSortBy: 'setSortby',
-  setSearch: 'setSearch',
-  setJustMounted: 'setJustMounted',
+const ActionTypes = {
+  SET_SORT_BY: 'SET_SORT_BY',
+  SET_SEARCH: 'SET_SEARCH',
+  SET_JUST_MOUNTED: 'SET_JUST_MOUNTED',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case actionTypes.setSortBy:
+    case ActionTypes.SET_SORT_BY:
       return { ...state, sortBy: action.sortBy };
-    case actionTypes.setSearch:
+    case ActionTypes.SET_SEARCH:
       return { ...state, search: action.search };
-    case actionTypes.setJustMounted:
+    case ActionTypes.SET_JUST_MOUNTED:
       return { ...state, justMounted: false };
     default:
       return state;
@@ -42,11 +42,11 @@ const useSortedAndSearchedProducts = (
   const dispatch = useDispatch();
 
   const setSortBy = React.useCallback((newSortBy) => {
-    setState({ type: actionTypes.setSortBy, sortBy: newSortBy });
+    setState({ type: ActionTypes.SET_SORT_BY, sortBy: newSortBy });
   }, []);
 
   const setSearch = React.useCallback((newSearch) => {
-    setState({ type: actionTypes.setSearch, search: newSearch });
+    setState({ type: ActionTypes.SET_SEARCH, search: newSearch });
   }, []);
 
   React.useEffect(() => {
@@ -56,7 +56,7 @@ const useSortedAndSearchedProducts = (
 
     // when user move to other page, and return to this one, we don't want to fetch again
     if (!isFirstLoad && justMounted) clearTimeout(debounce);
-    setState({ type: actionTypes.setJustMounted });
+    setState({ type: ActionTypes.SET_JUST_MOUNTED });
     return () => clearTimeout(debounce);
   }, [dispatch, sortBy, search]);
 
