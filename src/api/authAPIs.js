@@ -1,13 +1,13 @@
 import { createRequest } from 'utils/request';
 
-export const login = async (loginInfo) =>
+export const login = (loginInfo) =>
   createRequest({
     endpoint: '/login',
     body: loginInfo,
     method: 'POST',
   });
 
-export const register = async (registerInfo) =>
+export const register = (registerInfo) =>
   createRequest({
     endpoint: '/register',
     body: registerInfo,
