@@ -1,29 +1,27 @@
-import * as React from "react";
-import styled from "styled-components";
-import Product from "./Product";
+import * as React from 'react';
+import styled from 'styled-components';
+import Product from './Product';
 
-const ProductList = React.memo(({ productList = [] }) => {
-    return (
-        <List>
-            {productList.map((product) => (
-                <Product key={product.id} product={product} />
-            ))}
-        </List>
-    );
-});
+const ProductList = React.memo(({ productList = [] }) => (
+  <List>
+    {productList.map((product) => (
+      <Product key={product.id} product={product} />
+    ))}
+  </List>
+));
 
 const List = styled.ul`
-    width: 100%;
-    min-height: 60vh;
-    height: 80vh;
-    overflow: auto;
-    border: 1px solid;
-    margin-bottom: 20px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 0;
+  width: 100%;
+  /* min-height: 60vh; */
+  overflow: auto;
+  border: 1px solid;
+  border-radius: 12px;
+  border-top-left-radius: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
 `;
 
 export default ProductList;

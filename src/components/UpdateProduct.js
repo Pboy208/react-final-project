@@ -1,37 +1,43 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import ProductForm from "./common/ProductForm";
-import { getProduct, updateProduct } from "../store/productSlice";
-import LoadingSpinner from "./common/LoadingSpinner";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getProduct, updateProduct } from 'store/productSlice';
+import * as Toast from 'components/common/Toast';
+import ProductForm from './common/ProductForm';
+import LoadingSpinner from './common/LoadingSpinner';
 
-const UpdateProduct = () => {
-    const { productId } = useParams();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    let { byIds, isLoading } = useSelector((state) => state.product);
-    let product = byIds[productId];
-    React.useEffect(() => {
-        if (!product) {
-            dispatch(getProduct(productId)).unwrap();
-        }
-    }, [dispatch, product, productId]);
+function UpdateProduct() {
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { byIds, isLoading } = useSelector((state) => state.product);
+  const product = byIds?.[productId];
 
-    const handleFormSubmit = React.useCallback(
-        (product) => {
-            dispatch(updateProduct(product))
-                .unwrap()
-                .then(() => navigate("/home"));
-        },
-        [dispatch, navigate]
-    );
+  React.useEffect(() => {
+    if (!product) {
+      dispatch(getProduct(productId)).unwrap();
+    }
+  }, [dispatch, product, productId]);
 
-    return (
-        <>
-            <ProductForm product={product} handleFormSubmit={handleFormSubmit} />
-            <LoadingSpinner isLoading={isLoading} />
-        </>
-    );
-};
+  const handleFormSubmit = React.useCallback(
+    (updatedProduct) => {
+      dispatch(updateProduct(updatedProduct))
+        .unwrap()
+        .then(() => {
+          Toast.success('Update success');
+          navigate('/home');
+        })
+        .catch(console.error);
+    },
+    [dispatch, navigate],
+  );
+  if (!product) return <LoadingSpinner isLoading />;
+  return (
+    <div data-testid="update-product-page">
+      <ProductForm product={product} handleFormSubmit={handleFormSubmit} />
+      <LoadingSpinner isLoading={isLoading} />
+    </div>
+  );
+}
 
 export default UpdateProduct;

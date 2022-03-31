@@ -1,96 +1,135 @@
-import * as React from "react";
-import styled from "styled-components";
-import { useForm } from "react-hook-form";
-import { Form, Button } from "@ahaui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import validationSchema from "../../utils/schemas/productFormSchema";
+/* eslint-disable jsx-a11y/aria-role */
+/* eslint-disable react/jsx-props-no-spreading */
+import * as React from 'react';
+import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
+import { Form, Button, Icon } from '@ahaui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import validationSchema from 'utils/schemas/productFormSchema';
+import { useNavigate } from 'react-router-dom';
+// import { device } from 'constants/mediaQuery';
 
-const imageFallback = "https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg";
+const imageFallback =
+  'https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg';
 
-const ProductForm = React.memo(({ product, handleFormSubmit }) => {
-    const {
-        watch,
-        reset,
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        mode: "onChange",
-        resolver: yupResolver(validationSchema),
-        defaultValues: product,
-    });
+function ProductForm({ product, handleFormSubmit }) {
+  const {
+    watch,
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(validationSchema),
+    defaultValues: product,
+  });
+  const navigate = useNavigate();
+  const imageUrl = watch(['imageUrl'])[0];
+  const isPriceInvalid = !!errors.price;
+  const isImageUrlInvalid = !!errors.imageUrl;
+  const isTitleInvalid = !!errors.title;
 
-    const imageUrl = watch(["imageUrl"])[0];
-    const isPriceInvalid = !!errors.price;
-    const isImageUrlInvalid = !!errors.imageUrl;
-    const isTitleInvalid = !!errors.title;
+  React.useEffect(() => {
+    // reset form when product is updated after first time rendered as null product
+    reset(product);
+  }, [product, reset]);
 
-    React.useEffect(() => {
-        reset(product);
-    }, [product, reset]);
+  const redirectToHome = () => navigate('/home');
 
-    return (
-        <Wrapper>
-            <RegisterForm onSubmit={handleSubmit(handleFormSubmit)}>
-                <Form.Group style={{ width: "100%" }} controlId="productForm.title">
-                    <Form.Label>Title</Form.Label>
-                    <Form.Input
-                        type="text"
-                        isInvalid={isTitleInvalid}
-                        {...register("title")}
-                    ></Form.Input>
-                    <Form.Feedback type="invalid">{errors?.title?.message}</Form.Feedback>
-                </Form.Group>
-                <Form.Group style={{ width: "100%" }} controlId="productForm.imageUrl">
-                    <Form.Label>Image url</Form.Label>
-                    <Form.Input
-                        type="text"
-                        isInvalid={isImageUrlInvalid}
-                        {...register("imageUrl")}
-                    ></Form.Input>
-                    <Form.Feedback type="invalid">{errors?.imageUrl?.message}</Form.Feedback>
-                </Form.Group>
-                <Form.Group style={{ width: "100%" }} controlId="productForm.price">
-                    <Form.Label>Price</Form.Label>
-                    <Form.Input
-                        type="text"
-                        isInvalid={isPriceInvalid}
-                        {...register("price")}
-                    ></Form.Input>
-                    <Form.Feedback type="invalid">{errors?.price?.message}</Form.Feedback>
-                </Form.Group>
-                <Button size={"small"} variant="primary" style={{ width: "10%" }}>
-                    <Button.Label style={{ fontWeight: "500" }}>Save</Button.Label>
-                </Button>
-            </RegisterForm>
-            <ProductImage src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl} />
-        </Wrapper>
-    );
-});
+  return (
+    <Wrapper>
+      <StyledForm onSubmit={handleSubmit(handleFormSubmit)}>
+        <FormGroup controlId="productForm.title">
+          <Form.Label>Title</Form.Label>
+          <Form.Input
+            type="text"
+            isInvalid={isTitleInvalid}
+            {...register('title')}
+          />
+          <Form.Feedback type="invalid" role="alert">
+            {errors?.title?.message}
+          </Form.Feedback>
+        </FormGroup>
+        <FormGroup controlId="productForm.imageUrl">
+          <Form.Label>Image url</Form.Label>
+          <Form.Input
+            type="text"
+            isInvalid={isImageUrlInvalid}
+            {...register('imageUrl')}
+          />
+          <Form.Feedback type="invalid" role="alert">
+            {errors?.imageUrl?.message}
+          </Form.Feedback>
+        </FormGroup>
+        <FormGroup controlId="productForm.price">
+          <Form.Label>Price (VND)</Form.Label>
+          <Form.Input
+            type="text"
+            isInvalid={isPriceInvalid}
+            {...register('price')}
+          />
+          <Form.Feedback type="invalid" role="alert">
+            {errors?.price?.message}
+          </Form.Feedback>
+        </FormGroup>
+        <SaveButton size="small" variant="primary">
+          <Button.Label>Save</Button.Label>
+        </SaveButton>
+      </StyledForm>
+      <ProductImage
+        src={isImageUrlInvalid || !imageUrl ? imageFallback : imageUrl}
+      />
+      <GoBackButton onClick={redirectToHome} data-testid="return-button">
+        <Icon size="medium" name="arrowRoundBack" />
+      </GoBackButton>
+    </Wrapper>
+  );
+}
 
 const ProductImage = styled.img`
-    width: 40%;
-    height: 100%;
-    object-fit: cover;
+  width: 40%;
+  height: 100%;
+  object-fit: cover;
+  border: 3px solid;
+  border-radius: 12px;
 `;
 
-const RegisterForm = styled.form`
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+const StyledForm = styled.form`
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const FormGroup = styled(Form.Group)`
+  width: 100%;
+`;
+
+const SaveButton = styled(Button)`
+  width: max(10%, 70px);
+`;
+
+const GoBackButton = styled(Button)`
+  position: absolute;
+  top: 4%;
+  left: 2%;
+  width: max(5%, 52px);
+  height: max(6%, 24px);
 `;
 
 const Wrapper = styled.div`
-    display: flex;
-    min-height: 100%;
-    width: 100%;
-    border: 1px solid;
-    margin: 40px auto;
-    padding: 60px;
-    gap: 40px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+  border: 1px solid;
+  border-radius: 12px;
+  margin: 40px auto;
+  padding: 60px;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 `;
 export default ProductForm;

@@ -1,19 +1,21 @@
-import { createGlobalStyle } from "styled-components";
-import { device } from "../../constants/mediaQuery";
+import { createGlobalStyle } from 'styled-components';
+import { device } from 'constants/mediaQuery';
 
 const themes = {
-    light: {
-        body: "#FFF",
-        background: "white",
-        text: "#363537",
-        borderColor: "#363537",
-    },
-    dark: {
-        body: "#5C3D2E",
-        background: "rgb(0, 30, 60)",
-        text: "#FAFAFA",
-        borderColor: "#FAFAFA",
-    },
+  light: {
+    body: '#FFF',
+    background: 'white',
+    text: '#363537',
+    borderColor: '#363537',
+    toolTipBorderColor: '#363537',
+  },
+  dark: {
+    body: '#171717',
+    background: 'rgb(0, 30, 60)',
+    text: '#FAFAFA',
+    borderColor: '#FAFAFA',
+    toolTipBorderColor: '#FAFAFA',
+  },
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -31,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
       --wrapper-width: 94%;
       --logo-font-size: 90px;
     }
+
     @media ${device.tablet} {
       --wrapper-width: 96%;
       --logo-font-size: 85px;
@@ -38,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
       --card-width: 85%;
 
     }
+
     @media ${device.mobile} {
       --wrapper-width: 98%;
       --logo-font-size: 60px;
@@ -48,6 +52,7 @@ const GlobalStyle = createGlobalStyle`
 
   a{
     color: ${({ theme }) => themes[theme].text} ;
+    
     &:hover {
         text-decoration: none;
     }
@@ -57,6 +62,11 @@ const GlobalStyle = createGlobalStyle`
     background: ${({ theme }) => themes[theme].body};
     color: ${({ theme }) => themes[theme].text};
     border-color: ${({ theme }) => themes[theme].borderColor} !important;
+  }
+
+  span::after{
+    border-color: transparent transparent ${({ theme }) =>
+      themes[theme].toolTipBorderColor} transparent;
   }
 `;
 
