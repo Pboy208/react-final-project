@@ -58,7 +58,8 @@ export const verifyToken = async (token) => {
   try {
     userId = decode(token).userId;
   } catch (error) {
-    console.log('error in verify token', error);
+    if (process.env.NODE_ENV === 'development')
+      console.log('error in verify token', error);
     return false;
   }
   const store = await getAuthenStore();

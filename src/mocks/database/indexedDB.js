@@ -2,14 +2,15 @@ import * as productListJSON from './productList.json';
 import * as authListJSON from './authList.json';
 
 const { indexedDB } = window;
+const { productList } = productListJSON.default;
+const { authList } = authListJSON.default;
 
-const { productList } = productListJSON;
-const { authList } = authListJSON;
 const initiateProductsDB = () => {
   const request = indexedDB.open('ProductsDatabase', 1);
 
   request.onerror = (error) => {
-    console.log('error happened in product indexedDB:::', error);
+    if (process.env.NODE_ENV === 'development')
+      console.log('error happened in product indexedDB:::', error);
   };
 
   request.onupgradeneeded = () => {
@@ -46,7 +47,8 @@ const initiateAuthenDB = () => {
   const request = indexedDB.open('AuthenDatabase', 1);
 
   request.onerror = (error) => {
-    console.log('error happened in authen indexedDB:::', error);
+    if (process.env.NODE_ENV === 'development')
+      console.log('error happened in authen indexedDB:::', error);
   };
 
   request.onupgradeneeded = () => {

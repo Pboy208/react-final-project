@@ -42,7 +42,6 @@ const useSortedAndSearchedProducts = (
   const dispatch = useDispatch();
 
   const setSortBy = React.useCallback((newSortBy) => {
-    console.log('new sort by: ', newSortBy);
     setState({ type: actionTypes.setSortBy, sortBy: newSortBy });
   }, []);
 
@@ -52,7 +51,6 @@ const useSortedAndSearchedProducts = (
 
   React.useEffect(() => {
     const debounce = setTimeout(() => {
-      console.log('search for', search, sortBy);
       dispatch(getProductList({ sortBy, search })).unwrap();
     }, 500);
 

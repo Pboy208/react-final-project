@@ -17,6 +17,7 @@ import { BASE_URL } from './constants';
 initiateDB();
 const fullUrl = new URL(BASE_URL);
 server.start({
+  onUnhandledRequest: 'bypass',
   quiet: true,
   serviceWorker: {
     url: `${fullUrl.pathname}mockServiceWorker.js`,

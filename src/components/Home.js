@@ -26,7 +26,6 @@ function Home() {
   };
 
   const handleSortByChange = (e) => {
-    console.log('changed sort by');
     const { value } = e.target;
     setSortBy(value);
   };
