@@ -1,4 +1,4 @@
-const productMessage = {
+const ProductMessage = {
   TITLE_REQUIRED: 'Title is required',
   TITLE_LENGTH_SHORT: 'Title must be at least 5 characters',
   TITLE_LENGTH_EXCEED: 'Title must not exceed 30 characters',
@@ -12,4 +12,4 @@ const productMessage = {
   PRICE_INVALID: 'Price is needed to be a number',
 };
 
-export default productMessage;
+export default ProductMessage;

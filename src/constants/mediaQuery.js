@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-export const device = {
+export const Device = {
   mobile: `(max-width: 550px)`,
   tablet: `(max-width:  1100px)`,
   laptop: `(max-width: 1500px)`,

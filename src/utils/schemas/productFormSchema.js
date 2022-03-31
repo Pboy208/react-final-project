@@ -1,20 +1,20 @@
 import * as Yup from 'yup';
-import productMessage from 'constants/productMessage';
+import ProductMessage from 'constants/productMessage';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string()
-    .required(productMessage.TITLE_REQUIRED)
-    .min(5, productMessage.TITLE_LENGTH_SHORT)
-    .max(30, productMessage.TITLE_LENGTH_EXCEED),
+    .required(ProductMessage.TITLE_REQUIRED)
+    .min(5, ProductMessage.TITLE_LENGTH_SHORT)
+    .max(30, ProductMessage.TITLE_LENGTH_EXCEED),
   imageUrl: Yup.string()
-    .required(productMessage.IMAGE_URL_REQUIRED)
-    .url(productMessage.IMAGE_URL_INVALID)
+    .required(ProductMessage.IMAGE_URL_REQUIRED)
+    .url(ProductMessage.IMAGE_URL_INVALID)
     .matches(
       /^https?:\/\/.*\.(?:png|jpg)$/,
-      productMessage.IMAGE_URL_NOT_RIGHT_FORMAT,
+      ProductMessage.IMAGE_URL_NOT_RIGHT_FORMAT,
     ),
   price: Yup.number()
-    .typeError(productMessage.PRICE_INVALID)
-    .required(productMessage.PRICE_REQUIRED),
+    .typeError(ProductMessage.PRICE_INVALID)
+    .required(ProductMessage.PRICE_REQUIRED),
 });
 export default validationSchema;

@@ -7,7 +7,6 @@ import { Form, Button, Icon } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import validationSchema from 'utils/schemas/productFormSchema';
 import { useNavigate } from 'react-router-dom';
-// import { device } from 'constants/mediaQuery';
 
 const imageFallback =
   'https://banksiafdn.com/wp-content/uploads/2019/10/placeholde-image.jpg';
