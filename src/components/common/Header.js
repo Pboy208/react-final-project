@@ -43,9 +43,12 @@ function Header() {
       <Side>
         <Actions>
           {renderNavigationBar()}
-          <Button onClick={toggleTheme}>
+          <Button onClick={toggleTheme} data-testid="toggle-theme-button">
             <i
               className={`fa-solid ${theme === 'light' ? 'fa-sun' : 'fa-moon'}`}
+              data-testid={
+                theme === 'light' ? 'light-theme-icon' : 'dark-theme-icon'
+              }
             />
             <ToolTip>Change theme</ToolTip>
           </Button>
