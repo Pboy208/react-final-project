@@ -33,10 +33,10 @@ function UpdateProduct() {
   );
   if (!product) return <LoadingSpinner isLoading />;
   return (
-    <>
+    <div data-testid="update-product-page">
       <ProductForm product={product} handleFormSubmit={handleFormSubmit} />
       <LoadingSpinner isLoading={isLoading} />
-    </>
+    </div>
   );
 }
 

@@ -37,7 +37,7 @@ function Login() {
   };
 
   return (
-    <LoginForm onSubmit={handleSubmit(handleLogin)}>
+    <LoginForm onSubmit={handleSubmit(handleLogin)} data-testid="login-page">
       <FormGroup controlId="loginForm.email">
         <Form.Label>Email</Form.Label>
         <Form.Input

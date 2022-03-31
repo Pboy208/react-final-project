@@ -38,7 +38,7 @@ function Register() {
   };
 
   return (
-    <RegisterForm onSubmit={handleSubmit(handleRegister)}>
+    <RegisterForm onSubmit={handleSubmit(handleRegister)} data-testid="register-page">
       <FormGroup controlId="registerForm.email">
         <Form.Label>Email</Form.Label>
         <Form.Input

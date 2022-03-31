@@ -3,7 +3,7 @@
 import userEvent from '@testing-library/user-event';
 import { waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import AddProduct from 'components/AddProduct';
-import { render, act, screen, resetReduxState } from 'utils/test';
+import { render, act, screen } from 'utils/test';
 import server from 'mocks/server';
 import { rest } from 'msw';
 import * as mock from 'mocks/mockForTesting';

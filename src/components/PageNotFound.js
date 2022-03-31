@@ -2,7 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 function PageNotFound() {
-  return <Notification>Page not found ...</Notification>;
+  return (
+    <Notification data-testid="not-found-page">Page not found ...</Notification>
+  );
 }
 
 const Notification = styled.div`

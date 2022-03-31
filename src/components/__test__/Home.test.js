@@ -3,13 +3,13 @@
 import userEvent from '@testing-library/user-event';
 import { waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import Home from 'components/Home';
-import { render, act, screen, resetReduxState } from 'utils/test';
+import { render, act, screen, resetReduxProductState } from 'utils/test';
 import server from 'mocks/server';
 import { rest } from 'msw';
 import * as mock from 'mocks/mockForTesting';
 
 afterEach(() => {
-  resetReduxState();
+  resetReduxProductState();
 });
 
 test('Should loading at first', async () => {

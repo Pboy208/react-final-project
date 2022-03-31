@@ -28,13 +28,13 @@ function AddProduct() {
   }, []);
 
   return (
-    <>
+    <div data-testid="add-product-page">
       <ProductForm
         product={initialProduct}
         handleFormSubmit={handleFormSubmit}
       />
       <LoadingSpinner isLoading={isLoading} />
-    </>
+    </div>
   );
 }
 

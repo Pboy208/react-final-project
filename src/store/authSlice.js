@@ -32,8 +32,9 @@ const token = localStorage.getItem('token');
 if (isTokenValid(token)) {
   initialState.isLoggedIn = true;
   initialState.userName = decode(token).userName;
+  console.log('valid Token');
 } else {
-  console.log(token);
+  console.log('invalid Token', token);
 }
 
 const authSlice = createSlice({
@@ -47,6 +48,11 @@ const authSlice = createSlice({
     },
     setIsLoading(state, action) {
       state.isLoading = action.payload;
+    },
+    resetAuthState: (state) => {
+      state.isLoggedIn = false;
+      state.userName = '';
+      state.isLoading = false;
     },
   },
   extraReducers: {
@@ -65,4 +71,4 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 
-export const { logIn, logout } = authSlice.actions;
+export const { logIn, logout, resetAuthState } = authSlice.actions;

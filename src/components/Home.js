@@ -35,7 +35,7 @@ function Home() {
     return <LoadingSpinner isLoading />;
 
   return (
-    <Wrapper>
+    <Wrapper data-testid="home-page">
       <LoadingSpinner isLoading={isLoading} />
       <SearchAndSortBy>
         <SearchBox
