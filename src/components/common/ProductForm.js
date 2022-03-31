@@ -10,6 +10,7 @@ import validationSchema from 'utils/schemas/productFormSchema';
 
 function ProductForm({ product, handleFormSubmit }) {
   const {
+    setValue,
     watch,
     reset,
     register,
@@ -42,6 +43,7 @@ function ProductForm({ product, handleFormSubmit }) {
             type="text"
             isInvalid={isTitleInvalid}
             {...register('title')}
+            onBlur={(e) => setValue('title', e.target.value.trim())}
           />
           <Form.Feedback type="invalid" role="alert">
             {errors?.title?.message}
@@ -53,6 +55,7 @@ function ProductForm({ product, handleFormSubmit }) {
             type="text"
             isInvalid={isImageUrlInvalid}
             {...register('imageUrl')}
+            onBlur={(e) => setValue('imageUrl', e.target.value.trim())}
           />
           <Form.Feedback type="invalid" role="alert">
             {errors?.imageUrl?.message}
@@ -64,6 +67,7 @@ function ProductForm({ product, handleFormSubmit }) {
             type="text"
             isInvalid={isPriceInvalid}
             {...register('price')}
+            onBlur={(e) => setValue('price', e.target.value.trim())}
           />
           <Form.Feedback type="invalid" role="alert">
             {errors?.price?.message}

@@ -12,6 +12,7 @@ import * as Toast from 'components/common/Toast';
 
 function Login() {
   const {
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
@@ -43,6 +44,7 @@ function Login() {
           type="text"
           isInvalid={isEmailInvalid}
           {...register('email')}
+          onBlur={(e) => setValue('email', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.email?.message}
@@ -54,6 +56,7 @@ function Login() {
           type="password"
           isInvalid={isPasswordInvalid}
           {...register('password')}
+          onBlur={(e) => setValue('password', e.target.value.trim())}
         />
         <FormFeedback type="invalid" role="alert">
           {errors?.password?.message}
