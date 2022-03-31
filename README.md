@@ -2,6 +2,26 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Node.js and Npm version
+
+The application was built and tested with `Node.js version 16.14.2` and `Npm version 8.5.0`
+
+## Dependency installation and application launching instruction
+
+In folder of the project, open terminal and type in
+
+`npm install` for dependency installation\
+`npm start` to start the application (make sure you start it at port 3000)\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## Tests launching instruction
+
+In folder of the project, open terminal and type in
+
+`npm test` to run the tests\
+`npm test -- --coverage` to run the tests with coverage\
+`npm test -- --coverage --watchAll` to run the tests with coverage for the whole folders
+
 ## Available Scripts
 
 In the project directory, you can run:
