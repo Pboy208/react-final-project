@@ -6,7 +6,7 @@ const generateUrlWithParams = (givenUrl, params) => {
   if (!params.search) params.search = '';
   const url = new URL(givenUrl);
   url.search = new URLSearchParams(params);
-  return url;
+  return url.toString();
 };
 
 const getToken = () => localStorage.getItem('token');
@@ -19,7 +19,6 @@ export const createRequest = async ({
   params = null,
 }) => {
   const url = `${BASE_URL || 'http://localhost:3000'}${endpoint}`;
-  console.log(url);
   const requestUrl = params ? generateUrlWithParams(url, params) : url;
   const requestConfig = {
     method,
@@ -30,6 +29,7 @@ export const createRequest = async ({
     },
     body: body ? JSON.stringify(body) : null,
   };
+
   const response = await fetch(requestUrl, requestConfig);
   const payload = await response.json();
   if (!response.ok) {

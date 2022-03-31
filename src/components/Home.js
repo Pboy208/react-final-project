@@ -65,7 +65,7 @@ function Home() {
           <TitlesAndAddBtn>
             <ColumnTitles>
               <Title flex={5}>Name</Title>
-              <Title flex={2}>Price</Title>
+              <Title flex={2}>Price (VND)</Title>
               <Title flex={1}>Image</Title>
             </ColumnTitles>
             <AddBtn to="/product/create">Add item</AddBtn>
