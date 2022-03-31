@@ -1,6 +1,5 @@
 import * as productListJSON from './productList.json';
 import * as authListJSON from './authList.json';
-import 'fake-indexeddb/auto';
 
 const { indexedDB } = window;
 

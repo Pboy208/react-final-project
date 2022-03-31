@@ -7,8 +7,7 @@ import { formatVnd } from 'utils/formatter';
 import { deleteProduct } from 'store/productSlice';
 import * as Toast from 'components/common/Toast';
 import LoadingSpinner from 'components/common/LoadingSpinner';
-
-const ConfirmModal = React.lazy(() => import('./ConfirmModal'));
+import ConfirmModal from './ConfirmModal';
 
 function Product({ product }) {
   const { title, imageUrl, price, id } = product;
@@ -45,7 +44,10 @@ function Product({ product }) {
           <NavigateButton to={`/product/${id}`}>
             <i className="fa-solid fa-pen-to-square" />
           </NavigateButton>
-          <Button onClick={toggleConfirmDeleteModal}>
+          <Button
+            onClick={toggleConfirmDeleteModal}
+            data-testid="delete-button"
+          >
             <i className="fa-solid fa-trash-can" />
           </Button>
         </ProductActions>

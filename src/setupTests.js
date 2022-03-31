@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import '@testing-library/jest-dom';
+import 'fake-indexeddb/auto';
 import initiateDB from './mocks/database/indexedDB';
 import server from './mocks/server';
 

@@ -9,7 +9,7 @@ function ConfirmModal({ onConfirm, message, content, onHide }) {
   };
 
   return (
-    <StyledModal show size="small" onHide={onHide}>
+    <StyledModal show size="small" onHide={onHide} transition="">
       <Modal.Header>
         <Modal.Title>{message}</Modal.Title>
       </Modal.Header>

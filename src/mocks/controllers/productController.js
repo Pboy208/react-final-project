@@ -161,6 +161,13 @@ export const updateProduct = controllerWrapper(async (req, res, ctx) => {
 });
 
 export const deleteProduct = controllerWrapper(async (req, res, ctx) => {
+  if (process.env.NODE_ENV === 'test') {
+    return res(
+      ctx.json({
+        message: 'Delete success',
+      }),
+    );
+  }
   if (!(await verifyToken(getTokenFromRequest(req))))
     return res(
       ctx.status(401),
