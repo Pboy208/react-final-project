@@ -10,6 +10,7 @@ const ProductMessage = {
 
   PRICE_REQUIRED: 'Price is required',
   PRICE_INVALID: 'Price is needed to be a number',
+  PRICE_NOT_NEGATIVE: 'Price must be a positive number',
 };
 
 export default ProductMessage;
