@@ -102,6 +102,7 @@ const Information = styled.span`
   border-left: 1px solid;
   padding-left: 20px;
   font-size: var(--font-size);
+  word-wrap: break-word;
 
   &:first-child {
     border-left: none;
