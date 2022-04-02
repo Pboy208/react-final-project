@@ -81,7 +81,7 @@ function ProductForm({ product, handleFormSubmit }) {
       <ProductImage
         src={
           isImageUrlInvalid || !imageUrl
-            ? `/Assets/ImageFallback.jpeg`
+            ? `/assets/ImageFallback.jpeg`
             : imageUrl
         }
       />

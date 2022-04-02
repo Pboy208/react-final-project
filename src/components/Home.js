@@ -73,7 +73,7 @@ function Home() {
         </>
       ) : (
         <NotFoundWrapper>
-          <EmptyState src="/Assets/EmptyState.svg">
+          <EmptyState src="/assets/EmptyState.svg">
             <EmptyState.Heading>
               Can not found any item with name of "{search}"
             </EmptyState.Heading>
