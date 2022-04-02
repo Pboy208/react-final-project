@@ -39,35 +39,54 @@ export const add = async (product) => {
   product.createdTimestamp = Date.now();
 
   const store = await getProductStore();
-  const query = store.put(product);
+  const titleIndex = store.index('title');
 
   let resolvePromise;
   const promise = new Promise((resolve) => (resolvePromise = resolve));
 
-  query.onsuccess = async () => {
-    const { result } = query;
-    if (!result) return resolvePromise(false);
-    return resolvePromise(product);
+  const queryTitle = titleIndex.get(product.title);
+
+  queryTitle.onsuccess = async () => {
+    const duplicatedProduct = queryTitle.result;
+    if (duplicatedProduct) return resolvePromise(false);
+
+    const query = store.put(product);
+
+    return (query.onsuccess = async () => {
+      const { result } = query;
+      if (!result) return resolvePromise(false);
+      return resolvePromise(product);
+    });
   };
+
   return promise;
 };
 
 export const update = async (product) => {
   const store = await getProductStore();
-  const query = store.get(product.id);
+  const titleIndex = store.index('title');
 
   let resolvePromise;
   const promise = new Promise((resolve) => (resolvePromise = resolve));
 
-  query.onsuccess = async () => {
-    if (!product) return resolvePromise(false);
-    product.createdTimestamp = Date.now();
-    query.result.createdTimestamp = Date.now();
-    query.result.title = product.title;
-    query.result.price = product.price;
-    query.result.imageUrl = product.imageUrl;
-    store.put(query.result);
-    return resolvePromise(query.result);
+  const queryTitle = titleIndex.get(product.title);
+
+  queryTitle.onsuccess = async () => {
+    const duplicatedProduct = queryTitle.result;
+    if (duplicatedProduct) return resolvePromise({ ok: false, status: 409 });
+
+    const query = store.get(product.id);
+    return (query.onsuccess = async () => {
+      const oldProduct = query.result;
+      if (!oldProduct) return resolvePromise({ ok: false, status: 404 });
+
+      query.result.createdTimestamp = Date.now();
+      query.result.title = product.title;
+      query.result.price = product.price;
+      query.result.imageUrl = product.imageUrl;
+      store.put(query.result);
+      return resolvePromise({ ok: true, product: query.result });
+    });
   };
   return promise;
 };

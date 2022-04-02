@@ -17,6 +17,7 @@ const initiateProductsDB = () => {
     const db = request.result;
     const store = db.createObjectStore('productList', { keyPath: 'id' });
     store.createIndex('price', 'price');
+    store.createIndex('title', 'title');
   };
 
   request.onsuccess = () => {
