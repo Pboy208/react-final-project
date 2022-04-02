@@ -26,19 +26,8 @@ const getSortFormula = (sortBy) => {
   }
 };
 
-const hasSearch = (title, search) => {
-  const titleWords = title.split(' ');
-  const searchWords = search.split(' ');
-
-  for (let i = 0; i < titleWords.length; i++) {
-    for (let j = 0; j < searchWords.length; j++) {
-      if (titleWords[i].toLowerCase() === searchWords[j].toLowerCase()) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
+const hasSearch = (title, search) =>
+  title.toLowerCase().includes(search.toLowerCase());
 
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
   if (process.env.NODE_ENV === 'test') {
