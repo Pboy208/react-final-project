@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     --button-size:32px;
     --field-responsive-width: max(32%,220px);
     --card-width: 70%;
+    --modal-text-color: #363537;
 
     @media ${Device.LAPTOP} {
       --wrapper-width: 94%;

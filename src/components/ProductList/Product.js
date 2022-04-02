@@ -55,7 +55,7 @@ function Product({ product }) {
       {isConfirmingDeleteProduct && (
         <ConfirmModal
           onConfirm={handleDelete}
-          message="Do you really want to delete this item"
+          message="Do you really want to delete this item?"
           content={title}
           onHide={toggleConfirmDeleteModal}
         />
