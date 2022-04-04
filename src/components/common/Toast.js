@@ -18,7 +18,7 @@ const error = (message, title = 'Notification') => {
 };
 
 const success = (message, title = 'Notification') =>
-  toast.info(
+  toast.success(
     () => (
       <div className="u-flex u-flexGrow1">
         <div className="u-marginRightExtraSmall">
