@@ -73,7 +73,8 @@ export const update = async (product) => {
 
   queryTitle.onsuccess = async () => {
     const duplicatedProduct = queryTitle.result;
-    if (duplicatedProduct) return resolvePromise({ ok: false, status: 409 });
+    if (duplicatedProduct && duplicatedProduct.id !== product.id)
+      return resolvePromise({ ok: false, status: 409 });
 
     const query = store.get(product.id);
     return (query.onsuccess = async () => {
