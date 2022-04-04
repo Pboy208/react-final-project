@@ -9,9 +9,9 @@ function ConfirmModal({ onConfirm, message, content, onHide }) {
   };
 
   return (
-    <StyledModal show size="small" onHide={onHide} transition="">
+    <Modal show size="small" onHide={onHide} transition="">
       <Modal.Header>
-        <Modal.Title>{message}</Modal.Title>
+        <ModalTitle>{message}</ModalTitle>
       </Modal.Header>
       <ModalBody>{content}</ModalBody>
       <Modal.Footer>
@@ -22,17 +22,17 @@ function ConfirmModal({ onConfirm, message, content, onHide }) {
           Yes
         </Button>
       </Modal.Footer>
-    </StyledModal>
+    </Modal>
   );
 }
 
-const StyledModal = styled(Modal)`
-  width: '80%';
-  margin: 'auto';
+const ModalTitle = styled(Modal.Title)`
+  color: var(--modal-text-color) !important;
 `;
 
 const ModalBody = styled(Modal.Body)`
   text-align: center;
+  color: var(--modal-text-color) !important;
 `;
 
 export default ConfirmModal;

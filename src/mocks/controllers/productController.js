@@ -26,37 +26,29 @@ const getSortFormula = (sortBy) => {
   }
 };
 
-const hasSearch = (title, search) => {
-  const titleWords = title.split(' ');
-  const searchWords = search.split(' ');
-
-  for (let i = 0; i < titleWords.length; i++) {
-    for (let j = 0; j < searchWords.length; j++) {
-      if (titleWords[i].toLowerCase() === searchWords[j].toLowerCase()) {
-        return true;
-      }
-    }
-  }
-  return false;
-};
+const hasSearch = (title, search) =>
+  title.toLowerCase().includes(search.toLowerCase());
 
 export const getProducts = controllerWrapper(async (req, res, ctx) => {
   if (process.env.NODE_ENV === 'test') {
     const { sortBy, search } = getRequestParams(req);
     if (search)
       return res(
-        ctx.json({ message: 'Get success', data: mock.searchedProductList }),
+        ctx.json({
+          message: 'Get successfully',
+          data: mock.searchedProductList,
+        }),
       );
     if (sortBy === 'PRICE_DECREASE')
       return res(
         ctx.json({
-          message: 'Get success',
+          message: 'Get successfully',
           data: mock.priceDecreaseProductList,
         }),
       );
     return res(
       ctx.json({
-        message: 'Get success',
+        message: 'Get successfully',
         data: mock.productList,
       }),
     );
@@ -75,14 +67,14 @@ export const getProducts = controllerWrapper(async (req, res, ctx) => {
       hasSearch(product.title, search),
     );
   productList.sort(getSortFormula(sortBy));
-  return res(ctx.json({ message: 'Get success', data: productList }));
+  return res(ctx.json({ message: 'Get successfully', data: productList }));
 });
 
 export const getProduct = controllerWrapper(async (req, res, ctx) => {
   if (process.env.NODE_ENV === 'test') {
     return res(
       ctx.json({
-        message: 'Get success',
+        message: 'Get successfully',
         data: mock.product,
       }),
     );
@@ -102,14 +94,14 @@ export const getProduct = controllerWrapper(async (req, res, ctx) => {
         message: 'Get failed, id not found',
       }),
     );
-  return res(ctx.json({ message: 'Get success', data: product }));
+  return res(ctx.json({ message: 'Get successfully', data: product }));
 });
 
 export const addProduct = controllerWrapper(async (req, res, ctx) => {
   if (process.env.NODE_ENV === 'test') {
     return res(
       ctx.json({
-        message: 'Add success',
+        message: 'Add successfully',
         data: mock.product,
       }),
     );
@@ -126,17 +118,17 @@ export const addProduct = controllerWrapper(async (req, res, ctx) => {
     return res(
       ctx.status(409),
       ctx.json({
-        message: 'Add failed, duplicated item',
+        message: 'Add failed, duplicated product name',
       }),
     );
-  return res(ctx.json({ message: 'Create success', data: product }));
+  return res(ctx.json({ message: 'Create successfully', data: product }));
 });
 
 export const updateProduct = controllerWrapper(async (req, res, ctx) => {
   if (process.env.NODE_ENV === 'test') {
     return res(
       ctx.json({
-        message: 'Update success',
+        message: 'Update successfully',
         data: mock.product,
       }),
     );
@@ -148,22 +140,33 @@ export const updateProduct = controllerWrapper(async (req, res, ctx) => {
         message: 'Your session has expired, please login again',
       }),
     );
-  const product = await Product.update(req.body);
-  if (!product)
-    return res(
-      ctx.status(404),
-      ctx.json({
-        message: 'Update failed, id not found',
-      }),
-    );
-  return res(ctx.json({ message: 'Update success', data: product }));
+  const response = await Product.update(req.body);
+  if (!response.ok) {
+    if (response.status === 404)
+      return res(
+        ctx.status(404),
+        ctx.json({
+          message: 'Update failed, id not found',
+        }),
+      );
+    if (response.status === 409)
+      return res(
+        ctx.status(409),
+        ctx.json({
+          message: 'Update failed, duplicated product name',
+        }),
+      );
+  }
+  return res(
+    ctx.json({ message: 'Update successfully', data: response.product }),
+  );
 });
 
 export const deleteProduct = controllerWrapper(async (req, res, ctx) => {
   if (process.env.NODE_ENV === 'test') {
     return res(
       ctx.json({
-        message: 'Delete success',
+        message: 'Delete successfully',
       }),
     );
   }
@@ -182,5 +185,5 @@ export const deleteProduct = controllerWrapper(async (req, res, ctx) => {
         message: 'Delete failed, id not found',
       }),
     );
-  return res(ctx.json({ message: 'Delete success' }));
+  return res(ctx.json({ message: 'Delete successfully' }));
 });

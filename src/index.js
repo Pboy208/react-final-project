@@ -1,3 +1,4 @@
+import '@ahaui/css/dist/index.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -7,7 +8,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import FallbackComponent from './components/common/FallbackComponent';
-import '@ahaui/css/dist/index.min.css';
 import { ThemeProvider } from './context/ThemeContext';
 import initiateDB from './mocks/database/indexedDB';
 import { worker as server } from './mocks/browser';

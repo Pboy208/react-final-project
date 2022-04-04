@@ -73,7 +73,7 @@ function Home() {
         </>
       ) : (
         <NotFoundWrapper>
-          <EmptyState src="/Assets/EmptyState.svg">
+          <EmptyState src="/assets/EmptyState.svg">
             <EmptyState.Heading>
               Can not found any item with name of "{search}"
             </EmptyState.Heading>
@@ -192,13 +192,15 @@ const AddBtn = styled(Link)`
   margin-right: 4.5%;
   font-size: var(--font-size);
   cursor: pointer;
+  background-color: #aaaaaa;
 
   @media ${Device.TABLET} {
-    padding-left: 10px;
+    padding-left: 6px;
     height: 40px;
   }
 
   @media ${Device.MOBILE} {
+    padding-left: 2px;
     height: 48px;
   }
 `;

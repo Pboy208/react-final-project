@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button, Icon } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import validationSchema from 'utils/schemas/productFormSchema';
+import { Device } from 'constants/mediaQuery';
 
 function ProductForm({ product, handleFormSubmit }) {
   const {
@@ -80,7 +81,7 @@ function ProductForm({ product, handleFormSubmit }) {
       <ProductImage
         src={
           isImageUrlInvalid || !imageUrl
-            ? `/Assets/ImageFallback.jpeg`
+            ? `/assets/ImageFallback.jpeg`
             : imageUrl
         }
       />
@@ -135,6 +136,11 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+
+  @media ${Device.MOBILE} {
+    padding: 60px 0;
+    gap: 15px;
+  }
 `;
 
 export default ProductForm;

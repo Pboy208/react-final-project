@@ -12,7 +12,7 @@ function FallbackComponent({ error, resetErrorBoundary }) {
 
   return (
     <Wrapper>
-      <EmptyState src="/Assets/EmptyState.svg">
+      <EmptyState src="/assets/EmptyState.svg">
         <EmptyState.Heading>There was an error:</EmptyState.Heading>
         <EmptyState.Description>{error.message}</EmptyState.Description>
         <Button variant="secondary" onClick={handleResetErrorBoundary}>

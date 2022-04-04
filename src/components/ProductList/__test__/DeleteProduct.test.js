@@ -29,7 +29,7 @@ test('Should show confirm modal ', async () => {
 
   // expect confirm message
   expect(
-    screen.getByText('Do you really want to delete this item'),
+    screen.getByText('Do you really want to delete this item?'),
   ).toBeInTheDocument();
 
   // press confirm button
