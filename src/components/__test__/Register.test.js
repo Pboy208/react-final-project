@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
 import { waitForElementToBeRemoved } from '@testing-library/react';
+import { rest } from 'msw';
 import Register from 'components/Register';
 import { render, waitFor, act, screen } from 'utils/test';
 import server from 'mocks/server';
-import { rest } from 'msw';
 
 test('Should show error when fields are invalid', async () => {
   // make invalid data
