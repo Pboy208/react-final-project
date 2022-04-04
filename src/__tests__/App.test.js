@@ -20,7 +20,7 @@ test('Should show home page', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to have right page
-  screen.getByTestId('home-page');
+  expect(screen.getByTestId('home-page')).toBeInTheDocument();
 });
 
 test('Should redirect to home page when get into "/"', async () => {
@@ -31,7 +31,7 @@ test('Should redirect to home page when get into "/"', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to have right page
-  screen.getByTestId('home-page');
+  expect(screen.getByTestId('home-page')).toBeInTheDocument();
 });
 
 test('Should show add product page', async () => {
@@ -42,7 +42,7 @@ test('Should show add product page', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to have right page
-  screen.getByTestId('add-product-page');
+  expect(screen.getByTestId('add-product-page')).toBeInTheDocument();
 });
 
 test('Should show update product page', async () => {
@@ -53,7 +53,7 @@ test('Should show update product page', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to have right page
-  screen.getByTestId('update-product-page');
+  expect(screen.getByTestId('update-product-page')).toBeInTheDocument();
 });
 
 test('Should redirect to "/home" when get to "/login" with valid session', async () => {
@@ -64,7 +64,7 @@ test('Should redirect to "/home" when get to "/login" with valid session', async
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to have right page
-  screen.getByTestId('home-page');
+  expect(screen.getByTestId('home-page')).toBeInTheDocument();
 });
 
 test('Should redirect to "/login" when dont have token', async () => {
@@ -75,7 +75,7 @@ test('Should redirect to "/login" when dont have token', async () => {
   renderAppWithRoute(`/product/${mock.product.id}`);
 
   // expect to have right page
-  screen.getByTestId('login-page');
+  expect(screen.getByTestId('login-page')).toBeInTheDocument();
 });
 
 test('Should show login page', async () => {
@@ -86,7 +86,7 @@ test('Should show login page', async () => {
   renderAppWithRoute(`/login`);
 
   // expect to have right page
-  screen.getByTestId('login-page');
+  expect(screen.getByTestId('login-page')).toBeInTheDocument();
 });
 
 test('Should show register page', async () => {
@@ -100,7 +100,7 @@ test('Should show register page', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect to have right page
-  screen.getByTestId('register-page');
+  expect(screen.getByTestId('register-page')).toBeInTheDocument();
 });
 
 test('Should show not found page', async () => {
@@ -111,5 +111,5 @@ test('Should show not found page', async () => {
   renderAppWithRoute(`/notfoundpage`);
 
   // expect to have right page
-  screen.getByTestId('not-found-page');
+  expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
 });
