@@ -16,6 +16,7 @@ test('Should show product information', async () => {
 
   // render component
   render(<ProductForm product={mockProduct} />);
+  
   // expect information to be shown
   expect(screen.getByRole('textbox', { name: /title/i }).value).toBe(
     mockProduct.title,
@@ -40,15 +41,11 @@ test('Should show error when fields are invalid', async () => {
 
   // render component
   render(<ProductForm />);
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/title/i), mockProduct.title),
-  );
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/image url/i), mockProduct.imageUrl),
-  );
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/price/i), mockProduct.price),
-  );
+
+  // type product information
+  userEvent.type(screen.getByLabelText(/title/i), mockProduct.title);
+  userEvent.type(screen.getByLabelText(/image url/i), mockProduct.imageUrl);
+  userEvent.type(screen.getByLabelText(/price/i), mockProduct.price);
 
   // press save button
   await act(async () =>

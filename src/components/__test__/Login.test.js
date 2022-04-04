@@ -56,12 +56,8 @@ test('Should redirect and show toast when login with valid information', async (
   render(<Login />);
 
   // type login info
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/email/i), loginInfo.email),
-  );
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/password/i), loginInfo.password),
-  );
+  userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
+  userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
 
   // press login button
   await act(async () =>
@@ -87,12 +83,8 @@ test('Should show error toast when login with invalid information', async () => 
   render(<Login />);
 
   // type login info
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/email/i), loginInfo.email),
-  );
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/password/i), loginInfo.password),
-  );
+  userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
+  userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
 
   // press login button
   await act(async () =>

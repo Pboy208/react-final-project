@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { waitForElementToBeRemoved } from '@testing-library/react';
 import Register from 'components/Register';
 import { render, waitFor, act, screen } from 'utils/test';
+import server from 'mocks/server';
+import { rest } from 'msw';
 
 test('Should show error when fields are invalid', async () => {
   // make invalid data
@@ -17,18 +19,14 @@ test('Should show error when fields are invalid', async () => {
   render(<Register />);
 
   // type register info
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/email/i), registerInfo.email),
+  userEvent.type(screen.getByLabelText(/email/i), registerInfo.email);
+  userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName);
+  userEvent.type(
+    screen.getAllByLabelText(/password/i)[0],
+    registerInfo.password,
   );
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName),
-  );
-  await act(async () =>
-    userEvent.type(
-      screen.getAllByLabelText(/password/i)[0],
-      registerInfo.password,
-    ),
-  );
+  // we need to wrap this event trigger with act and await because form validation
+  // is async below, so we need at least 1 async handler to get the validation error
   await act(async () =>
     userEvent.type(
       screen.getAllByLabelText(/password/i)[1],
@@ -88,23 +86,15 @@ test('Should redirect and show toast when register with valid information', asyn
   render(<Register />);
 
   // type register info
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/email/i), registerInfo.email),
+  userEvent.type(screen.getByLabelText(/email/i), registerInfo.email);
+  userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName);
+  userEvent.type(
+    screen.getAllByLabelText(/password/i)[0],
+    registerInfo.password,
   );
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName),
-  );
-  await act(async () =>
-    userEvent.type(
-      screen.getAllByLabelText(/password/i)[0],
-      registerInfo.password,
-    ),
-  );
-  await act(async () =>
-    userEvent.type(
-      screen.getAllByLabelText(/password/i)[1],
-      registerInfo.confirmPassword,
-    ),
+  userEvent.type(
+    screen.getAllByLabelText(/password/i)[1],
+    registerInfo.confirmPassword,
   );
 
   // press register button
@@ -121,7 +111,19 @@ test('Should redirect and show toast when register with valid information', asyn
 });
 
 test('Should show error toast when register with invalid information', async () => {
-  // make valid data
+  // mock msw handler to throw back error
+  server.use(
+    rest.post('http://localhost:3000/register', async (req, res, ctx) =>
+      res(
+        ctx.status(409),
+        ctx.json({
+          message: 'Register failed, email has already been used',
+        }),
+      ),
+    ),
+  );
+
+  // make invalid data
   const registerInfo = {
     email: 'phuong@gmail.com',
     userName: 'testing user',
@@ -133,23 +135,15 @@ test('Should show error toast when register with invalid information', async () 
   render(<Register />);
 
   // type register info
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/email/i), registerInfo.email),
+  userEvent.type(screen.getByLabelText(/email/i), registerInfo.email);
+  userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName);
+  userEvent.type(
+    screen.getAllByLabelText(/password/i)[0],
+    registerInfo.password,
   );
-  await act(async () =>
-    userEvent.type(screen.getByLabelText(/user name/i), registerInfo.userName),
-  );
-  await act(async () =>
-    userEvent.type(
-      screen.getAllByLabelText(/password/i)[0],
-      registerInfo.password,
-    ),
-  );
-  await act(async () =>
-    userEvent.type(
-      screen.getAllByLabelText(/password/i)[1],
-      registerInfo.confirmPassword,
-    ),
+  userEvent.type(
+    screen.getAllByLabelText(/password/i)[1],
+    registerInfo.confirmPassword,
   );
 
   // press register button
