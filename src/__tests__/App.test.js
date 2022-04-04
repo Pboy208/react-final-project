@@ -1,12 +1,14 @@
 /* eslint-disable no-undef */
 import { waitForElementToBeRemoved } from '@testing-library/react';
+import { rest } from 'msw';
+import server from 'mocks/server';
+import * as mock from 'mocks/mockForTesting';
 import {
   renderAppWithRoute,
   screen,
   resetReduxProductState,
   resetReduxAuthState,
 } from 'utils/test';
-import * as mock from 'mocks/mockForTesting';
 
 afterEach(() => {
   resetReduxProductState();
@@ -65,6 +67,32 @@ test('Should redirect to "/home" when get to "/login" with valid session', async
 
   // expect to have right page
   expect(screen.getByTestId('home-page')).toBeInTheDocument();
+});
+
+test('Should logout and show error when token is invalid', async () => {
+  // mock msw to throw back an error
+  server.use(
+    rest.get('http://localhost:3000/products', async (req, res, ctx) =>
+      res(
+        ctx.status(401),
+        ctx.json({
+          message: 'Your session has expired, please login again',
+        }),
+      ),
+    ),
+  );
+
+  // render component
+  renderAppWithRoute('/home');
+
+  // // wait for loading spinner to be removed
+  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+
+  // // expect error show and redirect to login page
+  expect(
+    screen.getAllByText('Your session has expired, please login again')[0],
+  ).toBeInTheDocument();
+  expect(screen.getByTestId('login-page')).toBeInTheDocument();
 });
 
 test('Should redirect to "/login" when dont have token', async () => {
