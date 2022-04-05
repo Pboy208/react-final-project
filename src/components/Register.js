@@ -17,7 +17,7 @@ function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: yupResolver(validationSchema),
   });
   const dispatch = useDispatch();

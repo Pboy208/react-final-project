@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable react/jsx-props-no-spreading */
-import * as React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ function ProductForm({ product, handleFormSubmit }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: yupResolver(validationSchema),
     defaultValues: product,
   });
@@ -28,7 +28,7 @@ function ProductForm({ product, handleFormSubmit }) {
   const isImageUrlInvalid = !!errors.imageUrl;
   const isTitleInvalid = !!errors.title;
 
-  React.useEffect(() => {
+  useEffect(() => {
     // reset form when product is updated after first time rendered as null product
     reset(product);
   }, [product, reset]);
@@ -94,10 +94,18 @@ function ProductForm({ product, handleFormSubmit }) {
 
 const ProductImage = styled.img`
   width: 40%;
-  height: 100%;
+  height: 460px;
   object-fit: cover;
   border: 3px solid;
   border-radius: 12px;
+
+  @media ${Device.TABLET} {
+    height: 330px;
+  }
+
+  @media ${Device.MOBILE} {
+    height: 120px;
+  }
 `;
 
 const StyledForm = styled.form`
@@ -126,7 +134,6 @@ const GoBackButton = styled(Button)`
 
 const Wrapper = styled.div`
   display: flex;
-  min-height: 100%;
   width: 100%;
   border: 1px solid;
   border-radius: 12px;

@@ -1,34 +1,14 @@
-import { createRequest } from 'utils/request';
+import { createRequest, GET, POST, PUT, DELETE } from 'utils/request';
 
 export const getProductList = (params = { sortBy: 'CREATED_TIME' }) =>
-  createRequest({
-    endpoint: '/products',
-    method: 'GET',
-    params,
-  });
+  createRequest(GET('/products', { params }));
 
-export const getProduct = (id) =>
-  createRequest({
-    endpoint: `/product/${id}`,
-    method: 'GET',
-  });
+export const getProduct = (id) => createRequest(GET(`/product/${id}`));
 
 export const addProduct = (addInfo) =>
-  createRequest({
-    endpoint: '/product',
-    body: addInfo,
-    method: 'POST',
-  });
+  createRequest(POST('/product', { body: addInfo }));
 
 export const updateProduct = (updateInfo) =>
-  createRequest({
-    endpoint: `/product/${updateInfo.id}`,
-    body: updateInfo,
-    method: 'PUT',
-  });
+  createRequest(PUT(`/product/${updateInfo.id}`, { body: updateInfo }));
 
-export const deleteProduct = (id) =>
-  createRequest({
-    endpoint: `/product/${id}`,
-    method: 'DELETE',
-  });
+export const deleteProduct = (id) => createRequest(DELETE(`/product/${id}`));

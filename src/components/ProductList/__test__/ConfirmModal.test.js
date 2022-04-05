@@ -13,7 +13,7 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
-test('Should show message ', async () => {
+it('Should show message ', async () => {
   // mock message
   const message = 'Are you sure?';
 
@@ -24,7 +24,7 @@ test('Should show message ', async () => {
   expect(screen.getByText(/Are you sure?/i)).toBeInTheDocument();
 });
 
-test('Should call onConfirm,turnOff function when yes is pressed ', async () => {
+it('Should call onConfirm,turnOff function when yes is pressed ', async () => {
   // mock onConfirm, turnOff functions
   const onConfirm = jest.fn();
   const onHide = jest.fn();

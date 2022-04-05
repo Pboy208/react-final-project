@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import userEvent from '@testing-library/user-event';
-import { waitForElementToBeRemoved } from '@testing-library/react';
+import { waitForElementToBeRemoved, waitFor } from '@testing-library/react';
 import Home from 'components/Home';
 import { render, screen, resetReduxProductState } from 'utils/test';
 import * as mock from 'mocks/mockForTesting';
@@ -9,64 +9,35 @@ afterEach(() => {
   resetReduxProductState();
 });
 
-test('Should loading at first', async () => {
-  // render component
-  render(<Home />);
+describe('Test for successful interactions in Home.js', () => {
+  it('Should show product list at first and then should show sorted product when Sort By option changed and searched product when search box change', async () => {
+    // render component
+    render(<Home />);
 
-  // expect loading spinner
-  expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
-});
+    // expect loading spinner
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-test('Should show original product list at first', async () => {
-  // render component
-  render(<Home />);
+    // expect to show product list
+    expect(screen.getByText(mock.productList[0].title)).toBeInTheDocument();
 
-  // expect loading spinner
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    // choose sort by price decreasing
+    userEvent.selectOptions(screen.getByTestId('sort-by'), ['PRICE_DECREASE']);
 
-  // expect to show product list
-  expect(screen.getByText(mock.productList[0].title)).toBeInTheDocument();
-});
+    // expect to show sorted product list
+    await waitFor(() =>
+      expect(
+        screen.getByText(mock.priceDecreaseProductList[0].title),
+      ).toBeInTheDocument(),
+    );
 
-test('Should show sorted product list at first', async () => {
-  // render component
-  render(<Home />);
+    // type search info
+    userEvent.type(screen.getByTestId('search-box'), 'search');
 
-  // expect loading spinner
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
-
-  // choose sort by price decreasing
-
-  userEvent.selectOptions(screen.getByTestId('sort-by'), ['PRICE_DECREASE']);
-
-  // wait for custom hook to change isLoading state
-  await waitForElementToBeRemoved(() =>
-    screen.getByText(mock.productList[0].title),
-  );
-
-  // expect to show sorted product list
-  expect(
-    screen.getByText(mock.priceDecreaseProductList[0].title),
-  ).toBeInTheDocument();
-});
-
-test('Should show searched product list ', async () => {
-  // render component
-  render(<Home />);
-
-  // expect loading spinner
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
-
-  // type search info
-  userEvent.type(screen.getByTestId('search-box'), 'search');
-
-  // wait for custom hook to change isLoading state
-  await waitForElementToBeRemoved(() =>
-    screen.getByText(mock.productList[0].title),
-  );
-
-  // expect to show sorted product list
-  expect(
-    screen.getByText(mock.searchedProductList[0].title),
-  ).toBeInTheDocument();
+    // expect to show searched product list
+    await waitFor(() =>
+      expect(
+        screen.getByText(mock.searchedProductList[0].title),
+      ).toBeInTheDocument(),
+    );
+  });
 });

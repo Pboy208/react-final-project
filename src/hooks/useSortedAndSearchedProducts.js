@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useReducer, useMemo, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductList } from 'store/productSlice';
 import SortByConstant from 'constants/sortBy';
@@ -29,27 +29,27 @@ const useSortedAndSearchedProducts = (
   const { isLoading, byIds, ids, isFirstLoad } = useSelector(
     (state) => state.product,
   );
-  const [state, setState] = React.useReducer(reducer, {
+  const [state, setState] = useReducer(reducer, {
     sortBy: initialSortBy,
     search: initialSearch,
     justMounted: true,
   });
-  const productList = React.useMemo(
+  const productList = useMemo(
     () => (ids ? ids.map((id) => byIds[id]) : null),
     [ids, byIds],
   );
   const { sortBy, search, justMounted } = state;
   const dispatch = useDispatch();
 
-  const setSortBy = React.useCallback((newSortBy) => {
+  const setSortBy = useCallback((newSortBy) => {
     setState({ type: ActionTypes.SET_SORT_BY, sortBy: newSortBy });
   }, []);
 
-  const setSearch = React.useCallback((newSearch) => {
+  const setSearch = useCallback((newSearch) => {
     setState({ type: ActionTypes.SET_SEARCH, search: newSearch });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const debounce = setTimeout(() => {
       dispatch(getProductList({ sortBy, search }));
     }, 500);
@@ -58,6 +58,7 @@ const useSortedAndSearchedProducts = (
     if (!isFirstLoad && justMounted) clearTimeout(debounce);
     setState({ type: ActionTypes.SET_JUST_MOUNTED });
     return () => clearTimeout(debounce);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, sortBy, search]);
 
   return {

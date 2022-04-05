@@ -1,11 +1,22 @@
-import * as React from 'react';
+import {
+  createContext,
+  useState,
+  useMemo,
+  useContext,
+  useEffect,
+  memo,
+} from 'react';
 
-const ThemeContext = React.createContext();
+const storedTheme = localStorage.getItem('theme') || 'light';
 
-const ThemeProvider = React.memo(({ initialTheme = 'light', children }) => {
-  const [theme, setTheme] = React.useState(initialTheme);
+const ThemeContext = createContext();
 
-  const value = React.useMemo(
+const ThemeProvider = memo(({ initialTheme = storedTheme, children }) => {
+  const [theme, setTheme] = useState(initialTheme);
+
+  useEffect(() => localStorage.setItem('theme', theme), [theme]);
+
+  const value = useMemo(
     () => ({
       theme,
       toggleTheme: () =>
@@ -20,7 +31,7 @@ const ThemeProvider = React.memo(({ initialTheme = 'light', children }) => {
 });
 
 const useTheme = () => {
-  const context = React.useContext(ThemeContext);
+  const context = useContext(ThemeContext);
   if (!context) throw Error('ThemeContext need to be used in a ThemeProvider');
   return context;
 };
