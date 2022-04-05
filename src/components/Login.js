@@ -80,6 +80,7 @@ const LoginForm = styled.form`
   border: 1px solid;
   margin: 40px auto;
   padding: 60px;
+  border-radius: 12px;
 `;
 
 const FormGroup = styled(Form.Group)`
