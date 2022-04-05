@@ -19,7 +19,7 @@ function UpdateProduct() {
         .unwrap()
         .catch(() => navigate('/home'));
     }
-  }, [dispatch, product, productId]);
+  }, [dispatch, navigate, product, productId]);
 
   const handleFormSubmit = useCallback(
     (updatedProduct) => {
