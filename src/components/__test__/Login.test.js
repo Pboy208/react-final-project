@@ -6,107 +6,115 @@ import Login from 'components/Login';
 import { render, act, screen } from 'utils/test';
 import server from 'mocks/server';
 
-it('Should show error when fields are invalid', async () => {
-  // make invalid data
-  const loginInfo = {
-    email: '123',
-    password: '123',
-  };
+describe('Test for logging in successfully in Login.js', () => {
+  it('Should redirect and show toast when login with valid information', async () => {
+    // make valid data
+    const loginInfo = {
+      email: 'phuong@gmail.com',
+      password: 'phuong123',
+    };
 
-  // render component
-  render(<Login />);
+    // render component
+    render(<Login />);
 
-  // press login button
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /login/i })),
-  );
+    // type login info
+    userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
+    userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
 
-  // check error message
-  expect(screen.getAllByRole('alert')[0].textContent).toBe('Email is required');
-  expect(screen.getAllByRole('alert')[1].textContent).toBe(
-    'Password is required',
-  );
+    // press login button
+    await act(async () =>
+      userEvent.click(screen.getByRole('button', { name: /login/i })),
+    );
 
-  // type login info
-  userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
-  userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
+    // wait for response
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-  // press login button
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /login/i })),
-  );
-
-  // check error message
-  expect(screen.getAllByRole('alert')[0].textContent).toBe('Email is invalid');
-  expect(screen.getAllByRole('alert')[1].textContent).toBe(
-    'Password must be at least 5 characters',
-  );
+    // screen.debug();
+    // // expect success toast and redirect to home page
+    expect(global.window.location.pathname).toBe('/home');
+    expect(screen.queryByText('Login success')).toBeInTheDocument();
+  });
 });
 
-it('Should redirect and show toast when login with valid information', async () => {
-  // make valid data
-  const loginInfo = {
-    email: 'phuong@gmail.com',
-    password: 'phuong123',
-  };
+describe('Test for error handling in Login.js', () => {
+  it('Should show error when fields are invalid', async () => {
+    // make invalid data
+    const loginInfo = {
+      email: '123',
+      password: '123',
+    };
 
-  // render component
-  render(<Login />);
+    // render component
+    render(<Login />);
 
-  // type login info
-  userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
-  userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
+    // press login button
+    await act(async () =>
+      userEvent.click(screen.getByRole('button', { name: /login/i })),
+    );
 
-  // press login button
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /login/i })),
-  );
+    // check error message
+    expect(screen.getAllByRole('alert')[0].textContent).toBe(
+      'Email is required',
+    );
+    expect(screen.getAllByRole('alert')[1].textContent).toBe(
+      'Password is required',
+    );
 
-  // wait for response
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    // type login info
+    userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
+    userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
 
-  // screen.debug();
-  // // expect success toast and redirect to home page
-  expect(global.window.location.pathname).toBe('/home');
-  expect(screen.queryByText('Login success')).toBeInTheDocument();
-});
+    // press login button
+    await act(async () =>
+      userEvent.click(screen.getByRole('button', { name: /login/i })),
+    );
 
-it('Should show error toast when login with invalid information', async () => {
-  // mock handler to throw error
-  server.use(
-    rest.post('http://localhost:3000/login', async (req, res, ctx) =>
-      res(
-        ctx.status(400),
-        ctx.json({
-          message: 'Login failed, wrong username or password',
-        }),
+    // check error message
+    expect(screen.getAllByRole('alert')[0].textContent).toBe(
+      'Email is invalid',
+    );
+    expect(screen.getAllByRole('alert')[1].textContent).toBe(
+      'Password must be at least 5 characters',
+    );
+  });
+
+  it('Should show error toast when login with invalid information', async () => {
+    // mock handler to throw error
+    server.use(
+      rest.post('http://localhost:3000/login', async (req, res, ctx) =>
+        res(
+          ctx.status(400),
+          ctx.json({
+            message: 'Login failed, wrong username or password',
+          }),
+        ),
       ),
-    ),
-  );
+    );
 
-  // make invalid data
-  const loginInfo = {
-    email: 'phuong@gmail.com',
-    password: 'wrongpassword',
-  };
+    // make invalid data
+    const loginInfo = {
+      email: 'phuong@gmail.com',
+      password: 'wrongpassword',
+    };
 
-  // render component
-  render(<Login />);
+    // render component
+    render(<Login />);
 
-  // type login info
-  userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
-  userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
+    // type login info
+    userEvent.type(screen.getByLabelText(/email/i), loginInfo.email);
+    userEvent.type(screen.getByLabelText(/password/i), loginInfo.password);
 
-  // press login button
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /login/i })),
-  );
+    // press login button
+    await act(async () =>
+      userEvent.click(screen.getByRole('button', { name: /login/i })),
+    );
 
-  // wait for response
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    // wait for response
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-  // expect error toast
-  expect(
-    screen.queryByText('Login failed, wrong username or password'),
-  ).toBeInTheDocument();
+    // expect error toast
+    expect(
+      screen.queryByText('Login failed, wrong username or password'),
+    ).toBeInTheDocument();
+  });
 });

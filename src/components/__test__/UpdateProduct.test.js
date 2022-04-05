@@ -16,17 +16,12 @@ afterEach(() => {
   resetReduxProductState();
 });
 
-it('Should loading at first', async () => {
-  // render component
-  render(<UpdateProduct />);
-
-  // expect loading spinner
-  expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
-});
-
 it('Should auto fetch if redux state is null at first', async () => {
   // render component
   render(<UpdateProduct />);
+
+  // expect loading spinner to show up first
+  expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
 
   // wait for response for first fetch
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
@@ -35,23 +30,25 @@ it('Should auto fetch if redux state is null at first', async () => {
   expect(screen.getByLabelText(/title/i).value).toBe(mock.product.title);
 });
 
-it('Should redirect to home and show update success toast', async () => {
-  // render component
-  render(<UpdateProduct />);
+describe('Test for successful updating in UpdateProduct.js', () => {
+  it('Should redirect to home and show update success toast', async () => {
+    // render component
+    render(<UpdateProduct />);
 
-  // wait for response for first fetch as redux state is null at first
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    // wait for response for first fetch as redux state is null at first
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-  // press save button
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /save/i })),
-  );
+    // press save button
+    await act(async () =>
+      userEvent.click(screen.getByRole('button', { name: /save/i })),
+    );
 
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-  // expect success toast and redirect to home page
-  await waitFor(() =>
-    expect(screen.getByText('Update success')).toBeInTheDocument(),
-  );
-  expect(global.window.location.pathname).toBe('/home');
+    // expect success toast and redirect to home page
+    await waitFor(() =>
+      expect(screen.getByText('Update success')).toBeInTheDocument(),
+    );
+    expect(global.window.location.pathname).toBe('/home');
+  });
 });
