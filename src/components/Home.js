@@ -182,26 +182,31 @@ const Title = styled.div`
 const AddBtn = styled(Link)`
   width: 10%;
   border: 1px solid;
-  border-radius: 16px 16px 0 0;
-  border-bottom: none;
+  border-radius: 16px;
   text-align: center;
   height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-right: 4.5%;
   font-size: var(--font-size);
   cursor: pointer;
-  background-color: #aaaaaa;
+  background-color: var(--colorPrimary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -10px;
+  &:hover {
+    color: white;
+  }
 
   @media ${Device.TABLET} {
     padding-left: 6px;
-    height: 40px;
+    height: 44px;
   }
 
   @media ${Device.MOBILE} {
     padding-left: 2px;
-    height: 48px;
+    height: 52px;
   }
 `;
 
