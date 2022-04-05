@@ -1,9 +1,20 @@
-import { createContext, useState, useMemo, useContext, memo } from 'react';
+import {
+  createContext,
+  useState,
+  useMemo,
+  useContext,
+  useEffect,
+  memo,
+} from 'react';
+
+const storedTheme = localStorage.getItem('theme') || 'light';
 
 const ThemeContext = createContext();
 
-const ThemeProvider = memo(({ initialTheme = 'light', children }) => {
+const ThemeProvider = memo(({ initialTheme = storedTheme, children }) => {
   const [theme, setTheme] = useState(initialTheme);
+
+  useEffect(() => localStorage.setItem('theme', theme), [theme]);
 
   const value = useMemo(
     () => ({
