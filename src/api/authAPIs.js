@@ -1,15 +1,7 @@
-import { createRequest } from 'utils/request';
+import { createRequest, POST } from 'utils/request';
 
 export const login = (loginInfo) =>
-  createRequest({
-    endpoint: '/login',
-    body: loginInfo,
-    method: 'POST',
-  });
+  createRequest(POST('/login', { body: loginInfo }));
 
 export const register = (registerInfo) =>
-  createRequest({
-    endpoint: '/register',
-    body: registerInfo,
-    method: 'POST',
-  });
+  createRequest(POST('/register', { body: registerInfo }));
