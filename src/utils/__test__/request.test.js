@@ -39,7 +39,7 @@ test('Should see null fields at first', async () => {
 
   // expect fetch to be called with correct config
   expect(window.fetch).toHaveBeenCalledWith(expectedUrl, expectedConfig);
-  expect(payload).toEqual('payload');
+  expect(payload).toBe('payload');
 });
 
 test('Should throw error when status is error code', async () => {
@@ -62,7 +62,7 @@ test('Should throw error when status is error code', async () => {
     await createRequest(data);
   } catch (error) {
     // expect error to be thrown
-    expect(error.code).toEqual('404');
-    expect(error.message).toEqual('not found');
+    expect(error.code).toBe('404');
+    expect(error.message).toBe('not found');
   }
 });

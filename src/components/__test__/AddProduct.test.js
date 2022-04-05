@@ -10,9 +10,9 @@ test('Should see null fields at first', async () => {
   render(<AddProduct />);
 
   // expect null fields
-  expect(screen.getByLabelText(/title/i).value).toEqual('');
-  expect(screen.getByLabelText(/image url/i).value).toEqual('');
-  expect(screen.getByLabelText(/price/i).value).toEqual('0');
+  expect(screen.getByLabelText(/title/i).value).toBe('');
+  expect(screen.getByLabelText(/image url/i).value).toBe('');
+  expect(screen.getByLabelText(/price/i).value).toBe('0');
 });
 
 test('Should redirect to home and show add success toast', async () => {
@@ -36,5 +36,5 @@ test('Should redirect to home and show add success toast', async () => {
   expect(
     screen.getByText(`${mock.product.title} is added`),
   ).toBeInTheDocument();
-  expect(global.window.location.pathname).toEqual('/home');
+  expect(global.window.location.pathname).toBe('/home');
 });

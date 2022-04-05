@@ -102,7 +102,7 @@ test('Should redirect and show toast when register with valid information', asyn
   await waitForElementToBeRemoved(() => screen.queryByLabelText(/loading/i));
 
   // expect success toast and redirect to home page
-  expect(global.window.location.pathname).toEqual('/home');
+  expect(global.window.location.pathname).toBe('/home');
   expect(screen.getByText('Register success')).toBeInTheDocument();
 });
 
