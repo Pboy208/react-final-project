@@ -17,7 +17,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: yupResolver(validationSchema),
   });
   const { isLoading } = useSelector((state) => state.auth);

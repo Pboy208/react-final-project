@@ -18,7 +18,7 @@ function ProductForm({ product, handleFormSubmit }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: yupResolver(validationSchema),
     defaultValues: product,
   });
