@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { getProduct, updateProduct } from 'store/productSlice';
 import * as Toast from 'components/common/Toast';
 import ProductForm from 'components/common/ProductForm';
@@ -38,6 +39,10 @@ function UpdateProduct() {
 
   return (
     <div data-testid="update-product-page">
+      <Helmet>
+        <title>{product.title} updating</title>
+        <meta name="description" content={`${product.title} updating`} />
+      </Helmet>
       <ProductForm product={product} handleFormSubmit={handleFormSubmit} />
       <LoadingSpinner isLoading={isLoading} />
     </div>

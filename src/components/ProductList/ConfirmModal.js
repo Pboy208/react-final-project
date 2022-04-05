@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { Modal, Button } from '@ahaui/react';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 function ConfirmModal({ onConfirm, message, content, onHide }) {
   const handleConfirm = () => {
@@ -10,6 +12,10 @@ function ConfirmModal({ onConfirm, message, content, onHide }) {
 
   return (
     <Modal show size="small" onHide={onHide} transition="">
+      <Helmet>
+        <title>Deleting product from Leo's store</title>
+        <meta name="description" content="Deleting product from Leo's store" />
+      </Helmet>
       <Modal.Header>
         <ModalTitle>{message}</ModalTitle>
       </Modal.Header>

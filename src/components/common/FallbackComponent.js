@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import { EmptyState, Button } from '@ahaui/react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 function FallbackComponent({ error, resetErrorBoundary }) {
   const navigate = useNavigate();
@@ -12,6 +14,13 @@ function FallbackComponent({ error, resetErrorBoundary }) {
 
   return (
     <Wrapper>
+      <Helmet>
+        <title>Something when wrong with Leo's store</title>
+        <meta
+          name="description"
+          content="Something when wrong with Leo's store"
+        />
+      </Helmet>
       <EmptyState src="/assets/EmptyState.svg">
         <EmptyState.Heading>There was an error:</EmptyState.Heading>
         <EmptyState.Description>{error.message}</EmptyState.Description>

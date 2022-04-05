@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import styled from 'styled-components';
@@ -6,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Loader } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Helmet } from 'react-helmet';
 import * as Toast from 'components/common/Toast';
 import validationSchema from 'utils/schemas/registerSchema';
 import { register as registerThunk } from 'store/authSlice';
@@ -43,6 +45,10 @@ function Register() {
       onSubmit={handleSubmit(handleRegister)}
       data-testid="register-page"
     >
+      <Helmet>
+        <title>Register for Leo's store</title>
+        <meta name="description" content="Want to be a part of Leo?" />
+      </Helmet>
       <FormGroup controlId="registerForm.email">
         <Form.Label>Email</Form.Label>
         <Form.Input

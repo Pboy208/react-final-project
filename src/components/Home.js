@@ -2,6 +2,7 @@
 import { EmptyState } from '@ahaui/react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import SortByConstant from 'constants/sortBy';
 import useSortedAndSearchedProducts from 'hooks/useSortedAndSearchedProducts';
 import { Device } from 'constants/mediaQuery';
@@ -34,6 +35,10 @@ function Home() {
 
   return (
     <Wrapper data-testid="home-page">
+      <Helmet>
+        <title>Leo's shopping store</title>
+        <meta name="description" content="Welcome to Leo's shopping store" />
+      </Helmet>
       <LoadingSpinner isLoading={isLoading} />
       <SearchAndSortBy>
         <SearchBox
