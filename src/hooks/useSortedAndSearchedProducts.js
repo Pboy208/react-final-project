@@ -58,6 +58,7 @@ const useSortedAndSearchedProducts = (
     if (!isFirstLoad && justMounted) clearTimeout(debounce);
     setState({ type: ActionTypes.SET_JUST_MOUNTED });
     return () => clearTimeout(debounce);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, sortBy, search]);
 
   return {

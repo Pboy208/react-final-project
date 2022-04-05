@@ -25,7 +25,7 @@ function AddProduct() {
         navigate('/home');
       })
       .catch(console.error);
-  }, []);
+  }, [dispatch, navigate]);
 
   return (
     <div data-testid="add-product-page">
