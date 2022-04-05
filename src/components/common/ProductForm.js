@@ -94,10 +94,18 @@ function ProductForm({ product, handleFormSubmit }) {
 
 const ProductImage = styled.img`
   width: 40%;
-  height: 100%;
+  height: 460px;
   object-fit: cover;
   border: 3px solid;
   border-radius: 12px;
+
+  @media ${Device.TABLET} {
+    height: 330px;
+  }
+
+  @media ${Device.MOBILE} {
+    height: 120px;
+  }
 `;
 
 const StyledForm = styled.form`
@@ -126,7 +134,6 @@ const GoBackButton = styled(Button)`
 
 const Wrapper = styled.div`
   display: flex;
-  min-height: 100%;
   width: 100%;
   border: 1px solid;
   border-radius: 12px;
