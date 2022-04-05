@@ -2,13 +2,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { Form, Button, Loader } from '@ahaui/react';
-import { yupResolver } from '@hookform/resolvers/yup';
-import validationSchema from 'utils/schemas/registerSchema';
-import { register as registerThunk } from 'store/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Form, Button, Loader } from '@ahaui/react';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as Toast from 'components/common/Toast';
+import validationSchema from 'utils/schemas/registerSchema';
+import { register as registerThunk } from 'store/authSlice';
 
 function Register() {
   const {
