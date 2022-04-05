@@ -40,7 +40,7 @@ function Header() {
   return (
     <Wrapper>
       <Side />
-      <Logo to="/home">Logo</Logo>
+      <Logo to="/home">Leo's</Logo>
       <Side>
         <Actions>
           {renderNavigationBar()}
