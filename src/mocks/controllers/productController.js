@@ -91,7 +91,7 @@ export const getProduct = controllerWrapper(async (req, res, ctx) => {
     return res(
       ctx.status(404),
       ctx.json({
-        message: 'Get failed, id not found',
+        message: 'Get failed, product not found',
       }),
     );
   return res(ctx.json({ message: 'Get successfully', data: product }));
@@ -182,7 +182,7 @@ export const deleteProduct = controllerWrapper(async (req, res, ctx) => {
     return res(
       ctx.status(404),
       ctx.json({
-        message: 'Delete failed, id not found',
+        message: 'Delete failed, product not found',
       }),
     );
   return res(ctx.json({ message: 'Delete successfully' }));

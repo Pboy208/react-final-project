@@ -15,7 +15,9 @@ function UpdateProduct() {
 
   useEffect(() => {
     if (!product) {
-      dispatch(getProduct(productId)).unwrap();
+      dispatch(getProduct(productId))
+        .unwrap()
+        .catch(() => navigate('/home'));
     }
   }, [dispatch, product, productId]);
 
