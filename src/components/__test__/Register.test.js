@@ -25,13 +25,14 @@ test('Should show error when fields are invalid', async () => {
     screen.getAllByLabelText(/password/i)[0],
     registerInfo.password,
   );
-  // we need to wrap this event trigger with act and await because form validation
-  // is async below, so we need at least 1 async handler to get the validation error
+  userEvent.type(
+    screen.getAllByLabelText(/password/i)[1],
+    registerInfo.confirmPassword,
+  );
+
+  // press register button
   await act(async () =>
-    userEvent.type(
-      screen.getAllByLabelText(/password/i)[1],
-      registerInfo.confirmPassword,
-    ),
+    userEvent.click(screen.getByRole('button', { name: /register/i })),
   );
 
   // check error message
