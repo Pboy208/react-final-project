@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ import ConfirmModal from './ConfirmModal';
 function Product({ product }) {
   const { title, imageUrl, price, id } = product;
   const [isConfirmingDeleteProduct, setIsConfirmingDeleteProduct] =
-    React.useState(false);
+    useState(false);
   const { isLoading } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 

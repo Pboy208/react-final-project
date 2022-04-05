@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable react/jsx-props-no-spreading */
-import * as React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +28,7 @@ function ProductForm({ product, handleFormSubmit }) {
   const isImageUrlInvalid = !!errors.imageUrl;
   const isTitleInvalid = !!errors.title;
 
-  React.useEffect(() => {
+  useEffect(() => {
     // reset form when product is updated after first time rendered as null product
     reset(product);
   }, [product, reset]);

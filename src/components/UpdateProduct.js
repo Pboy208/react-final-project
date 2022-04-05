@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getProduct, updateProduct } from 'store/productSlice';
@@ -13,13 +13,13 @@ function UpdateProduct() {
   const { byIds, isLoading } = useSelector((state) => state.product);
   const product = byIds?.[productId];
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!product) {
       dispatch(getProduct(productId)).unwrap();
     }
   }, [dispatch, product, productId]);
 
-  const handleFormSubmit = React.useCallback(
+  const handleFormSubmit = useCallback(
     (updatedProduct) => {
       dispatch(updateProduct(updatedProduct))
         .unwrap()
@@ -33,7 +33,7 @@ function UpdateProduct() {
   );
 
   if (!product) return <LoadingSpinner isLoading />;
-  
+
   return (
     <div data-testid="update-product-page">
       <ProductForm product={product} handleFormSubmit={handleFormSubmit} />

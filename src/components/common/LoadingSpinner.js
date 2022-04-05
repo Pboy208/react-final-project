@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Loader } from '@ahaui/react';
-import * as React from 'react';
+import { memo } from 'react';
 
-const LoadingSpinner = React.memo(
+const LoadingSpinner = memo(
   ({ isLoading }) =>
     isLoading && <StyledLoader aria-label="Loading" size="large" />,
 );

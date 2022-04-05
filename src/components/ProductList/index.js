@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 import Product from './Product';
 
-const ProductList = React.memo(({ productList = [] }) => (
+const ProductList = memo(({ productList = [] }) => (
   <List>
     {productList.map((product) => (
       <Product key={product.id} product={product} />

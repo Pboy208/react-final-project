@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 import { EmptyState } from '@ahaui/react';
-import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SortByConstant from 'constants/sortBy';

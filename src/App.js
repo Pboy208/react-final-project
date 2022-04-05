@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from '@ahaui/react';
 import ProtectedRoute from 'components/common/ProtectedRoute';
@@ -10,10 +10,10 @@ import Login from 'components/Login';
 import PageNotFound from 'components/PageNotFound';
 import { useTheme } from 'context/ThemeContext';
 
-const Home = React.lazy(() => import('components/Home'));
-const Register = React.lazy(() => import('components/Register'));
-const AddProduct = React.lazy(() => import('components/AddProduct'));
-const UpdateProduct = React.lazy(() => import('components/UpdateProduct'));
+const Home = lazy(() => import('components/Home'));
+const Register = lazy(() => import('components/Register'));
+const AddProduct = lazy(() => import('components/AddProduct'));
+const UpdateProduct = lazy(() => import('components/UpdateProduct'));
 
 function App() {
   const { theme } = useTheme();
@@ -22,7 +22,7 @@ function App() {
       <GlobalStyle theme={theme} />
       <ToastContainer />
       <Layout>
-        <React.Suspense fallback={<LoadingSpinner isLoading />}>
+        <Suspense fallback={<LoadingSpinner isLoading />}>
           <Routes>
             <Route path="/" exact element={<Navigate to="/home" />} />
             <Route
@@ -52,7 +52,7 @@ function App() {
             />
             <Route path="/*" element={<PageNotFound />} />
           </Routes>
-        </React.Suspense>
+        </Suspense>
       </Layout>
     </>
   );

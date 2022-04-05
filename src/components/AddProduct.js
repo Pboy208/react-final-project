@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addProduct } from 'store/productSlice';
@@ -17,7 +17,7 @@ function AddProduct() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleFormSubmit = React.useCallback((product) => {
+  const handleFormSubmit = useCallback((product) => {
     dispatch(addProduct(product))
       .unwrap()
       .then(() => {
