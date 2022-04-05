@@ -14,7 +14,7 @@ afterEach(() => {
   resetReduxProductState();
 });
 
-test('Should show home page', async () => {
+it('Should show home page', async () => {
   // render component
   renderAppWithRoute('/home');
 
@@ -25,7 +25,7 @@ test('Should show home page', async () => {
   expect(screen.getByTestId('home-page')).toBeInTheDocument();
 });
 
-test('Should redirect to home page when get into "/"', async () => {
+it('Should redirect to home page when get into "/"', async () => {
   // render component
   renderAppWithRoute('/');
 
@@ -36,7 +36,7 @@ test('Should redirect to home page when get into "/"', async () => {
   expect(screen.getByTestId('home-page')).toBeInTheDocument();
 });
 
-test('Should show add product page', async () => {
+it('Should show add product page', async () => {
   // render component
   renderAppWithRoute('/product/create');
 
@@ -47,7 +47,7 @@ test('Should show add product page', async () => {
   expect(screen.getByTestId('add-product-page')).toBeInTheDocument();
 });
 
-test('Should show update product page', async () => {
+it('Should show update product page', async () => {
   // render component
   renderAppWithRoute(`/product/${mock.product.id}`);
 
@@ -58,7 +58,7 @@ test('Should show update product page', async () => {
   expect(screen.getByTestId('update-product-page')).toBeInTheDocument();
 });
 
-test('Should redirect to "/home" when get to "/login" with valid session', async () => {
+it('Should redirect to "/home" when get to "/login" with valid session', async () => {
   // render component
   renderAppWithRoute(`/login`);
 
@@ -69,7 +69,7 @@ test('Should redirect to "/home" when get to "/login" with valid session', async
   expect(screen.getByTestId('home-page')).toBeInTheDocument();
 });
 
-test('Should logout and show error when token is invalid', async () => {
+it('Should logout and show error when token is invalid', async () => {
   // mock msw to throw back an error
   server.use(
     rest.get('http://localhost:3000/products', async (req, res, ctx) =>
@@ -95,7 +95,7 @@ test('Should logout and show error when token is invalid', async () => {
   expect(screen.getByTestId('login-page')).toBeInTheDocument();
 });
 
-test('Should redirect to "/login" when dont have token', async () => {
+it('Should redirect to "/login" when dont have token', async () => {
   // logout
   resetReduxAuthState();
 
@@ -106,7 +106,7 @@ test('Should redirect to "/login" when dont have token', async () => {
   expect(screen.getByTestId('login-page')).toBeInTheDocument();
 });
 
-test('Should show login page', async () => {
+it('Should show login page', async () => {
   // logout
   resetReduxAuthState();
 
@@ -117,7 +117,7 @@ test('Should show login page', async () => {
   expect(screen.getByTestId('login-page')).toBeInTheDocument();
 });
 
-test('Should show register page', async () => {
+it('Should show register page', async () => {
   // logout
   resetReduxAuthState();
 
@@ -131,7 +131,7 @@ test('Should show register page', async () => {
   expect(screen.getByTestId('register-page')).toBeInTheDocument();
 });
 
-test('Should show not found page', async () => {
+it('Should show not found page', async () => {
   // logout
   resetReduxAuthState();
 

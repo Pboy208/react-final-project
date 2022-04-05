@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Header from 'components/common/Header';
 import { render, screen } from 'utils/test';
 
-test('Should be light theme at the beginning and change theme to dark when button is clicked', async () => {
+it('Should be light theme at the beginning and change theme to dark when button is clicked', async () => {
   // render component
   render(<Header />);
 

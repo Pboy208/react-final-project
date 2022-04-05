@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import ProductForm from 'components/common/ProductForm';
 import { render, act, screen } from 'utils/test';
 
-test('Should show product information', async () => {
+it('Should show product information', async () => {
   // mock valid data
   const mockProduct = {
     id: '4aff282b-46b0-469b-b91a-52f0b2fccabb',
@@ -29,7 +29,7 @@ test('Should show product information', async () => {
   );
 });
 
-test('Should show error when fields are invalid', async () => {
+it('Should show error when fields are invalid', async () => {
   // mock invalid data
   const mockProduct = {
     id: '4aff282b-46b0-469b-b91a-52f0b2fccabb',
@@ -64,7 +64,7 @@ test('Should show error when fields are invalid', async () => {
   );
 });
 
-test('Should redirect to home when click return button', async () => {
+it('Should redirect to home when click return button', async () => {
   // render component
   render(<ProductForm />);
 

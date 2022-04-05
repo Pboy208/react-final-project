@@ -6,7 +6,7 @@ beforeAll(() => {
   window.fetch = jest.fn();
 });
 
-test('Should see null fields at first', async () => {
+it('Should see null fields at first', async () => {
   // window.fetch mock
   window.fetch.mockImplementation(async () => ({
     ok: true,
@@ -42,7 +42,7 @@ test('Should see null fields at first', async () => {
   expect(payload).toBe('payload');
 });
 
-test('Should throw error when status is error code', async () => {
+it('Should throw error when status is error code', async () => {
   // window.fetch mock
   window.fetch.mockImplementation(async () => ({
     ok: false,

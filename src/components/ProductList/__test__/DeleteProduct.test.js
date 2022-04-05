@@ -20,7 +20,7 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
-test('Should show confirm modal ', async () => {
+it('Should show confirm modal ', async () => {
   // render component
   render(<ProductList productList={mock.productList} />);
 

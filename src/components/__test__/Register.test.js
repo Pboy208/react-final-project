@@ -6,7 +6,7 @@ import Register from 'components/Register';
 import { render, waitFor, act, screen } from 'utils/test';
 import server from 'mocks/server';
 
-test('Should show error when fields are invalid', async () => {
+it('Should show error when fields are invalid', async () => {
   // make invalid data
   const registerInfo = {
     email: 'invalidEmail',
@@ -48,7 +48,7 @@ test('Should show error when fields are invalid', async () => {
   );
 });
 
-test('Should show error when fields are null', async () => {
+it('Should show error when fields are null', async () => {
   // render component
   render(<Register />);
 
@@ -70,7 +70,7 @@ test('Should show error when fields are null', async () => {
   );
 });
 
-test('Should redirect and show toast when register with valid information', async () => {
+it('Should redirect and show toast when register with valid information', async () => {
   // make valid data
   const registerInfo = {
     email: 'testingAccount@gmail.com',
@@ -107,7 +107,7 @@ test('Should redirect and show toast when register with valid information', asyn
   expect(screen.getByText('Register success')).toBeInTheDocument();
 });
 
-test('Should show error toast when register with invalid information', async () => {
+it('Should show error toast when register with invalid information', async () => {
   // mock msw handler to throw back error
   server.use(
     rest.post('http://localhost:3000/register', async (req, res, ctx) =>

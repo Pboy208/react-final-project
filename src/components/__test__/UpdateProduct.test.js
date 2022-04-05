@@ -16,7 +16,7 @@ afterEach(() => {
   resetReduxProductState();
 });
 
-test('Should loading at first', async () => {
+it('Should loading at first', async () => {
   // render component
   render(<UpdateProduct />);
 
@@ -24,7 +24,7 @@ test('Should loading at first', async () => {
   expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
 });
 
-test('Should auto fetch if redux state is null at first', async () => {
+it('Should auto fetch if redux state is null at first', async () => {
   // render component
   render(<UpdateProduct />);
 
@@ -35,7 +35,7 @@ test('Should auto fetch if redux state is null at first', async () => {
   expect(screen.getByLabelText(/title/i).value).toBe(mock.product.title);
 });
 
-test('Should redirect to home and show update success toast', async () => {
+it('Should redirect to home and show update success toast', async () => {
   // render component
   render(<UpdateProduct />);
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { formatVnd } from 'utils/formatter';
 
-test('Should be in right format', async () => {
+it('Should be in right format', async () => {
   // generate data of 100.000.000 vnd
   const price = 100000000;
 

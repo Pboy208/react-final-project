@@ -9,7 +9,7 @@ afterEach(() => {
   resetReduxProductState();
 });
 
-test('Should loading at first', async () => {
+it('Should loading at first', async () => {
   // render component
   render(<Home />);
 
@@ -17,7 +17,7 @@ test('Should loading at first', async () => {
   expect(screen.getByLabelText(/loading/i)).toBeInTheDocument();
 });
 
-test('Should show original product list at first', async () => {
+it('Should show original product list at first', async () => {
   // render component
   render(<Home />);
 
@@ -28,7 +28,7 @@ test('Should show original product list at first', async () => {
   expect(screen.getByText(mock.productList[0].title)).toBeInTheDocument();
 });
 
-test('Should show sorted product list at first', async () => {
+it('Should show sorted product list at first', async () => {
   // render component
   render(<Home />);
 
@@ -50,7 +50,7 @@ test('Should show sorted product list at first', async () => {
   ).toBeInTheDocument();
 });
 
-test('Should show searched product list ', async () => {
+it('Should show searched product list ', async () => {
   // render component
   render(<Home />);
 

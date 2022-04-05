@@ -6,7 +6,7 @@ import Login from 'components/Login';
 import { render, act, screen } from 'utils/test';
 import server from 'mocks/server';
 
-test('Should show error when fields are invalid', async () => {
+it('Should show error when fields are invalid', async () => {
   // make invalid data
   const loginInfo = {
     email: '123',
@@ -43,7 +43,7 @@ test('Should show error when fields are invalid', async () => {
   );
 });
 
-test('Should redirect and show toast when login with valid information', async () => {
+it('Should redirect and show toast when login with valid information', async () => {
   // make valid data
   const loginInfo = {
     email: 'phuong@gmail.com',
@@ -71,7 +71,7 @@ test('Should redirect and show toast when login with valid information', async (
   expect(screen.queryByText('Login success')).toBeInTheDocument();
 });
 
-test('Should show error toast when login with invalid information', async () => {
+it('Should show error toast when login with invalid information', async () => {
   // mock handler to throw error
   server.use(
     rest.post('http://localhost:3000/login', async (req, res, ctx) =>

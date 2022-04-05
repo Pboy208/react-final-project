@@ -5,7 +5,7 @@ import AddProduct from 'components/AddProduct';
 import { render, act, screen } from 'utils/test';
 import * as mock from 'mocks/mockForTesting';
 
-test('Should see null fields at first', async () => {
+it('Should see null fields at first', async () => {
   // render component
   render(<AddProduct />);
 
@@ -15,7 +15,7 @@ test('Should see null fields at first', async () => {
   expect(screen.getByLabelText(/price/i).value).toBe('0');
 });
 
-test('Should redirect to home and show add success toast', async () => {
+it('Should redirect to home and show add success toast', async () => {
   // render component
   render(<AddProduct />);
 

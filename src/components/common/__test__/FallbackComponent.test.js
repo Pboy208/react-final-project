@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import FallbackComponent from 'components/common/FallbackComponent';
 import { render, screen } from 'utils/test';
 
-test('Should show error message and redirect when click try again', async () => {
+it('Should show error message and redirect when click try again', async () => {
   // mock resetErrorBoundary
   const resetErrorBoundary = jest.fn();
 
