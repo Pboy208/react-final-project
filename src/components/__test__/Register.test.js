@@ -35,17 +35,15 @@ test('Should show error when fields are invalid', async () => {
   );
 
   // check error message
-  expect(screen.getAllByRole('alert')[0].textContent).toMatchInlineSnapshot(
-    `"Email is invalid"`,
+  expect(screen.getAllByRole('alert')[0].textContent).toBe('Email is invalid');
+  expect(screen.getAllByRole('alert')[1].textContent).toBe(
+    "User's name must be at least 5 characters",
   );
-  expect(screen.getAllByRole('alert')[1].textContent).toMatchInlineSnapshot(
-    `"User's name must be at least 5 characters"`,
+  expect(screen.getAllByRole('alert')[2].textContent).toBe(
+    'Password must be at least 5 characters',
   );
-  expect(screen.getAllByRole('alert')[2].textContent).toMatchInlineSnapshot(
-    `"Password must be at least 5 characters"`,
-  );
-  expect(screen.getAllByRole('alert')[3].textContent).toMatchInlineSnapshot(
-    `"Password must be at least 5 characters"`,
+  expect(screen.getAllByRole('alert')[3].textContent).toBe(
+    'Password must be at least 5 characters',
   );
 });
 
@@ -59,17 +57,15 @@ test('Should show error when fields are null', async () => {
   );
 
   // check error message
-  expect(screen.getAllByRole('alert')[0].textContent).toMatchInlineSnapshot(
-    `"Email is required"`,
+  expect(screen.getAllByRole('alert')[0].textContent).toBe('Email is required');
+  expect(screen.getAllByRole('alert')[1].textContent).toBe(
+    "User's name is required",
   );
-  expect(screen.getAllByRole('alert')[1].textContent).toMatchInlineSnapshot(
-    `"User's name is required"`,
+  expect(screen.getAllByRole('alert')[2].textContent).toBe(
+    'Password is required',
   );
-  expect(screen.getAllByRole('alert')[2].textContent).toMatchInlineSnapshot(
-    `"Password is required"`,
-  );
-  expect(screen.getAllByRole('alert')[3].textContent).toMatchInlineSnapshot(
-    `"Confirm password is required"`,
+  expect(screen.getAllByRole('alert')[3].textContent).toBe(
+    'Confirm password is required',
   );
 });
 

@@ -16,7 +16,7 @@ test('Should show product information', async () => {
 
   // render component
   render(<ProductForm product={mockProduct} />);
-  
+
   // expect information to be shown
   expect(screen.getByRole('textbox', { name: /title/i }).value).toBe(
     mockProduct.title,
@@ -53,14 +53,14 @@ test('Should show error when fields are invalid', async () => {
   );
 
   // expect error to be shown
-  expect(screen.getAllByRole('alert')[0].textContent).toMatchInlineSnapshot(
-    `"Title must be at least 5 characters"`,
+  expect(screen.getAllByRole('alert')[0].textContent).toBe(
+    'Title must be at least 5 characters',
   );
-  expect(screen.getAllByRole('alert')[1].textContent).toMatchInlineSnapshot(
-    `"Image url is invalid"`,
+  expect(screen.getAllByRole('alert')[1].textContent).toBe(
+    'Image url is invalid',
   );
-  expect(screen.getAllByRole('alert')[2].textContent).toMatchInlineSnapshot(
-    `"Price is needed to be a number"`,
+  expect(screen.getAllByRole('alert')[2].textContent).toBe(
+    'Price is needed to be a number',
   );
 });
 
