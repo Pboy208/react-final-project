@@ -10,7 +10,7 @@ The application was built and tested with `Node.js version 16.14.2` and `Npm ver
 
 In folder of the project, open terminal and type in
 
-`npm install` for dependency installation\
+`npm install` for dependencies installation\
 `npm start` to start the application (make sure you start it at port 3000)\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
@@ -19,5 +19,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 In folder of the project, open terminal and type in
 
 `npm test` to run the tests\
-`npm test -- --coverage` to run the tests with coverage\
-`npm test -- --coverage --watchAll` to run the tests with coverage for the whole folders
+`npm run testCoverageAll` to run the tests with coverage for the whole folders

@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
+import { EmptyState } from '@ahaui/react';
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SortByConstant from 'constants/sortBy';
 import useSortedAndSearchedProducts from 'hooks/useSortedAndSearchedProducts';
 import { Device } from 'constants/mediaQuery';
-import { EmptyState } from '@ahaui/react';
 import LoadingSpinner from 'components/common/LoadingSpinner';
 import ProductList from 'components/ProductList';
 
@@ -151,7 +151,8 @@ const ColumnTitles = styled.div`
 const Title = styled.div`
   flex: ${(prop) => prop.flex};
   height: 30px;
-  padding-left: 20px;
+  padding: 0 20px;
+
   border: 1px solid;
   border-top-right-radius: 16px;
   border-top-left-radius: 4px;
@@ -169,12 +170,12 @@ const Title = styled.div`
   }
 
   @media ${Device.TABLET} {
-    padding-left: 10px;
+    padding: 0 10px;
     height: 40px;
   }
 
   @media ${Device.MOBILE} {
-    padding-left: 4px;
+    padding: 0 4px;
     height: 48px;
   }
 `;

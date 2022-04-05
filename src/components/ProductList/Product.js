@@ -100,7 +100,7 @@ const Information = styled.span`
   flex: ${(prop) => prop.flex};
   border-right: 1px solid;
   border-left: 1px solid;
-  padding-left: 20px;
+  padding: 0 20px;
   font-size: var(--font-size);
   word-wrap: break-word;
 
@@ -118,12 +118,12 @@ const Information = styled.span`
   }
 
   @media ${Device.TABLET} {
-    padding-left: 10px;
+    padding: 0 10px;
     height: 40px;
   }
 
   @media ${Device.MOBILE} {
-    padding-left: 4px;
+    padding: 0 1px;
     height: 48px;
   }
 `;
@@ -150,7 +150,6 @@ const Button = styled.div`
 `;
 
 const ImagePreview = styled.div`
-  padding-right: 20px;
   text-align: center;
   cursor: pointer;
 
