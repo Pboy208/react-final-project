@@ -68,7 +68,7 @@ test('Should redirect and show toast when login with valid information', async (
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect success toast and redirect to home page
-  expect(global.window.location.pathname).toEqual('/home');
+  expect(global.window.location.pathname).toBe('/home');
   expect(screen.queryByText('Login success')).toBeInTheDocument();
 });
 

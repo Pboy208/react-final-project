@@ -32,7 +32,7 @@ test('Should auto fetch if redux state is null at first', async () => {
   await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
   // expect product information
-  expect(screen.getByLabelText(/title/i).value).toEqual(mock.product.title);
+  expect(screen.getByLabelText(/title/i).value).toBe(mock.product.title);
 });
 
 test('Should redirect to home and show update success toast', async () => {
@@ -53,5 +53,5 @@ test('Should redirect to home and show update success toast', async () => {
   await waitFor(() =>
     expect(screen.getByText('Update success')).toBeInTheDocument(),
   );
-  expect(global.window.location.pathname).toEqual('/home');
+  expect(global.window.location.pathname).toBe('/home');
 });

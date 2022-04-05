@@ -72,5 +72,5 @@ test('Should redirect to home when click return button', async () => {
   userEvent.click(screen.getByTestId('return-button'));
 
   // expect to be redirected to home
-  expect(global.window.location.pathname).toEqual('/home');
+  expect(global.window.location.pathname).toBe('/home');
 });
