@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { normalize } from 'normalizr';
 import * as normalizerSchema from 'utils/schemas/normalizrSchemas';
@@ -34,17 +33,22 @@ const productSlice = createSlice({
   },
   reducers: {
     setIsLoading: (state, action) => {
+      /* eslint-disable */
       state.isLoading = action.payload;
+      /* eslint-enable */
     },
     resetProductState: (state) => {
+      /* eslint-disable */
       state.isFirstLoad = true;
       state.byIds = {};
       state.ids = [];
       state.isLoading = false;
+      /* eslint-enable */
     },
   },
   extraReducers: {
     [getProductList.fulfilled]: (state, action) => {
+      /* eslint-disable */
       const normalizedData = normalize(
         action.payload.data,
         normalizerSchema.arrayOfProduct,
@@ -52,16 +56,20 @@ const productSlice = createSlice({
       state.byIds = normalizedData.entities.product;
       state.ids = normalizedData.result;
       state.isFirstLoad = false;
+      /* eslint-enable */
     },
     [getProduct.fulfilled]: (state, action) => {
+      /* eslint-disable */
       const normalizedData = normalize(
         action.payload.data,
         normalizerSchema.product,
       );
       state.byIds = { ...state.byIds, ...normalizedData.entities.product };
       state.ids = [...state.ids, normalizedData.result];
+      /* eslint-enable */
     },
     [updateProduct.fulfilled]: (state, action) => {
+      /* eslint-disable */
       const product = action.payload.data;
       if (state.ids.includes(product.id)) {
         state.byIds[product.id] = {
@@ -72,15 +80,20 @@ const productSlice = createSlice({
       // move id of product to the start of array ids
       state.ids = state.ids.filter((id) => id !== product.id);
       state.ids = [product.id, ...state.ids];
+      /* eslint-enable */
     },
     [deleteProduct.fulfilled]: (state, action) => {
+      /* eslint-disable */
       state.ids = state.ids.filter((id) => id !== action.meta.arg);
       delete state.byIds[action.payload.id];
+      /* eslint-enable */
     },
     [addProduct.fulfilled]: (state, action) => {
+      /* eslint-disable */
       const product = action.payload.data;
       state.byIds = { ...state.byIds, [product.id]: product };
       state.ids = [product.id, ...state.ids];
+      /* eslint-enable */
     },
   },
 });

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect } from 'react';
 import styled from 'styled-components';
