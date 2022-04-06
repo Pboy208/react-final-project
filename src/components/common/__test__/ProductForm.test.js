@@ -25,7 +25,7 @@ describe('Unit test for ProductForm.js, test for logic of component ', () => {
     expect(screen.getByRole('textbox', { name: /image url/i }).value).toBe(
       mockProduct.imageUrl,
     );
-    expect(screen.getByRole('textbox', { name: /price/i }).value).toBe(
+    expect(screen.getByRole('spinbutton', { name: /price/i }).value).toBe(
       mockProduct.price,
     );
   });
