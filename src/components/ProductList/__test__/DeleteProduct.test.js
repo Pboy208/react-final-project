@@ -20,27 +20,29 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
-it('Should show confirm modal ', async () => {
-  // render component
-  render(<ProductList productList={mock.productList} />);
+describe('Test for successful product deleting', () => {
+  it('Should show confirm modal and show successful toast', async () => {
+    // render component
+    render(<ProductList productList={mock.productList} />);
 
-  // press delete button
-  userEvent.click(screen.getByTestId('delete-button'));
+    // press delete button
+    userEvent.click(screen.getByTestId('delete-button'));
 
-  // expect confirm message
-  expect(
-    screen.getByText('Do you really want to delete this item?'),
-  ).toBeInTheDocument();
+    // expect confirm message
+    expect(
+      screen.getByText('Do you really want to delete this item?'),
+    ).toBeInTheDocument();
 
-  // press confirm button
-  await act(async () => userEvent.click(screen.getByText(/yes/i)));
+    // press confirm button
+    await act(async () => userEvent.click(screen.getByText(/yes/i)));
 
-  // wait for response
-  await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
+    // wait for response
+    await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i));
 
-  // screen.debug();
-  // expect success toast
-  await waitFor(() =>
-    expect(screen.getByText('Delete success')).toBeInTheDocument(),
-  );
+    // screen.debug();
+    // expect success toast
+    await waitFor(() =>
+      expect(screen.getByText('Delete success')).toBeInTheDocument(),
+    );
+  });
 });
