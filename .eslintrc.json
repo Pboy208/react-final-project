@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["airbnb", "prettier", "eslint:recommended", "react-hooks"],
+  "extends": ["airbnb", "prettier", "eslint:recommended"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -18,6 +18,8 @@
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
     "no-console": 0,
-    "import/no-unresolved": 0
+    "import/no-unresolved": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

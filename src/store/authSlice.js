@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import decode from 'jwt-decode';
 import * as authApi from 'api/authAPIs';
@@ -32,36 +31,46 @@ const token = localStorage.getItem('token');
 if (isTokenValid(token)) {
   initialState.isLoggedIn = true;
   initialState.userName = decode(token).userName;
-} 
+}
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     logout(state) {
+      /* eslint-disable */
       state.isLoggedIn = false;
       state.userName = '';
       localStorage.removeItem('token');
+      /* eslint-enable */
     },
     setIsLoading(state, action) {
+      /* eslint-disable */
       state.isLoading = action.payload;
+      /* eslint-enable */
     },
     resetAuthState: (state) => {
+      /* eslint-disable */
       state.isLoggedIn = false;
       state.userName = '';
       state.isLoading = false;
+      /* eslint-enable */
     },
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
+      /* eslint-disable */
       localStorage.setItem('token', action.payload.data);
       state.isLoggedIn = true;
       state.userName = decode(action.payload.data).userName;
+      /* eslint-enable */
     },
     [register.fulfilled]: (state, action) => {
+      /* eslint-disable */
       localStorage.setItem('token', action.payload.data);
       state.isLoggedIn = true;
       state.userName = decode(action.payload.data).userName;
+      /* eslint-enable */
     },
   },
 });

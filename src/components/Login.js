@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { Helmet } from 'react-helmet';
 import { Form, Button, Loader } from '@ahaui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,6 +40,10 @@ function Login() {
 
   return (
     <LoginForm onSubmit={handleSubmit(handleLogin)} data-testid="login-page">
+      <Helmet>
+        <title>Leo's store login page</title>
+        <meta name="description" content="Login to Leo's shopping store" />
+      </Helmet>
       <FormGroup controlId="loginForm.email">
         <Form.Label>Email</Form.Label>
         <Form.Input

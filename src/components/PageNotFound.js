@@ -1,9 +1,19 @@
+/* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 function PageNotFound() {
   return (
-    <Notification data-testid="not-found-page">Page not found ...</Notification>
+    <>
+      <Helmet>
+        <title>Sorry, Leo couldn't find this page</title>
+        <meta name="description" content="Sorry, Leo couldn't find this page" />
+      </Helmet>
+      <Notification data-testid="not-found-page">
+        Page not found ...
+      </Notification>
+    </>
   );
 }
 

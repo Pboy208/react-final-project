@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/aria-role */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -65,7 +64,7 @@ function ProductForm({ product, handleFormSubmit }) {
         <FormGroup controlId="productForm.price">
           <Form.Label>Price (VND)</Form.Label>
           <Form.Input
-            type="text"
+            type="number"
             isInvalid={isPriceInvalid}
             {...register('price')}
             onBlur={(e) => setValue('price', e.target.value.trim())}
