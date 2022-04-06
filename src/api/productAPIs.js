@@ -1,14 +1,13 @@
-import { createRequest, GET, POST, PUT, DELETE } from 'utils/request';
+import { get, post, put, del } from 'utils/request';
 
 export const getProductList = (params = { sortBy: 'CREATED_TIME' }) =>
-  createRequest(GET('/products', { params }));
+  get('/products', { params });
 
-export const getProduct = (id) => createRequest(GET(`/product/${id}`));
+export const getProduct = (id) => get(`/product/${id}`);
 
-export const addProduct = (addInfo) =>
-  createRequest(POST('/product', { body: addInfo }));
+export const addProduct = (addInfo) => post('/product', { body: addInfo });
 
 export const updateProduct = (updateInfo) =>
-  createRequest(PUT(`/product/${updateInfo.id}`, { body: updateInfo }));
+  put(`/product/${updateInfo.id}`, { body: updateInfo });
 
-export const deleteProduct = (id) => createRequest(DELETE(`/product/${id}`));
+export const deleteProduct = (id) => del(`/product/${id}`);
