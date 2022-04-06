@@ -1,6 +1,7 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ToastContainer } from '@ahaui/react';
+import { useDispatch } from 'react-redux';
 import ProtectedRoute from 'components/common/ProtectedRoute';
 import UnprotectedRoute from 'components/common/UnprotectedRoute';
 import LoadingSpinner from 'components/common/LoadingSpinner';
@@ -9,6 +10,7 @@ import GlobalStyle from 'components/common/GlobalStyle';
 import Login from 'components/Login';
 import PageNotFound from 'components/PageNotFound';
 import { useTheme } from 'context/ThemeContext';
+import { logout } from 'store/authSlice';
 
 const Home = lazy(() => import('components/Home'));
 const Register = lazy(() => import('components/Register'));
@@ -17,6 +19,19 @@ const UpdateProduct = lazy(() => import('components/UpdateProduct'));
 
 function App() {
   const { theme } = useTheme();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleInvalidToken = (e) => {
+      // if token is removed from localStorage, other tabs will be logged out
+      if (e.key === 'token' && e.oldValue && !e.newValue) {
+        dispatch(logout());
+      }
+    };
+
+    window.addEventListener('storage', handleInvalidToken);
+  }, [dispatch]);
+
   return (
     <>
       <GlobalStyle theme={theme} />

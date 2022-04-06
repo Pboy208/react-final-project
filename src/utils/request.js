@@ -40,26 +40,30 @@ export const createRequest = async ({
   return payload;
 };
 
-export const GET = (endpoint, options) => ({
-  endpoint,
-  ...options,
-  method: 'GET',
-});
+export const get = (endpoint, options) =>
+  createRequest({
+    endpoint,
+    ...options,
+    method: 'GET',
+  });
 
-export const POST = (endpoint, options) => ({
-  endpoint,
-  ...options,
-  method: 'POST',
-});
+export const post = (endpoint, options) =>
+  createRequest({
+    endpoint,
+    ...options,
+    method: 'POST',
+  });
 
-export const PUT = (endpoint, options) => ({
-  endpoint,
-  ...options,
-  method: 'PUT',
-});
+export const put = (endpoint, options) =>
+  createRequest({
+    endpoint,
+    ...options,
+    method: 'PUT',
+  });
 
-export const DELETE = (endpoint, options) => ({
-  endpoint,
-  ...options,
-  method: 'DELETE',
-});
+export const del = (endpoint, options) =>
+  createRequest({
+    endpoint,
+    ...options,
+    method: 'DELETE',
+  });

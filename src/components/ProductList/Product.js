@@ -162,7 +162,7 @@ const Image = styled.img`
   display: none;
   position: fixed;
   z-index: 2;
-  height: min(72vh, 36vw);
+  height: min(72vh, 80vw);
   background-color: white;
   border: 3px solid;
   border-radius: 12px;
